@@ -10,7 +10,7 @@ import { Fragment } from "react"
 import { Cadastro } from "../auth/Cadastro"
 import { useContext } from "react"
 import { LogoutComponent } from "../components/Logout/"
-import { Footer } from '../layout/components/Footer/'
+import { Footer } from '../layout/components/footer/'
 import { Login } from "../auth/Login"
 import { AuthContext, AuthProvider } from "../authcontext"
 export const Main = () => {
