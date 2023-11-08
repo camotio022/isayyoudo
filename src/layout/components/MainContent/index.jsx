@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { ContainerGlobal } from "../../../components/Global/Styles/styles"
-import { Menu } from "../Menu"
+import { Menu } from "../menu"
 
 export const MainContent = ({
     children,
