@@ -1,6 +1,6 @@
 import { Divider, Stack, useMediaQuery } from '@mui/material'
 import { LogoPage } from '../../../components/Logo'
-import *as T from './Styles/index'
+import *as T from './styles/index'
 import { MyButton } from '../../../components/Global/Styles/styles'
 import { Add, Close, Logout } from '@mui/icons-material'
 import { links } from '../links/listLinks'
