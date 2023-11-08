@@ -1,6 +1,6 @@
 import { Logout, Menu } from '@mui/icons-material';
 import { useMediaQuery } from "@mui/material";
-import { MyLogout } from "./Styles";
+import { MyLogout } from "./styles";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../authcontext/index";
 import { Menu as MenuLinks } from '../../layout/components/Menu';
