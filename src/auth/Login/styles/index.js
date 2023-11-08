@@ -1,6 +1,6 @@
 import { styled, Grid, Stack, Box, Typography, Grid as MuiContainer, withTheme, Button, Link } from '@mui/material';
 import { grey, } from '@mui/material/colors';
-import { Root } from '../../../components/Global/root/root_styles';
+import { Root } from '../../../components/Global/Root/root_styles';
 
 export const StyledContainer = styled(MuiContainer)(({ theme }) => ({
     height: '100vh',
