@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+h1 {
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px; /* Tamanho padrão */
+            color: orange; /* Cor laranja para "iSay" */
+        }
+
+        @media (max-width: 768px) {
+            /* Estilos para telas menores que 768px */
+            .logo {
+                font-size: 24px; /* Tamanho menor para telas menores */
+            }
+        }
