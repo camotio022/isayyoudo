@@ -10,8 +10,8 @@ import { LogoPage } from "../../components/Logo";
 import { DialogError } from "../../components/Dialog";
 import { validateForm } from "./components/rules";
 import { BoxMain, MyButton, MyLink } from "../../components/Global/Styles/styles";
-import { add_users } from "../../api/Users/addUsers.js";
-import { get_users } from "../../api/Users/getUsers.js";
+import { add_users } from "../../api/users/addUsers.js";
+import { get_users } from "../../api/users/getUsers.js";
 
 export const Cadastro = () => {
     const [isPassword, setIsPassword] = useState(false)
