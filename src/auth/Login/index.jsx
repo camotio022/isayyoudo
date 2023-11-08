@@ -17,7 +17,7 @@ import { Baseboard } from "./components/baseboard";
 import { DialogError } from "../../components/Dialog";
 import { LogoPage } from "../../components/Logo";
 import { IsForgotPassword } from "../IForgotMyPassword";
-import { BoxMain, MyButton } from "../../components/Global/styles/styles";
+import { BoxMain, MyButton } from "../../components/Global/Styles/styles";
 import { useContext } from "react";
 import { AuthContext } from "../../authcontext/index";
 export const Login = () => {

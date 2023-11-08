@@ -4,7 +4,7 @@ import { MyTextField } from '../../components/Textfied'
 import { Box, Grid, LinearProgress, TextField, Typography } from '@mui/material'
 import { Fragment, useState } from 'react'
 import { purple } from '@mui/material/colors'
-import { BoxMain, MyButton, MyLink } from '../../components/Global/styles/styles'
+import { BoxMain, MyButton, MyLink } from '../../components/Global/Styles/styles'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { DialogError } from '../../components/Dialog'
 

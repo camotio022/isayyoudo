@@ -2,7 +2,7 @@ import { Google } from "@mui/icons-material"
 import { Box, Typography } from "@mui/material"
 import { Fragment } from "react"
 import *as T from '../styles/index'
-import { MyButton, MyLink } from "../../../components/Global/styles/styles"
+import { MyButton, MyLink } from "../../../components/Global/Styles/styles"
 import { useContext } from "react"
 import { AuthContext } from "../../../authcontext/index"
 
