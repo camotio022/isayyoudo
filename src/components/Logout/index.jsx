@@ -18,7 +18,7 @@ export const LogoutComponent = () => {
     return (
         <MyLogout isLinks={isLinks} position={'90%'}>
             <Menu onClick={()=> setIsLinks(!isLinks)}/>
-            {isLinks && <MenuLinks setIsLinks={setIsLinks}/>}
+            {isLinks && <MenuLinks setIsLinks={setIsLinks} isLinks={isLinks}/>}
         </MyLogout>
     )
 } 

@@ -13,13 +13,15 @@ export const Links_a = ({
   link,
   icon,
   canShowAlert,
+  closeMenuLinks,
+  isLinks
 }) => {
   const location = useLocation();
   const isRoute = location.pathname === link
   return (
     <>
-      <Link to={link}>
-        <ListItemButton style={{
+      <Link to={link} >
+        <ListItemButton onClick={closeMenuLinks} style={{
           transition: 'all .2s ease-in-out',
           borderLeft: isRoute && `2px solid${Root.color_button}`
         }}
