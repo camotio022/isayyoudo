@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom"
 
 import { MainLayout } from "../layout/"
-import { HomePage } from "../pages/Home/"
-import { Community } from "../pages/Community/"
-import { Catalog } from "../pages/Catalog/"
+import { HomePage } from "../pages/home/"
+import { Community } from "../pages/community/"
+import { Catalog } from "../pages/catalog/"
 import { MyTasks } from "../pages/Tasks/"
 import { AuthFooter } from "../components/Footer"
 import { Fragment } from "react"
@@ -12,7 +12,7 @@ import { useContext } from "react"
 import { LogoutComponent } from "../components/Logout/"
 import { Footer } from '../layout/components/Footer/'
 import { Login } from "../auth/Login"
-import { AuthContext, AuthProvider } from "../authcontext/"
+import { AuthContext, AuthProvider } from "../authcontext"
 export const Main = () => {
     const auth = useContext(AuthContext)
     if (auth?.isLoggedIn) {
