@@ -11,7 +11,7 @@ import { AuthContext } from '../../../authcontext/index'
 import { Root } from '../../../components/Global/Root/root_styles'
 import { SelectItem } from '../../../components/SelectItem'
 export const Menu = (
-    { setIsLinks }
+    { setIsLinks,isLinks }
 ) => {
     const { logout } = useContext(AuthContext)
     const isSmallScreen = useMediaQuery('(max-width:600px)');
@@ -19,7 +19,7 @@ export const Menu = (
         <T.LateralMenu isSmallScreen={isSmallScreen}>
             <LogoPage />
             <MyLogout sx={{ flexDirection: 'row', gap: 2 }}>
-                <SelectItem item={<Close onClick={() => setIsLinks(false)} />}/>
+                {isLinks&&<SelectItem item={<Close onClick={() => setIsLinks(false)} />}/>}
                 <SelectItem item={<Logout onClick={logout} />}/>
             </MyLogout>
             <Stack sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', width: "80%" }}>
@@ -36,6 +36,8 @@ export const Menu = (
                             {...li}
                             name={li.name}
                             canShowAlert={li.name === 'My Tasks'}
+                            closeMenuLinks={() => setIsLinks(false)}
+                            isLinks={isLinks}
                         />
                     )
                 })}

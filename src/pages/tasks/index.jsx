@@ -22,7 +22,7 @@ export const MyTasks = () => {
                         <Typography>{user.uid}</Typography>
                     </Grid>
                 </Grid>
-                <MyButton>get started</MyButton>
+                
             </BoxMain>
         </ContainerGlobal>
     );
