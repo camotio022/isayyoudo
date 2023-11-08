@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material"
 import { Fragment } from "react"
-import *as T from './Styles/index'
+import *as T from './styles/index'
 export const Footer = () => {
     return (
         <Fragment>
