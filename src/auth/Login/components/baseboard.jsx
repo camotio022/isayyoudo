@@ -30,7 +30,7 @@ export const Baseboard = ({
                 width: '100%', gap: 2
             }}>
                 <T.MiniButton onClick={() => setIsForgot(true)} variant="body2">
-                    Hi, I forgot my password
+                    I forgot the password
                 </T.MiniButton>
                 <MyLink href="/signup" variant="body2">
                     {"register on iSayYoDo?"}
