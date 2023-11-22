@@ -10,7 +10,16 @@ export const ContainerGlobal = styled(Box)(({ theme }) => ({
     justifyContent: "center",
     width: "100vw",
     height: "100vh",
-
+    color: Root.gray,
+    backgroundColor: Root.light,
+}));
+export const ContainerGlobalChildrens = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "75%",
+    height: "100%",
     color: Root.gray,
     backgroundColor: Root.light,
 }));
@@ -111,6 +120,6 @@ export const Items = styled(Stack)(({ theme }) => ({
     justifyContent: 'center',
     height: 'auto',
     width: 'auto',
-    backgroundColor: Root.color_button_secondary,
+    boxShadow: Root.boxShadow,
     padding: '1px',
 }));
