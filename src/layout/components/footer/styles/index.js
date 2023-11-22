@@ -18,4 +18,10 @@ export const MyFooter = styled(Link)(({ theme }) => ({
     textDecoration:'none',
     backgroundColor: '#7667CF',
     color:'#7A04D7',
+        boxShadow: Root.boxShadow,
+    '&:hover': {
+        backgroundColor: Root.color_default,
+        color: Root.color_button_secondary,
+        cursor: 'pointer',
+    },
 }));

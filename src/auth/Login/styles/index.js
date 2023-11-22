@@ -45,4 +45,10 @@ export const MiniButton = styled(Typography)(({ theme }) => ({
     borderBottomRightRadius: 20,
     textDecoration: 'none',
     minHeight: '2rem',
+        boxShadow: Root.boxShadow,
+    '&:hover': {
+        backgroundColor: Root.color_default,
+        color: Root.color_button_secondary,
+        cursor: 'pointer',
+    },
 }));
