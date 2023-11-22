@@ -34,6 +34,7 @@ export const add_users = {
             } catch (error) {
                 if (error.code === "auth/email-already-in-use") {
                     alert("O e-mail já está em uso por outro usuário.");
+                    window.location.replace("/");;
                 } else {
                     console.log(error)
                     alert(error);
