@@ -48,8 +48,8 @@ export const MyButton = styled(Button)(({ theme }) => ({
     fontSize: '12px',
 
     '&:hover': {
-        backgroundColor: `rgba(106, 90, 205, 0.3)`,
-        color: 'white',
+        backgroundColor: Root.color_default,
+        color: Root.color_button_secondary,
         cursor: 'pointer',
     },
 }));
@@ -70,6 +70,13 @@ export const MyLink = styled(Link)(({ theme }) => ({
     borderBottomRightRadius: 20,
     textDecoration: 'none',
     minHeight: '2rem',
+    boxShadow: Root.boxShadow,
+    '&:hover': {
+        backgroundColor: Root.color_default,
+        color: Root.color_button_secondary,
+        cursor: 'pointer',
+    },
+
 }));
 export const MyFooter = styled(Link)(({ theme }) => ({
     position: 'fixed',
