@@ -34,7 +34,7 @@ export const MiniButton = styled(Typography)(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    color: '#6a5acd',
+    color: Root.color_default,
     width: "100%",
     marginTop: 10,
     mb: 2,
@@ -44,4 +44,5 @@ export const MiniButton = styled(Typography)(({ theme }) => ({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     textDecoration: 'none',
+    minHeight: '2rem',
 }));
