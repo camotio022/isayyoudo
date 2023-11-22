@@ -17,30 +17,27 @@ export const Main = () => {
     const auth = useContext(AuthContext)
     if (auth?.isLoggedIn) {
         return (
-
-                <MainLayout>
-                    <LogoutComponent />
-                    <Routes>
-                        <Route path='/' element={<HomePage />} />
-                        <Route path='/community' element={<Community />} />
-                        <Route path='/catalog' element={<Catalog />} />
-                        <Route path='/mytasks' element={<MyTasks />} />
-                    </Routes>
-                    <AuthFooter />
-                </MainLayout>
-
+            <MainLayout>
+                <LogoutComponent />
+                <Routes>
+                    <Route path='/' element={<HomePage />} />
+                    <Route path='/community' element={<Community />} />
+                    <Route path='/catalog' element={<Catalog />} />
+                    <Route path='/mytasks' element={<MyTasks />} />
+                </Routes>
+            </MainLayout>
         )
     }
     return (
         <>
 
-                <Fragment>
-                    <Routes>
-                        <Route path='/' element={<Login />} />
-                        <Route path='/signup' element={<Cadastro />} />
-                    </Routes>
-                    <Footer />
-                </Fragment>
+            <Fragment>
+                <Routes>
+                    <Route path='/' element={<Login />} />
+                    <Route path='/signup' element={<Cadastro />} />
+                </Routes>
+                <Footer />
+            </Fragment>
 
         </>
     )
