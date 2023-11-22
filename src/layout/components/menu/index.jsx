@@ -8,19 +8,18 @@ import { Links_a } from '../links/links_a'
 import { MyLogout } from '../../../components/Logout/styles'
 import { useContext } from 'react'
 import { AuthContext } from '../../../authcontext/index'
-import { Root } from '../../../components/Global/Root/root_styles'
 import { SelectItem } from '../../../components/SelectItem'
+import { LogoutComponent } from '../../../components/Logout/index.jsx'
 export const Menu = (
-    { setIsLinks,isLinks }
+    { setIsLinks, isLinks, children }
 ) => {
     const { logout } = useContext(AuthContext)
     const isSmallScreen = useMediaQuery('(max-width:600px)');
     return (
         <T.LateralMenu isSmallScreen={isSmallScreen}>
             <LogoPage />
-            <MyLogout sx={{ flexDirection: 'row', gap: 2 }}>
-                {isLinks&&<SelectItem item={<Close onClick={() => setIsLinks(false)} />}/>}
-                <SelectItem item={<Logout onClick={logout} />}/>
+            <MyLogout position={'90%'}>
+                {isLinks && <SelectItem item={<Close onClick={() => setIsLinks(false)} />} />}
             </MyLogout>
             <Stack sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', width: "80%" }}>
                 <MyButton sx={{ textTransform: "lowercase" }}>
@@ -42,6 +41,12 @@ export const Menu = (
                     )
                 })}
             </T.MinhaLista>
+            <T.Logout onClick={logout}>
+                <Logout />
+                <Stack>
+                    Logout
+                </Stack>
+            </T.Logout>
         </T.LateralMenu>
     )
 }

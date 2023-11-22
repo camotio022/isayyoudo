@@ -58,6 +58,7 @@ export const Cadastro = () => {
         setOpen(false)
     }
     const creteUser = async () => {
+        const isRegistred = ''
         try {
             setProgress(true);
             const response = await add_users.user.post(data)
@@ -92,15 +93,12 @@ export const Cadastro = () => {
                             <LinearProgress />
                             Cadastrando...
                         </Box>
-                        <MyButton onClick={() => setProgress(!progress)} sx={{ width: 'auto', mt: 4 }}>
-                            Desistir
-                        </MyButton>
                     </Fragment>
                     :
                     <BoxMain
                     >
                         <Typography component="h1" variant="h5">
-                            Sign up
+                            Cadastrar
                         </Typography>
                         <T.GridMapTextfield
                             component="div"

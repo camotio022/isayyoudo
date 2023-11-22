@@ -10,13 +10,22 @@ export const ContainerGlobal = styled(Box)(({ theme }) => ({
     justifyContent: "center",
     width: "100vw",
     height: "100vh",
-
     color: Root.gray,
     backgroundColor: Root.light,
 }));
-export const BoxMain = styled(Box)(({ 
-    theme, 
-    border, 
+export const ContainerGlobalChildrens = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "75%",
+    height: "100%",
+    color: Root.gray,
+    backgroundColor: Root.light,
+}));
+export const BoxMain = styled(Box)(({
+    theme,
+    border,
     padding
 }) => ({
     width: '90%',
@@ -30,13 +39,13 @@ export const BoxMain = styled(Box)(({
     backgroundColor: "white",
     gap: 10,
     boxShadow: Root.boxShadow,
-    border: border? '0':Root.border,
+    border: border ? '0' : Root.border,
 }));
 export const MyButton = styled(Button)(({ theme }) => ({
     cursor: 'pointer',
-    color: '#6a5acd',
+    color: Root.color_default,
     width: "100%",
-    fontWeight:900,
+    fontWeight: 900,
     outline: 'none !important',
     mt: 3,
     mb: 2,
@@ -45,9 +54,11 @@ export const MyButton = styled(Button)(({ theme }) => ({
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    fontSize: '12px',
+
     '&:hover': {
-        backgroundColor: `rgba(106, 90, 205, 0.3)`,
-        color: 'white',
+        backgroundColor: Root.color_default,
+        color: Root.color_button_secondary,
         cursor: 'pointer',
     },
 }));
@@ -57,7 +68,7 @@ export const MyLink = styled(Link)(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    color: '#6a5acd',
+    color: Root.color_default,
     width: "100%",
     marginTop: 10,
     mb: 2,
@@ -67,6 +78,14 @@ export const MyLink = styled(Link)(({ theme }) => ({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     textDecoration: 'none',
+    minHeight: '2rem',
+    boxShadow: Root.boxShadow,
+    '&:hover': {
+        backgroundColor: Root.color_default,
+        color: Root.color_button_secondary,
+        cursor: 'pointer',
+    },
+
 }));
 export const MyFooter = styled(Link)(({ theme }) => ({
     position: 'fixed',
@@ -88,19 +107,19 @@ export const NotificationCounter = styled(Stack)(({ theme, color }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width:'14px',
-    height:'14px',
+    width: '14px',
+    height: '14px',
     padding: '3px',
-    borderRadius:'50%',
+    borderRadius: '50%',
     color: color || 'white',
-    backgroundColor:Root.red
+    backgroundColor: Root.red
 }));
 export const Items = styled(Stack)(({ theme }) => ({
-    display:'flex',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height:'auto',
-    width:'auto',
-    backgroundColor: Root.color_button_secondary,
+    height: 'auto',
+    width: 'auto',
+    boxShadow: Root.boxShadow,
     padding: '1px',
 }));

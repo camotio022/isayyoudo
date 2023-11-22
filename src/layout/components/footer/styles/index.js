@@ -16,6 +16,12 @@ export const MyFooter = styled(Link)(({ theme }) => ({
     left: 0,
     zIndex:1,
     textDecoration:'none',
-    backgroundColor: 'rgba(106, 90, 205, 0.9)',
-    color: Root.white,
+    backgroundColor: '#7667CF',
+    color:'#7A04D7',
+        boxShadow: Root.boxShadow,
+    '&:hover': {
+        backgroundColor: Root.color_default,
+        color: Root.color_button_secondary,
+        cursor: 'pointer',
+    },
 }));

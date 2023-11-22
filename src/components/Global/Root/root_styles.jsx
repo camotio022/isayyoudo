@@ -1,8 +1,8 @@
 export const Root = {
     color_default: '#ffffff',
-    color_button: '#6a5acd',
-    color_button_secondary: "#e6e6fa",
-    color_link: '#6a5acd',
+    color_button: '#932dd2',
+    color_button_secondary: "#932dd2",
+    color_link: '#93dd2',
     blue: '#007bff',
     indigo: '#6610f2',
     purple: '#6f42c1',

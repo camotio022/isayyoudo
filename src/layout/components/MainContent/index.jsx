@@ -1,6 +1,7 @@
 import { Fragment } from "react"
-import { ContainerGlobal } from "../../../components/Global/Styles/styles"
+import { ContainerGlobal, ContainerGlobalChildrens } from "../../../components/Global/Styles/styles"
 import { Menu } from "../menu"
+import { AuthFooter } from "../../../components/Footer"
 
 export const MainContent = ({
     children,
@@ -19,6 +20,7 @@ export const MainContent = ({
         return (
             <ContainerGlobal>
                 {children}
+                <AuthFooter />
             </ContainerGlobal>
         )
     }
@@ -35,8 +37,12 @@ export const MainContent = ({
                 handleSelectLink={handleSelectLink}
                 handleOpenUserMenu={handleOpenUserMenu}
                 showLinks={showLinks}
-                setShowLinks={setShowLinks} />
-            {children}
+                setShowLinks={setShowLinks}
+            />
+     
+                {children}
+                <AuthFooter />
+
         </ContainerGlobal>
     )
 }
