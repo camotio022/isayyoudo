@@ -39,10 +39,8 @@ export const MainContent = ({
                 showLinks={showLinks}
                 setShowLinks={setShowLinks}
             />
-     
-                {children}
-                <AuthFooter />
-
+            {children}
+            <AuthFooter />
         </ContainerGlobal>
     )
 }
