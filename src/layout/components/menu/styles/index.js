@@ -33,7 +33,7 @@ export const Logout = styled(Box)(() => ({
     gap: '12px',
     overflow: 'hidden',
     height: 'auto',
-    padding: '5px',
+    padding: '10px',
     width: '100%',
     maxWidth: '100%',
     transition: 'all 0.5s ease-in-out',
