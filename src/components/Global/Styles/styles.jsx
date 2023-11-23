@@ -60,6 +60,7 @@ export const MyButton = styled(Button)(({ theme }) => ({
         backgroundColor: Root.color_default,
         color: Root.color_button_secondary,
         cursor: 'pointer',
+        boxShadow: Root.boxShadow
     },
 }));
 export const MyLink = styled(Link)(({ theme }) => ({
