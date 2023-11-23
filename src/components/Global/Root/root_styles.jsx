@@ -25,7 +25,7 @@ export const Root = {
     light: '#f8f9fa',
     dark: '#343a40',
     boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-    border: '1px solid #6a5acd',
+    border: '1px solid #c4c4c4',
     breakpointXS: '0',
     breakpointSM: '576px',
     breakpointMD: '768px',
