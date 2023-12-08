@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 import { Box, Button, Link, Stack, useMediaQuery } from "@mui/material";
 import { Root } from "../Root/root_styles";
-import { purple } from "@mui/material/colors";
-
 export const ContainerGlobal = styled(Box)(({ theme }) => ({
+    position: 'relative',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -11,7 +10,7 @@ export const ContainerGlobal = styled(Box)(({ theme }) => ({
     width: "100vw",
     height: "100vh",
     color: Root.gray,
-    backgroundColor: Root.light,
+    backgroundColor: Root.containTask,
 }));
 export const ContainerGlobalChildrens = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -36,7 +35,7 @@ export const BoxMain = styled(Box)(({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "white",
+    backgroundColor: Root.white,
     gap: 10,
     boxShadow: Root.boxShadow,
     border: border ? '0' : Root.border,

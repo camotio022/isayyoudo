@@ -13,6 +13,9 @@ import { LogoutComponent } from "../components/Logout/"
 import { Footer } from '../layout/components/footer/'
 import { Login } from "../auth/Login"
 import { AuthContext, AuthProvider } from "../authcontext"
+import { ArchivedTasks } from "../pages/subpages/archived/index.jsx"
+import { CompletedTasks } from "../pages/subpages/completed/index.jsx"
+import { TasksClosed } from "../pages/subpages/close/index.jsx"
 export const Main = () => {
     const auth = useContext(AuthContext)
     if (auth?.isLoggedIn) {
@@ -24,6 +27,9 @@ export const Main = () => {
                     <Route path='/community' element={<Community />} />
                     <Route path='/catalog' element={<Catalog />} />
                     <Route path='/mytasks' element={<MyTasks />} />
+                    <Route path='/taskArchived' element={<ArchivedTasks />} />
+                    <Route path='/taskCompleted' element={<CompletedTasks />} />
+                    <Route path='/taskClose' element={<TasksClosed />} />
                 </Routes>
             </MainLayout>
         )
