@@ -32,7 +32,6 @@ export const TepsMenuTasks = () => {
     return (
         <Tag.TabsMain>
             {abas.map((aba, index) => {
-                console.log(location.pathname)
                 return (
                     <Link to={aba.link} style={{
                         textDecoration: 'none',

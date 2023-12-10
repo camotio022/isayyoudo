@@ -9,6 +9,7 @@ export const ContainerGlobal = styled(Box)(({ theme }) => ({
     justifyContent: "center",
     width: "100vw",
     height: "100vh",
+    overflow: 'hidden',
     color: Root.gray,
     backgroundColor: Root.containTask,
 }));
