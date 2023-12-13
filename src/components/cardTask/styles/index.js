@@ -91,7 +91,7 @@ export const TaskMainTooltipTagMainItem= styled(Box)(({ theme, border }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    fontWeight: 900,
+    fontWeight: 500,
     width: '100%',
 }));
 export const TaskMainTooltipTagMainItemBorderLeft= styled(Stack)(({ theme, border }) => ({
