@@ -4,10 +4,12 @@ import { Root } from '../Global/Root/root_styles.jsx'
 import { Avatar, Box, Container, Stack } from '@mui/material'
 import { Email, ExpandMore, Notifications } from '@mui/icons-material'
 import { AuthContext } from '../../authcontext/index.jsx'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import { tasks } from '../../mask/tasks.js'
 
 export const TepsMenuTasks = () => {
     const { user } = useContext(AuthContext)
+    
     const location = useLocation()
     const locationMain = location.pathname === '/';
     const border = `2px solid ${Root.color_button}`
@@ -15,24 +17,22 @@ export const TepsMenuTasks = () => {
         {
             title: 'Active Tasks',
             link: '/',
-            taskNumber: 20,
+            taskNumber: tasks.filter((task) => task.status === 'active').length,
         },
         {
             title: 'Completed',
             link: '/taskCompleted',
-            taskNumber: 20,
+            taskNumber: tasks.filter((task) => task.status === 'completed').length,
         },
-
         {
             title: 'Archived',
             link: '/taskArchived',
-            taskNumber: 230,
+            taskNumber: tasks.filter((task) => task.status === 'archived').length,
         },
         {
             title: 'Close',
             link: '/taskClose',
-            taskNumber: 20,
-        }
+            taskNumber: tasks.filter((task) => task.status === 'close').length,        }
     ]
     return (
         <Tag.Container>
