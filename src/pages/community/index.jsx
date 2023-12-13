@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { Avatar, Grid, Typography, useMediaQuery } from "@mui/material";
-import { BoxMain, ContainerGlobal, MyButton, MyFooter } from "../../components/Global/Styles/styles";
+import { BoxMain, ContainerGlobal, ContainerTasks, MyButton, MyFooter } from "../../components/Global/Styles/styles";
 import { AuthContext } from "../../authcontext";
 
 export const Community = () => {
     const { user } = useContext(AuthContext);
     return (
-        <ContainerGlobal>
+        <ContainerTasks>
             <BoxMain
                 border={true} sx={{ padding: '20px' }}>
                 <Grid container spacing={2}>
@@ -24,6 +24,6 @@ export const Community = () => {
                 </Grid>
          
             </BoxMain>
-        </ContainerGlobal>
+        </ContainerTasks>
     );
 };

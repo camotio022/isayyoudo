@@ -13,6 +13,7 @@ export const TaskCard = ({
     dateStarted,
     dateDelivery,
     stateTask,
+    colorStatus,
 }) => {
     return (
         <T.TabsMain>
@@ -22,7 +23,8 @@ export const TaskCard = ({
                     {name}
                 </T.TaskTitle>
                 <T.Infos>
-                    {action}                </T.Infos>
+                    {action}
+                </T.Infos>
             </T.TaskTitleButton>
 
             <T.TaskTitleButton>
@@ -59,7 +61,7 @@ export const TaskCard = ({
             <T.LastInfosTask justifyContent={'center !important'}>
                 <Avatar src={avatar}></Avatar>
                 <T.TaskTitle>
-                   {assignerTo}<br />
+                    {assignerTo}<br />
                     <T.TaskAssigner>
                         assigned to
                     </T.TaskAssigner>
@@ -67,7 +69,7 @@ export const TaskCard = ({
             </T.LastInfosTask>
             <T.LastInfosTask>
                 <T.BoxTypeButtonMain>
-                    <T.CircleStateTask>
+                    <T.CircleStateTask color={colorStatus}>
                     </T.CircleStateTask>
                     {stateTask}
                 </T.BoxTypeButtonMain>

@@ -3,7 +3,7 @@ import { Root } from "../../Global/Root/root_styles";
 
 export const TabsMain = styled(Box)(({ theme, border }) => ({
     width: '95%',
-    minHeight: '10%',
+    minHeight: '5rem',
     height: 'auto',
     paddingBlock: '1rem',
     borderRadius: '4px',
@@ -43,19 +43,29 @@ export const TaskTitleButton = styled(Stack)(({ theme, border }) => ({
 export const TaskTitle = styled(Typography)(({ theme, border }) => ({
     color: Root.black,
     fontSize: '12px',
-    fontWeight: '900'
+    fontWeight: '600'
 }));
 export const Infos = styled(Stack)(({ theme, border }) => ({
     backgroundColor: Root.subButton,
     paddingInline: '5px',
     fontSize: '12px',
     borderRadius: '30px',
-    color: Root.green
+    color: Root.green,
+    height:'30px',
+    width:'80%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '10px',
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
 }))
 export const TaskAssigner = styled(Stack)(({ theme, border }) => ({
     fontSize: '12px',
-    fontWeight: 800,
-    color: Root.gray_desfius
+    fontWeight: 400,
+    color: Root.gray
 }));
 export const TaskMainHoverInfosDate = styled(Box)(({ theme, border }) => ({
     display: 'flex',
@@ -110,9 +120,9 @@ export const BoxTypeButtonMain= styled(Box)(({ theme, border }) => ({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
 }));
-export const CircleStateTask= styled(Stack)(({ theme, border }) => ({
+export const CircleStateTask= styled(Stack)(({ theme, color }) => ({
     width: '8px',
     height: '8px',
     borderRadius: '50%',
-    backgroundColor: Root.pink
+    backgroundColor: color,
 }));

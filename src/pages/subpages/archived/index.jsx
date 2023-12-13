@@ -1,13 +1,11 @@
-import { BoxMain, ContainerGlobal } from "../../../components/Global/Styles/styles"
-import { TepsMenuTasks } from "../../../components/Teps/index.jsx"
+import { BoxMain, ContainerTasks } from "../../../components/Global/Styles/styles"
 
-export const ArchivedTasks=()=> {
-    return(
-        <ContainerGlobal justifyContent={'flex-start !important'}>
-            <TepsMenuTasks />
+export const ArchivedTasks = () => {
+    return (
+        <ContainerTasks>
             <BoxMain>
                 Aqui está a vizualização das tarefas arguivadas!
             </BoxMain>
-        </ContainerGlobal>
+        </ContainerTasks>
     )
 }

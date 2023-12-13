@@ -6,7 +6,7 @@ export const ContainerGlobal = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     width: "100vw",
     height: "100vh",
     overflow: 'hidden',
@@ -124,3 +124,31 @@ export const Items = styled(Stack)(({ theme }) => ({
     boxShadow: Root.boxShadow,
     padding: '1px',
 }));
+
+export const ContainerTasks = styled(Stack)(({ theme }) => ({
+    position: 'relative',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: '20px',
+    width: "100%",
+    minHeight: "50%",
+    height: "auto",
+    overflow: 'auto',
+    paddingBlock: '3rem',
+    color: Root.gray,
+    backgroundColor: Root.containTask,
+    '&::-webkit-scrollbar': {
+        width: '4px',
+    },
+
+    '&::-webkit-scrollbar-thumb': {
+        backgroundColor: Root.color_button,
+        borderRadius: '6px',
+    },
+
+    '&::-webkit-scrollbar-track': {
+        backgroundColor: '#f1f1f1',
+    },
+}))
