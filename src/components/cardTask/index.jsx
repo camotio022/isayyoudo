@@ -17,7 +17,13 @@ export const TaskCard = ({
 }) => {
     return (
         <T.TabsMain>
-            <Assignment sx={{ margin: '1rem', color: Root.gray_desfius }} />
+            <Assignment sx={{ margin: '1rem', color: colorStatus }} />
+            <T.CircleStateTask color={colorStatus} sx={{
+                position: 'absolute',
+                ml: 4,
+                mt: 2,
+                boxShadow: "rgba(0, 0, 0, 0.90) 0px 3px 8px",
+            }}/>
             <T.TaskTitleButton>
                 <T.TaskTitle>
                     {name}
@@ -26,7 +32,6 @@ export const TaskCard = ({
                     {action}
                 </T.Infos>
             </T.TaskTitleButton>
-
             <T.TaskTitleButton>
                 <T.TaskTitle>
                     {assigner}<br />
@@ -54,7 +59,7 @@ export const TaskCard = ({
                         arrow
                         placement="top"
                     >
-                        {missingTime}
+                        {missingTime} days
                     </T.TaskMainTooltip>
                 </T.TaskMainHoverInfosDate>
             </T.TaskTitleButton>

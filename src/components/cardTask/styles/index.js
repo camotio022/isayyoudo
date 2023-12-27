@@ -38,7 +38,8 @@ export const TaskTitleButton = styled(Stack)(({ theme, border }) => ({
     justifyContent: 'space-between',
     gap: '10px',
     width: '20%',
-    height: '5rem',
+    minHeight: '5rem',
+    height: 'auto'
 }));
 export const TaskTitle = styled(Typography)(({ theme, border }) => ({
     color: Root.black,
