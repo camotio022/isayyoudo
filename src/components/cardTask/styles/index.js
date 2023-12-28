@@ -120,6 +120,13 @@ export const BoxTypeButtonMain= styled(Box)(({ theme, border }) => ({
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    cursor: 'pointer',
+
+    ":hover":{
+        border:`1px solid ${Root.color_button}`,
+        transition: '500ms ease-in-out',
+        color: Root.color_button,
+    }
 }));
 export const CircleStateTask= styled(Stack)(({ theme, color }) => ({
     width: '8px',

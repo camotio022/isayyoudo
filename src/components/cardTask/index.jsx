@@ -1,7 +1,9 @@
 import { Avatar, Box, Button, Popover, Stack, Tooltip, Typography } from '@mui/material'
 import * as T from './styles/index.js'
-import { Assignment, Check, Circle, Event, EventAvailable, MarkUnreadChatAlt, MoreHoriz } from '@mui/icons-material'
+import { Assignment, Check, Circle, Event, EventAvailable, MarkUnreadChatAlt, Message, MoreHoriz } from '@mui/icons-material'
 import { Root } from '../Global/Root/root_styles.jsx'
+import { CircularRedAlert } from '../CircularRedAlert/index.jsx'
+import { TaskDetailed } from '../TaskDetailed/index.jsx'
 
 export const TaskCard = ({
     name,
@@ -14,8 +16,17 @@ export const TaskCard = ({
     dateDelivery,
     stateTask,
     colorStatus,
+    setTask,
+    task,
+    setOpenMoreInfo,
+    openMoreInfo
 }) => {
+    function handleClick() {
+        setTask(task);
+        setOpenMoreInfo(!openMoreInfo);
+    }
     return (
+
         <T.TabsMain>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
             <T.CircleStateTask color={colorStatus} sx={{
@@ -23,7 +34,7 @@ export const TaskCard = ({
                 ml: 4,
                 mt: 2,
                 boxShadow: "rgba(0, 0, 0, 0.90) 0px 3px 8px",
-            }}/>
+            }} />
             <T.TaskTitleButton>
                 <T.TaskTitle>
                     {name}
@@ -74,12 +85,14 @@ export const TaskCard = ({
             </T.LastInfosTask>
             <T.LastInfosTask>
                 <T.BoxTypeButtonMain>
-                    <T.CircleStateTask color={colorStatus}>
-                    </T.CircleStateTask>
+                    <T.CircleStateTask color={colorStatus} />
                     {stateTask}
                 </T.BoxTypeButtonMain>
-                <MarkUnreadChatAlt />
-                <MoreHoriz />
+                <Stack position={'relative'}>
+                    <Message />
+                    <CircularRedAlert />
+                </Stack>
+                <MoreHoriz cursor={'pointer'} onClick={handleClick}/>
             </T.LastInfosTask>
         </T.TabsMain>
     )

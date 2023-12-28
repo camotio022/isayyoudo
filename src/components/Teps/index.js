@@ -5,7 +5,7 @@ export const Container = styled(Box)(({ theme }) => ({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    flexDirection:'column',
+    flexDirection: 'column',
     gap: '4px',
     width: '95%',
     height: '15%',
@@ -40,15 +40,22 @@ export const TabMainItems = styled(Box)(({ theme }) => ({
 
 }));
 export const TepsIcons = styled(Stack)(({ theme }) => ({
+    position: 'relative',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize:'10px',
-    backgroundColor:Root.white,
-    borderRadius:'50%',
-    width:'30px',
-    height:'30px',
+    fontSize: '10px',
+    backgroundColor: Root.white,
+    borderRadius: '50%',
+    width: '30px',
+    height: '30px',
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    cursor: 'pointer',
+
+    ":hover": {
+        transition: 'all 200ms linear',
+        color: Root.color_button
+    }
 }));
 export const AvatarPhoto = styled(Avatar)(({ theme }) => ({
     width: '30px',

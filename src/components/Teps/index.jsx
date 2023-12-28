@@ -6,10 +6,10 @@ import { Email, ExpandMore, Notifications } from '@mui/icons-material'
 import { AuthContext } from '../../authcontext/index.jsx'
 import { useContext, useState } from 'react'
 import { tasks } from '../../mask/tasks.js'
+import { CircularRedAlert } from '../CircularRedAlert/index.jsx'
 
 export const TepsMenuTasks = () => {
     const { user } = useContext(AuthContext)
-    
     const location = useLocation()
     const locationMain = location.pathname === '/';
     const border = `2px solid ${Root.color_button}`
@@ -40,9 +40,11 @@ export const TepsMenuTasks = () => {
                 <Tag.TabMainItems sx={{ ga: '1rem' }}>
                     <Tag.TepsIcons>
                         <Email />
+                        {false&&<CircularRedAlert/>}
                     </Tag.TepsIcons>
                     <Tag.TepsIcons>
                         <Notifications />
+                        {false&&<CircularRedAlert/>}
                     </Tag.TepsIcons>
                 </Tag.TabMainItems>
                 <Tag.TabMainItems sx={{
