@@ -8,7 +8,7 @@ export const Container = styled(Box)(({ theme }) => ({
     flexDirection: 'column',
     gap: '4px',
     width: '95%',
-    height: '15%',
+    height: '10%',
     backgroundColor: Root.containTask,
     top: 0,
     left: 0,
