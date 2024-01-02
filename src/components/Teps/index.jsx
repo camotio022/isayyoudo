@@ -37,6 +37,19 @@ export const TepsMenuTasks = () => {
             taskNumber: tasks.filter((task) => task.status === 'close').length,
         }
     ]
+    const newRoute = {
+        title: 'New Task',
+        link: location.pathname,
+        taskNumber: 'pending...'
+    };
+    if (location.pathname === '/createTask') {
+        abas.push(newRoute);
+    } else {
+        const novaArray = abas.filter(objeto => objeto.link !== '/createTask');
+        abas.length = 0;
+        abas.push(...novaArray);
+    }
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
