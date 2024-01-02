@@ -10,6 +10,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../../authcontext/index'
 import { SelectItem } from '../../../components/SelectItem'
 import { LogoutComponent } from '../../../components/Logout/index.jsx'
+import { Link } from 'react-router-dom'
 export const Menu = (
     { setIsLinks, isLinks, children }
 ) => {
@@ -21,12 +22,19 @@ export const Menu = (
             <MyLogout position={'90%'}>
                 {isLinks && <SelectItem item={<Close onClick={() => setIsLinks(false)} />} />}
             </MyLogout>
-            <Stack sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', width: "80%" }}>
+            <Link
+                to={'/createTask'}
+                style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start',
+                    width: "80%"
+                }}>
                 <MyButton sx={{ textTransform: "lowercase" }}>
                     <Add />
                     New Task
                 </MyButton>
-            </Stack>
+            </Link>
             <T.MinhaLista>
                 {links.map((li) => {
                     return (
