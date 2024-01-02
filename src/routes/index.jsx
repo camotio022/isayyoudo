@@ -15,6 +15,7 @@ import { AuthContext, AuthProvider } from "../authcontext"
 import { ArchivedTasks } from "../pages/subpages/archived/index.jsx"
 import { CompletedTasks } from "../pages/subpages/completed/index.jsx"
 import { TasksClosed } from "../pages/subpages/close/index.jsx"
+import { CreateTask } from "../pages/createTasks/index.jsx"
 export const Main = () => {
     const auth = useContext(AuthContext)
     if (auth?.isLoggedIn) {
@@ -30,6 +31,7 @@ export const Main = () => {
                         <Route path='/taskArchived' element={<ArchivedTasks />} />
                         <Route path='/taskCompleted' element={<CompletedTasks />} />
                         <Route path='/taskClose' element={<TasksClosed />} />
+                        <Route path='/createTask' element={<CreateTask/>}/>
                     </Routes>
                 </>}>
             </MainLayout>
