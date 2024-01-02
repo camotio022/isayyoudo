@@ -51,7 +51,6 @@ export const TepsIcons = styled(Stack)(({ theme }) => ({
     height: '30px',
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     cursor: 'pointer',
-
     ":hover": {
         transition: 'all 200ms linear',
         color: Root.color_button
