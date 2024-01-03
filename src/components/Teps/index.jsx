@@ -17,7 +17,7 @@ export const TepsMenuTasks = () => {
     const border = `2px solid ${Root.color_button}`
     const abas = [
         {
-            title: 'Active Tasks',
+            title: 'Active',
             link: '/',
             taskNumber: tasks.filter((task) => task.status === 'active').length,
         },
