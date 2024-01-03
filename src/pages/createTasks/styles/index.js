@@ -38,4 +38,5 @@ export const ContainerTitleAndMOre = styled(Box)(({ theme }) => ({
     gap: '16px',
     width: '90%',
     height: 'auto',
+
 }));

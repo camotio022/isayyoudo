@@ -1,46 +1,118 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as Tag from './styles/index.js'
 import image from './imgs/juggle---drop.gif'
-import { Box, Stepper, Step, StepLabel, StepContent, Stack, TextField, Select, MenuItem, Button, Typography } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import CreateIcon from '@mui/icons-material/Create';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import { options } from './quirys/options.js';
-import { Info, Timeline } from '@mui/icons-material';
-
+import { Box, Stepper, Step, StepLabel, Button, Typography, Stack } from '@mui/material';
+import { Info, Save, Timeline, Warning } from '@mui/icons-material';
+import { StepOne } from './components/StepOne/index.jsx';
+import { StepTwo } from './components/StepTwo/index.jsx';
+import { AuthContext } from '../../authcontext/index.jsx';
+import { Root } from '../../components/Global/Root/root_styles.jsx';
+import { StepThree } from './components/StepThree/index.jsx';
+import { LoadingButton } from '@mui/lab';
 const steps = [
     { label: 'Task Information:', icon: <Info /> },
     { label: 'Timeline Information:', icon: <Timeline /> },
-    { label: 'Create an ad', icon: <AssignmentIcon /> }
+    { label: 'Relevant Fields', icon: <Warning /> }
 ];
 
 export const CreateTask = () => {
-
-    const [selectedType, setSelectedType] = useState('');
+    const { user } = useContext(AuthContext)
     const [activeStep, setActiveStep] = useState(0);
-    const [selecao, setSelecao] = useState('');
-    const handleSelecao = (event) => {
-        setSelecao(event.target.value);
-    };
     const [taskDetails, setTaskDetails] = useState({
         title: '',
         description: '',
-        responsible: '',
+        typeCollection: '',
         startDate: '',
-        dueDate: '',
+        deliveryDate: '',
+        assigned: '',
         priority: '',
-        tags: '',
         taskStatus: '',
+        estimated: '',
+        assigner: user.displayName,
+        assignerPhotoURL: user.photoURL,
+        assignerId: user.uid,
+        assignerTasksCreated: 0,
+        tags: '',
         completionPercentage: '',
-        comments: '',
-        relatedTasks: '',
         requiredResources: '',
         communications: '',
         attachments: '',
         activityLogs: '',
         changeHistory: '',
+        comments: [],
+        relatedTasks: [],
+        responsibles: [],
         collaborators: []
     });
+    const handleSelecao = (event) => {
+        const selectedValue = event.target.value;
+        setTaskDetails((prevTaskDetails) => ({
+            ...prevTaskDetails,
+            typeCollection: selectedValue,
+        }));
+    };
+    const handleInputChange = (fieldName, value) => {
+        setTaskDetails((prevTaskDetails) => {
+            let updatedDetails = {
+                ...prevTaskDetails,
+                [fieldName]: fieldName.includes('Date') ? new Date(value) : value,
+            };
+            const deliveryDate = new Date(updatedDetails.deliveryDate);
+            const startDate = new Date(updatedDetails.startDate);
+            if (fieldName === 'deliveryDate' && deliveryDate < startDate) {
+                updatedDetails = {
+                    ...updatedDetails,
+                    startDate: '',
+                };
+            }
+            if (fieldName === 'startDate' && startDate > deliveryDate) {
+                updatedDetails = {
+                    ...updatedDetails,
+                    deliveryDate: '',
+                };
+            }
+            return updatedDetails;
+        });
+    };
+    const createTasksNow = () => {
+        try {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push(taskDetails);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            const defaultTaskDetails = {
+                title: '',
+                description: '',
+                typeCollection: '',
+                startDate: '',
+                deliveryDate: '',
+                assigned: '',
+                priority: '',
+                taskStatus: '',
+                estimated: '',
+                assigner: user.displayName,
+                assignerPhotoURL: user.photoURL,
+                assignerId: user.uid,
+                assignerTasksCreated: 0,
+                tags: '',
+                completionPercentage: '',
+                requiredResources: '',
+                communications: '',
+                attachments: '',
+                activityLogs: '',
+                changeHistory: '',
+                comments: [],
+                relatedTasks: [],
+                responsibles: [],
+                collaborators: []
+            };
+            setTaskDetails(defaultTaskDetails);
+            console.log("Tareas guardadas:", tasks);
+            console.log("Detalles de la tarea actualizados:", taskDetails);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -49,9 +121,6 @@ export const CreateTask = () => {
     };
     const handleReset = () => {
         setActiveStep(0);
-    };
-    const handleChange = (event) => {
-        setSelectedType(event.target.value);
     };
     const estiloSubtitulo = {
         fontSize: '1rem',
@@ -79,7 +148,14 @@ export const CreateTask = () => {
                 <Stepper sx={{ width: '100%' }} alternativeLabel activeStep={activeStep < 1 ? 1 : activeStep}>
                     {steps.map((step, index) => (
                         <Step key={index}>
-                            <StepLabel icon={activeStep > index ? 'OK' : step.icon}>
+                            <StepLabel
+                                icon={activeStep > index ? 'OK' :
+                                    <Stack sx={{
+                                        color: activeStep > index ? Root.green : Root.color_button,
+                                        borderRadius: '50%',
+                                        border: Root.border,
+                                        padding: '2px',
+                                    }}>{step.icon}</Stack>}>
                                 {step.label}
                             </StepLabel>
                         </Step>
@@ -90,72 +166,36 @@ export const CreateTask = () => {
                 <Typography variant="h6" component="h2" style={estiloSubtitulo}>
                     Create a new task
                 </Typography>
+                {
+                    activeStep === 0 && (
+                        <StepOne
+                            handleInputChange={handleInputChange}
+                            handleSelecao={handleSelecao}
+                            taskDetails={taskDetails}
+                        />)
+                }
                 {activeStep === 1 && (
-                    <Stack flexDirection={'row'} sx={{ gap: 3, width: '100%' }}>
-                        <TextField
-                            fullWidth
-                            required
-                            size="small"
-                            id="outlined-required"
-                            label="Title"
-                            placeholder='Enter your description here...'
-                        />
-                        <TextField
-                            fullWidth
-                            required
-                            size="small"
-                            id="outlined-required"
-                            label="Description"
-                            placeholder='Enter your new task here...'
-                        />
-                        <Select
-                            fullWidth
-                            size="small"
-                            value={selecao}
-                            onChange={handleSelecao}
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Selecione uma opção' }}
-                        >
-                            <MenuItem value="" disabled>
-                                Choose the collection type...
-                            </MenuItem>
-                            {options.map((opcao) => (
-                                <MenuItem key={opcao.value} value={opcao.value}>
-                                    {opcao.label}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </Stack>
+                    <StepTwo
+                        handleInputChange={handleInputChange}
+                        taskDetails={taskDetails}
+                    />
                 )}
                 {activeStep === 2 && (
-                    <Stack flexDirection={'row'} sx={{ gap: 3, width: '100%' }}>
-                        <TextField
-                            fullWidth
-                            required
-                            type='date'
-                            size="small"
-                            id="outlined-required"
-                            label="Stard Date"
-                            placeholder='Enter your Stard Date'
-                        />
-                        <TextField
-                            fullWidth
-                            required
-                            type='date'
-                            size="small"
-                            id="outlined-required"
-                            label="Delivery day"
-                            placeholder='Enter your delivery date'
-                        />
-                        <TextField
-                            fullWidth
-                            required
-                            size="small"
-                            id="outlined-required"
-                            label="priority"
-                            placeholder='priority to who ( *email or user id )'
-                        />
-                    </Stack>
+                    <StepThree
+                        handleInputChange={handleInputChange}
+                        taskDetails={taskDetails}
+                        setTaskDetails={setTaskDetails}
+                    />
+                )}
+                {activeStep === steps.length && (
+                    <Box sx={{ mt: 2 }}>
+                        <Typography>
+
+                            You have finished the registration steps
+                            for the {taskDetails.title} task, do you want to create it?
+                        </Typography>
+                        <Button onClick={handleReset}>Reset</Button>
+                    </Box>
                 )}
             </Tag.ContainerTitleAndMOre>
             <Tag.ContainerTitleAndMOre sx={{ flexDirection: 'row', justifyContent: 'flex-end', mt: 2 }} spacing={2}>
@@ -164,19 +204,26 @@ export const CreateTask = () => {
                     variant="contained" onClick={handleBack} disabled={activeStep === 0}>
                     Back
                 </Button>
-                <Button
-                    sx={{ width: activeStep === 1 && '20%', transition: 'all .4s' }}
-                    variant="contained" onClick={handleNext}>
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
+                {activeStep === steps.length ?
+                    <LoadingButton
+                        size="small"
+                        color="secondary"
+                        loading={''}
+                        onClick={createTasksNow}
+                        loadingPosition="start"
+                        startIcon={<Save />}
+                        variant="contained"
+                    >
+                        <span>Create</span>
+                    </LoadingButton> :
+                    <Button
+                        sx={{ width: activeStep === 1 && '20%', transition: 'all .4s' }}
+                        variant="contained" onClick={handleNext}>
+                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
+                }
             </Tag.ContainerTitleAndMOre>
 
-            {activeStep === steps.length && (
-                <Box sx={{ mt: 2 }}>
-                    <Typography>All steps completed - you're finished</Typography>
-                    <Button onClick={handleReset}>Reset</Button>
-                </Box>
-            )}
 
         </Tag.ContentNewTask>
     );

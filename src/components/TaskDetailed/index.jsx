@@ -18,7 +18,7 @@ export const TaskDetailed = ({
             position: 'absolute',
             display: 'flex',
             alignItems: 'flex-end',
-            justifyContent: 'flex-end',
+        justifyContent: 'flex-end',
         }}>
             <DialogTitle>{task?.name}</DialogTitle>
             <DialogContent>
