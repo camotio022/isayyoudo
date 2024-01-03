@@ -15,6 +15,8 @@ export const TepsMenuTasks = () => {
     const location = useLocation()
     const locationMain = location.pathname === '/';
     const border = `2px solid ${Root.color_button}`
+    const firstInitial = user.displayName.split(' ')[0].charAt(0);
+    const firstName = user.displayName.split(' ')[0];
     const abas = [
         {
             title: 'Active',
@@ -82,9 +84,9 @@ export const TepsMenuTasks = () => {
                     <Tooltip onClick={handleClick} title="Account settings">
                         <Tag.TabMainItems>
                             <Tag.AvatarPhoto src={user.photoURL} sx={{ width: 32, height: 32 }}>
+                                {firstInitial}
                             </Tag.AvatarPhoto>
-                            {user.displayName.split(' ')[0].split('')[0]}
-                            {user.displayName.split(' ')[0]}
+                            {firstName}
                             {!open ? <ExpandMore /> : <ExpandLess />}
                         </Tag.TabMainItems>
                     </Tooltip>
