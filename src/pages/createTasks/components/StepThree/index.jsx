@@ -61,7 +61,7 @@ export const StepThree = ({
                 <Select
                     fullWidth
                     size="small"
-                    value={taskDetails.taskStatus}
+                    value={taskDetails.assigned ? taskStatus[5] : taskDetails.taskStatus}
                     onChange={handleTaskStatusy}
                     displayEmpty
                 >

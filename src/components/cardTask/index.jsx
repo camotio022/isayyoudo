@@ -19,15 +19,34 @@ export const TaskCard = ({
     setTask,
     task,
     setOpenMoreInfo,
-    openMoreInfo
+    openMoreInfo,
+    width,
+    backgroundColor
 }) => {
     function handleClick() {
         setTask(task);
         setOpenMoreInfo(!openMoreInfo);
     }
+    const calculateExecutionDays = () => {
+        const startDate = new Date(dateStarted);
+        const deliveryDate = new Date(dateDelivery);
+        if (isNaN(startDate) || isNaN(deliveryDate)) {
+            return false;
+        }
+        const timeDifference = deliveryDate - startDate;
+        const executionDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        return executionDays;
+    };
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const formattedDate = `${year}/${month}/${day}`;
+        return formattedDate;
+    }
     return (
 
-        <T.TabsMain>
+        <T.TabsMain width={width} backgroundColor={backgroundColor}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
             <T.CircleStateTask color={colorStatus} sx={{
                 position: 'absolute',
@@ -57,20 +76,20 @@ export const TaskCard = ({
                             <T.TaskMainTooltipTagMain>
                                 <T.TaskMainTooltipTagMainItem>
                                     <Circle fontSize='5px' style={{ marginRight: '4px' }} />
-                                    {dateStarted}<br />Started date
+                                    {formatDate(dateStarted)}<br />Started date
                                 </T.TaskMainTooltipTagMainItem>
                                 <T.TaskMainTooltipTagMainItemBorderLeft>
                                 </T.TaskMainTooltipTagMainItemBorderLeft>
                                 <T.TaskMainTooltipTagMainItem>
                                     <Check fontSize='5px' style={{ marginRight: '4px' }} />
-                                    {dateDelivery}<br />Estimated delivery
+                                    {formatDate(dateDelivery)}<br />Estimated delivery
                                 </T.TaskMainTooltipTagMainItem>
                             </T.TaskMainTooltipTagMain>
                         }
                         arrow
                         placement="top"
                     >
-                        {missingTime} days
+                        {calculateExecutionDays()} days
                     </T.TaskMainTooltip>
                 </T.TaskMainHoverInfosDate>
             </T.TaskTitleButton>
@@ -92,7 +111,7 @@ export const TaskCard = ({
                     <Message />
                     <CircularRedAlert />
                 </Stack>
-                <MoreHoriz cursor={'pointer'} onClick={handleClick}/>
+                <MoreHoriz cursor={'pointer'} onClick={handleClick} />
             </T.LastInfosTask>
         </T.TabsMain>
     )

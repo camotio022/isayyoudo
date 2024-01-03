@@ -2,19 +2,21 @@ import React, { useContext, useState } from 'react';
 import * as Tag from './styles/index.js'
 import image from './imgs/juggle---drop.gif'
 import { Box, Stepper, Step, StepLabel, Button, Typography, Stack } from '@mui/material';
-import { Info, Save, Timeline, Warning } from '@mui/icons-material';
+import { Info, Preview, Save, Timeline, Warning } from '@mui/icons-material';
 import { StepOne } from './components/StepOne/index.jsx';
 import { StepTwo } from './components/StepTwo/index.jsx';
 import { AuthContext } from '../../authcontext/index.jsx';
 import { Root } from '../../components/Global/Root/root_styles.jsx';
 import { StepThree } from './components/StepThree/index.jsx';
 import { LoadingButton } from '@mui/lab';
+import { CardTopCreateTask } from './components/cardTop/index.jsx';
+import { PreviewTask } from './components/PreviewTask/index.jsx';
 const steps = [
     { label: 'Task Information:', icon: <Info /> },
     { label: 'Timeline Information:', icon: <Timeline /> },
-    { label: 'Relevant Fields', icon: <Warning /> }
+    { label: 'Relevant Fields', icon: <Warning /> },
+    { label: 'Preview Task', icon: <Preview /> }
 ];
-
 export const CreateTask = () => {
     const { user } = useContext(AuthContext)
     const [activeStep, setActiveStep] = useState(0);
@@ -129,21 +131,7 @@ export const CreateTask = () => {
     };
     return (
         <Tag.ContentNewTask>
-            <Tag.CardNewTask>
-                <img src={image} alt="" style={{ width: '50%', height: '300px' }} />
-                <Box textAlign={'center'} gap={3}>
-                    <Typography variant='h3' component={'h3'}>
-                        {
-                            activeStep > 0 && `Step: ${activeStep}`
-                        }
-                    </Typography>
-                    <Tag.ContainerDescription>
-                        "Incentive a criação de tarefas para potencializar a realização de objetivos.
-                        Transforme desafios em conquistas, fortalecendo a disciplina e motivação.
-                        Comece hoje, dando passos pequenos em direção a um amanhã mais produtivo e satisfatório."
-                    </Tag.ContainerDescription>
-                </Box>
-            </Tag.CardNewTask>
+            <CardTopCreateTask image={image} activeStep={activeStep} />
             <Tag.CardNewTask>
                 <Stepper sx={{ width: '100%' }} alternativeLabel activeStep={activeStep < 1 ? 1 : activeStep}>
                     {steps.map((step, index) => (
@@ -187,6 +175,9 @@ export const CreateTask = () => {
                         setTaskDetails={setTaskDetails}
                     />
                 )}
+                {activeStep === 3 &&(
+                    <PreviewTask taskDetails={taskDetails}/>
+                )}
                 {activeStep === steps.length && (
                     <Box sx={{ mt: 2 }}>
                         <Typography>
@@ -223,8 +214,6 @@ export const CreateTask = () => {
                     </Button>
                 }
             </Tag.ContainerTitleAndMOre>
-
-
         </Tag.ContentNewTask>
     );
 };

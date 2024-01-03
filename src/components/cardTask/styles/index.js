@@ -1,8 +1,8 @@
 import { Box, Stack, Tooltip, Typography, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
-export const TabsMain = styled(Box)(({ theme, border }) => ({
-    width: '95%',
+export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor }) => ({
+    width: width? width: '95%',
     minHeight: '5rem',
     height: 'auto',
     paddingBlock: '1rem',
@@ -10,7 +10,7 @@ export const TabsMain = styled(Box)(({ theme, border }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: Root.white,
+    backgroundColor: backgroundColor? backgroundColor: Root.white,
     gap: 10,
     boxShadow: Root.boxShadowTask,
     overflowX: 'auto',
