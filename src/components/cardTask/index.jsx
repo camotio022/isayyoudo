@@ -4,6 +4,7 @@ import { Assignment, Check, Circle, Event, EventAvailable, MarkUnreadChatAlt, Me
 import { Root } from '../Global/Root/root_styles.jsx'
 import { CircularRedAlert } from '../CircularRedAlert/index.jsx'
 import { TaskDetailed } from '../TaskDetailed/index.jsx'
+import { taskService } from '../../api/tasks/addTask.js'
 
 export const TaskCard = ({
     name,
@@ -21,7 +22,9 @@ export const TaskCard = ({
     setOpenMoreInfo,
     openMoreInfo,
     width,
-    backgroundColor
+    backgroundColor,
+    typeShowTask,
+    taskId
 }) => {
     function handleClick() {
         setTask(task);
@@ -44,9 +47,19 @@ export const TaskCard = ({
         const formattedDate = `${year}/${month}/${day}`;
         return formattedDate;
     }
+    const deleteTask = async () => {
+        const confirm = prompt('! Atensão você está entrando em uma ação que levara a exclução dessa tarefa, certeza que quer continuar?')
+        if (confirm === 'sim') {
+            try {
+                await taskService.task.deleteTask(taskId)
+            }catch(err){
+                alert(err)
+            }
+        }
+    }
     return (
 
-        <T.TabsMain width={width} backgroundColor={backgroundColor}>
+        <T.TabsMain width={width} backgroundColor={backgroundColor} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
             <T.CircleStateTask color={colorStatus} sx={{
                 position: 'absolute',
@@ -76,13 +89,13 @@ export const TaskCard = ({
                             <T.TaskMainTooltipTagMain>
                                 <T.TaskMainTooltipTagMainItem>
                                     <Circle fontSize='5px' style={{ marginRight: '4px' }} />
-                                    {formatDate(dateStarted)}<br />Started date
+                                    {dateStarted && typeShowTask === 'preview' ? formatDate(dateStarted) : dateStarted}<br />Started date
                                 </T.TaskMainTooltipTagMainItem>
                                 <T.TaskMainTooltipTagMainItemBorderLeft>
                                 </T.TaskMainTooltipTagMainItemBorderLeft>
                                 <T.TaskMainTooltipTagMainItem>
                                     <Check fontSize='5px' style={{ marginRight: '4px' }} />
-                                    {formatDate(dateDelivery)}<br />Estimated delivery
+                                    {dateStarted && typeShowTask === 'preview' ? formatDate(dateDelivery) : dateDelivery}<br />Estimated delivery
                                 </T.TaskMainTooltipTagMainItem>
                             </T.TaskMainTooltipTagMain>
                         }

@@ -4,39 +4,58 @@ import { Root } from '../Global/Root/root_styles.jsx'
 import { Avatar, Box, Container, IconButton, Stack, Tooltip } from '@mui/material'
 import { Email, ExpandLess, ExpandMore, Notifications } from '@mui/icons-material'
 import { AuthContext } from '../../authcontext/index.jsx'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { tasks } from '../../mask/tasks.js'
 import { CircularRedAlert } from '../CircularRedAlert/index.jsx'
 import { MenuUser } from '../menuUser/index.jsx'
 import { DrawerNotification } from '../DrawerNotification/index.jsx'
+import { taskService } from '../../api/tasks/addTask.js'
+let timesTempTasks = []
 
 export const TepsMenuTasks = () => {
+    const[tasks, setTasks] = useState([])
     const { user } = useContext(AuthContext)
     const location = useLocation()
     const locationMain = location.pathname === '/';
     const border = `2px solid ${Root.color_button}`
     const firstInitial = user.displayName.split(' ')[0].charAt(0);
     const firstName = user.displayName.split(' ')[0];
+    useEffect(() => {
+        const getTasks = async () => {
+            try {
+                const getTasks = await taskService.task.getTasks() || []
+                setTasks(getTasks)
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        getTasks()
+    }, [])
     const abas = [
         {
-            title: 'Active',
+            title: 'All Tasks',
             link: '/',
-            taskNumber: tasks.filter((task) => task.status === 'active').length,
+            taskNumber: tasks.length,
+        },
+        {
+            title: 'Active',
+            link: '/active',
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Active').length,
         },
         {
             title: 'Completed',
             link: '/taskCompleted',
-            taskNumber: tasks.filter((task) => task.status === 'completed').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Completed').length,
         },
         {
             title: 'Archived',
             link: '/taskArchived',
-            taskNumber: tasks.filter((task) => task.status === 'archived').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Archived').length,
         },
         {
             title: 'Close',
             link: '/taskClose',
-            taskNumber: tasks.filter((task) => task.status === 'close').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Close').length,
         }
     ]
     const newRoute = {

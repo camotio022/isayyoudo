@@ -11,6 +11,7 @@ import { StepThree } from './components/StepThree/index.jsx';
 import { LoadingButton } from '@mui/lab';
 import { CardTopCreateTask } from './components/cardTop/index.jsx';
 import { PreviewTask } from './components/PreviewTask/index.jsx';
+import { taskService } from '../../api/tasks/addTask.js';
 const steps = [
     { label: 'Task Information:', icon: <Info /> },
     { label: 'Timeline Information:', icon: <Timeline /> },
@@ -76,11 +77,9 @@ export const CreateTask = () => {
             return updatedDetails;
         });
     };
-    const createTasksNow = () => {
+    const createTasksNow = async () => {
         try {
-            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            tasks.push(taskDetails);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
+            const createTask = await taskService.task.post(taskDetails)
             const defaultTaskDetails = {
                 title: '',
                 description: '',
@@ -108,8 +107,7 @@ export const CreateTask = () => {
                 collaborators: []
             };
             setTaskDetails(defaultTaskDetails);
-            console.log("Tareas guardadas:", tasks);
-            console.log("Detalles de la tarea actualizados:", taskDetails);
+            console.log("tarefa adicionada com sucesso!!", createTask);
         } catch (err) {
             console.error(err);
         }
@@ -181,7 +179,6 @@ export const CreateTask = () => {
                 {activeStep === steps.length && (
                     <Box sx={{ mt: 2 }}>
                         <Typography>
-
                             You have finished the registration steps
                             for the {taskDetails.title} task, do you want to create it?
                         </Typography>

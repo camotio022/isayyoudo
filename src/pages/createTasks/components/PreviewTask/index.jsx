@@ -3,7 +3,6 @@ import { taskStatus, taskStatusBgcolor, taskStatusColors } from "../../quirys/ta
 export const PreviewTask = (
     {taskDetails}
 ) => {
-    console.log(taskDetails)
     const backgroundColor = taskStatusBgcolor[taskDetails.taskStatus]
     const color = taskStatusColors[taskDetails.taskStatus]
     return (
@@ -20,6 +19,7 @@ export const PreviewTask = (
             stateTask={taskDetails.taskStatus}
             colorStatus={color}
             backgroundColor={backgroundColor}
+            typeShowTask={'preview'}
         />
     );
 }
