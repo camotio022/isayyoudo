@@ -18,13 +18,13 @@ export const CardTaskMobile = (
             <Grid item xs={8} sx={{
                 width: mobile ? '320px' : 275,
                 height: 150,
-                bgcolor: color ? color : emptyBgcolor,
                 cursor: 'pointer',
-                border: Root.border
+                boxShadow: Root.boxShadow
+
             }}>
                 <Card variant="outlined" sx={{
                     height: '100%',
-                    borderRadius: '1rem',
+                    borderRadius: 'none',
                     border: 'none'
                 }}>
                     <CardContent>

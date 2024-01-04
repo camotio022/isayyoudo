@@ -47,6 +47,7 @@ export const CreateTask = () => {
         responsibles: [],
         collaborators: []
     });
+
     const handleSelecao = (event) => {
         const selectedValue = event.target.value;
         setTaskDetails((prevTaskDetails) => ({
