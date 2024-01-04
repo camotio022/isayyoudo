@@ -160,5 +160,17 @@ export const CardTaskMacthes = styled(Box)(({ mobile }) => ({
     flexWrap: 'wrap',
     overflow: 'auto',
     gap: '1rem',
-    paddingBlock: mobile? "6rem": "5rem"
+    paddingBlock: mobile? "6rem": "5rem",
+    '&::-webkit-scrollbar': {
+        width: '4px',
+    },
+
+    '&::-webkit-scrollbar-thumb': {
+        backgroundColor: Root.color_button,
+        borderRadius: '6px',
+    },
+
+    '&::-webkit-scrollbar-track': {
+        backgroundColor: '#f1f1f1',
+    },
 }))
