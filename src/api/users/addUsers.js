@@ -22,7 +22,7 @@ export const add_users = {
                     password
                 );
                 const user = userCredential.user;
-                await updateProfile(user, { displayName: `${name} ${name}` });
+                await updateProfile(user, { displayName: `${name}` });
                 const usersCollection = collection(db, "users");
                 const userDocRef = await addDoc(usersCollection, {
                     id: user.uid,

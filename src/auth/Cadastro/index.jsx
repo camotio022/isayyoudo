@@ -98,7 +98,7 @@ export const Cadastro = () => {
                     <BoxMain
                     >
                         <Typography component="h1" variant="h5">
-                            Cadastrar
+                            Sign up
                         </Typography>
                         <T.GridMapTextfield
                             component="div"
@@ -134,7 +134,7 @@ export const Cadastro = () => {
                                 variant={canClick ? "contained" : "disabled"}
                                 startIcon={<PersonAdd />}
                             >
-                                Sign Up
+                                Register
                             </MyButton> : "Can't sign up"}
                             <MyLink href="/">I already have an account on iSayYouDo</MyLink>
                         </T.GridMapTextfield>

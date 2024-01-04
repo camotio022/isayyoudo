@@ -1,28 +1,56 @@
-import { useContext } from "react";
-import {Grid, Typography } from "@mui/material";
-import { BoxMain, ContainerGlobal, MyButton, MyFooter } from "../../components/Global/Styles/styles";
-import { AuthContext } from "../../authcontext/index";
+import {  useEffect, useState } from "react";
+import { ContainerTasks } from "../../components/Global/Styles/styles";
+import { TaskCard } from "../../components/cardTask/index.jsx";
+import { TaskDetailed } from "../../components/TaskDetailed/index.jsx";
+import { taskStatusBgcolor, taskStatusColors } from "../createTasks/quirys/taskStatus.js";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebaseConfig.js";
 export const HomePage = () => {
-    const { user } = useContext(AuthContext);
+    const [tasks, setTasks] = useState([])
+    const [task, setTask] = useState({})
+    const [openMoreInfo, setOpenMoreInfo] = useState(false);
+    function handleClick() {
+        setOpenMoreInfo(false);
+    }
+    useEffect(() => {
+        const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
+            const timesTempTasks = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setTasks(timesTempTasks);
+        });
+        return () => unsubscribe();
+    }, []);
     return (
-        <ContainerGlobal>
-            <BoxMain
-                border={true} sx={{ padding: '20px' }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography variant="h4">Home</Typography>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Typography variant="h6">User Display Name:</Typography>
-                        <Typography>{user.displayName}</Typography>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Typography variant="h6">User UID:</Typography>
-                        <Typography>{user.uid}</Typography>
-                    </Grid>
-                </Grid>
-                
-            </BoxMain>
-        </ContainerGlobal>
+        <ContainerTasks>
+            {tasks
+                .map((task) => {
+                    const colors = taskStatusColors[task.taskStatus];
+                    const backgroundColor = taskStatusBgcolor[task.taskStatus]
+                    return (
+                        <TaskCard
+                            key={task.taskId}
+                            taskId={task.taskId}
+                            name={task.title}
+                            action={task.typeCollection}
+                            assigner={task.assigner}
+                            avatar={''}
+                            assignerTo={'SnowManLabs'}
+                            missingTime={task.missingTime}
+                            dateStarted={task.startDate}
+                            dateDelivery={task.deliveryDate}
+                            stateTask={task.taskStatus}
+                            colorStatus={colors}
+                            setTask={setTask}
+                            task={task}
+                            openMoreInfo={openMoreInfo}
+                            setOpenMoreInfo={setOpenMoreInfo}
+                            backgroundColor={backgroundColor}
+                        />
+                    );
+                })}
+            <TaskDetailed open={openMoreInfo} handleClick={handleClick} task={task} />
+        </ContainerTasks>
     );
 };

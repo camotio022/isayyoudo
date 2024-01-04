@@ -2,6 +2,8 @@ import { Fragment } from "react"
 import { ContainerGlobal, ContainerGlobalChildrens } from "../../../components/Global/Styles/styles"
 import { Menu } from "../menu"
 import { AuthFooter } from "../../../components/Footer"
+import { Stack } from "@mui/material"
+import { TepsMenuTasks } from "../../../components/Teps/index.jsx"
 
 export const MainContent = ({
     children,
@@ -39,10 +41,17 @@ export const MainContent = ({
                 showLinks={showLinks}
                 setShowLinks={setShowLinks}
             />
-     
+            <Stack sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                width: "100%",
+                height: "100vh",
+                gap: '1rem',
+            }}>
+                <TepsMenuTasks />
                 {children}
-                <AuthFooter />
-
+            </Stack>
         </ContainerGlobal>
     )
 }

@@ -1,17 +1,17 @@
 import styled from "@emotion/styled";
 import { Box, Button, Link, Stack, useMediaQuery } from "@mui/material";
 import { Root } from "../Root/root_styles";
-import { purple } from "@mui/material/colors";
-
 export const ContainerGlobal = styled(Box)(({ theme }) => ({
+    position: 'relative',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     width: "100vw",
     height: "100vh",
+    overflow: 'hidden',
     color: Root.gray,
-    backgroundColor: Root.light,
+    backgroundColor: Root.containTask,
 }));
 export const ContainerGlobalChildrens = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -36,7 +36,7 @@ export const BoxMain = styled(Box)(({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "white",
+    backgroundColor: Root.white,
     gap: 10,
     boxShadow: Root.boxShadow,
     border: border ? '0' : Root.border,
@@ -60,6 +60,7 @@ export const MyButton = styled(Button)(({ theme }) => ({
         backgroundColor: Root.color_default,
         color: Root.color_button_secondary,
         cursor: 'pointer',
+        boxShadow: Root.boxShadow
     },
 }));
 export const MyLink = styled(Link)(({ theme }) => ({
@@ -123,3 +124,31 @@ export const Items = styled(Stack)(({ theme }) => ({
     boxShadow: Root.boxShadow,
     padding: '1px',
 }));
+
+export const ContainerTasks = styled(Stack)(({ theme }) => ({
+    position: 'relative',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: '20px',
+    width: "100%",
+    minHeight: "50%",
+    height: "auto",
+    overflow: 'auto',
+    paddingBlock: '3rem',
+    color: Root.gray,
+    backgroundColor: Root.containTask,
+    '&::-webkit-scrollbar': {
+        width: '4px',
+    },
+
+    '&::-webkit-scrollbar-thumb': {
+        backgroundColor: Root.color_button,
+        borderRadius: '6px',
+    },
+
+    '&::-webkit-scrollbar-track': {
+        backgroundColor: '#f1f1f1',
+    },
+}))

@@ -15,7 +15,7 @@ export const GridMiniMain = styled(Grid)(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     height: 'auto',
-    backgroundColor: grey[300]
+    backgroundColor: 'white'
 }));
 
 export const GridMapTextfield = styled(Grid)(({ theme }) => ({
