@@ -152,3 +152,13 @@ export const ContainerTasks = styled(Stack)(({ theme }) => ({
         backgroundColor: '#f1f1f1',
     },
 }))
+export const CardTaskMacthes = styled(Box)(({ mobile }) => ({
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    overflow: 'auto',
+    gap: '1rem',
+    paddingBlock: mobile? "6rem": "5rem"
+}))
