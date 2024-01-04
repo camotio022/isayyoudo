@@ -12,8 +12,10 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { FormControlLabel, Switch } from '@mui/material';
 export const MenuUser = ({
-    open, handleClick, handleClose, anchorEl, user }) => {
+    open, handleClose, anchorEl, user, handleChange, checked}) => {
+
     return (
         <React.Fragment>
             <Menu
@@ -52,9 +54,18 @@ export const MenuUser = ({
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={handleClose}>
-                    <Tag.AvatarPhoto src={user.photoURL}/> {user.displayName}
+                    <Tag.AvatarPhoto src={user.photoURL} /> {user.displayName}
                 </MenuItem>
                 <Divider />
+                <MenuItem onClick={()=>handleClose(true)}>
+                    <ListItemIcon>
+                        <FormControlLabel
+                            control={<Switch checked={checked} onChange={handleChange} />}
+                            label="Active backgroundColor of tasks"
+                        />
+                    </ListItemIcon>
+                    
+                </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <Settings fontSize="small" />

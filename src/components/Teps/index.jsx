@@ -1,36 +1,46 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import * as Tag from './index.js'
 import { Root } from '../Global/Root/root_styles.jsx'
-import { Avatar, Box, Container, IconButton, Stack, Tooltip } from '@mui/material'
+import { Tooltip } from '@mui/material'
 import { Email, ExpandLess, ExpandMore, Notifications } from '@mui/icons-material'
 import { AuthContext } from '../../authcontext/index.jsx'
 import { useContext, useEffect, useState } from 'react'
-import { tasks } from '../../mask/tasks.js'
 import { CircularRedAlert } from '../CircularRedAlert/index.jsx'
 import { MenuUser } from '../menuUser/index.jsx'
 import { DrawerNotification } from '../DrawerNotification/index.jsx'
-import { taskService } from '../../api/tasks/addTask.js'
-let timesTempTasks = []
-
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from '../../firebaseConfig.js'
 export const TepsMenuTasks = () => {
-    const[tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState([])
     const { user } = useContext(AuthContext)
+    const [checked, setChecked] = useState(true);
     const location = useLocation()
     const locationMain = location.pathname === '/';
     const border = `2px solid ${Root.color_button}`
     const firstInitial = user.displayName.split(' ')[0].charAt(0);
     const firstName = user.displayName.split(' ')[0];
     useEffect(() => {
-        const getTasks = async () => {
-            try {
-                const getTasks = await taskService.task.getTasks() || []
-                setTasks(getTasks)
-            } catch (err) {
-                console.error(err)
-            }
+        const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
+            const timesTempTasks = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setTasks(timesTempTasks);
+        });
+        return () => unsubscribe();
+    }, []);
+
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+        if (event.target.checked) {
+            localStorage.setItem('bgActive', true)
+            return
         }
-        getTasks()
-    }, [])
+        localStorage.setItem('bgActive', false)
+    };
+
+
     const abas = [
         {
             title: 'All Tasks',
@@ -110,6 +120,8 @@ export const TepsMenuTasks = () => {
                         </Tag.TabMainItems>
                     </Tooltip>
                     <MenuUser
+                        checked={checked}
+                        handleChange={handleChange}
                         user={user}
                         open={open}
                         handleClick={handleClick}

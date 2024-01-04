@@ -3,8 +3,7 @@ import { Root } from "../../Global/Root/root_styles";
 
 export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor }) => ({
     width: width? width: '95%',
-    minHeight: '5rem',
-    height: 'auto',
+    minHeight: 'auto',
     paddingBlock: '1rem',
     borderRadius: '4px',
     display: 'flex',
@@ -13,8 +12,6 @@ export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor }) 
     backgroundColor: backgroundColor? backgroundColor: Root.white,
     gap: 10,
     boxShadow: Root.boxShadowTask,
-    overflowX: 'auto',
-    overflowY: 'hidden',
 
     '&::-webkit-scrollbar': {
         width: '5px',
@@ -38,13 +35,13 @@ export const TaskTitleButton = styled(Stack)(({ theme, border }) => ({
     justifyContent: 'space-between',
     gap: '10px',
     width: '20%',
-    minHeight: '5rem',
     height: 'auto'
 }));
 export const TaskTitle = styled(Typography)(({ theme, border }) => ({
     color: Root.black,
     fontSize: '12px',
-    fontWeight: '600'
+    fontWeight: '600',
+    minHeight: 'auto'
 }));
 export const Infos = styled(Stack)(({ theme, border }) => ({
     backgroundColor: Root.subButton,
@@ -108,14 +105,15 @@ export const LastInfosTask = styled(Box)(({ theme, border }) => ({
     minWidth: '20%',
     height: '5rem',
 }));
-export const BoxTypeButtonMain= styled(Box)(({ theme, border }) => ({
+export const BoxTypeButtonMain= styled(Box)(({ theme, width }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: '8px',
-    height:'40%',
-    width: '6rem',
-    paddingLeft: '8px',
+    minHeight:'30%',
+    minWidth: width,
+    width:'auto',
+    padding: '8px',
     border:'1px solid gray',
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,

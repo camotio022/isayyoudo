@@ -1,10 +1,11 @@
-import { Avatar, Box, Button, Popover, Stack, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Stack, } from '@mui/material'
 import * as T from './styles/index.js'
-import { Assignment, Check, Circle, Event, EventAvailable, MarkUnreadChatAlt, Message, MoreHoriz } from '@mui/icons-material'
+import { Assignment, Check, Circle, Message, MoreHoriz } from '@mui/icons-material'
 import { Root } from '../Global/Root/root_styles.jsx'
 import { CircularRedAlert } from '../CircularRedAlert/index.jsx'
-import { TaskDetailed } from '../TaskDetailed/index.jsx'
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { taskService } from '../../api/tasks/addTask.js'
+import { useEffect, useState } from 'react'
 
 export const TaskCard = ({
     name,
@@ -12,7 +13,6 @@ export const TaskCard = ({
     assigner,
     avatar,
     assignerTo,
-    missingTime,
     dateStarted,
     dateDelivery,
     stateTask,
@@ -26,6 +26,8 @@ export const TaskCard = ({
     typeShowTask,
     taskId
 }) => {
+    const matches = useMediaQuery('(min-width:600px)');
+
     function handleClick() {
         setTask(task);
         setOpenMoreInfo(!openMoreInfo);
@@ -52,13 +54,12 @@ export const TaskCard = ({
         if (confirm === 'sim') {
             try {
                 await taskService.task.deleteTask(taskId)
-            }catch(err){
+            } catch (err) {
                 alert(err)
             }
         }
     }
     return (
-
         <T.TabsMain width={width} backgroundColor={backgroundColor} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
             <T.CircleStateTask color={colorStatus} sx={{
@@ -115,8 +116,9 @@ export const TaskCard = ({
                     </T.TaskAssigner>
                 </T.TaskTitle>
             </T.LastInfosTask>
+            {matches&&<>
             <T.LastInfosTask>
-                <T.BoxTypeButtonMain>
+                <T.BoxTypeButtonMain width={width}>
                     <T.CircleStateTask color={colorStatus} />
                     {stateTask}
                 </T.BoxTypeButtonMain>
@@ -125,7 +127,7 @@ export const TaskCard = ({
                     <CircularRedAlert />
                 </Stack>
                 <MoreHoriz cursor={'pointer'} onClick={handleClick} />
-            </T.LastInfosTask>
+            </T.LastInfosTask></>}
         </T.TabsMain>
     )
 }

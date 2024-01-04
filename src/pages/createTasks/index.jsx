@@ -80,33 +80,7 @@ export const CreateTask = () => {
     const createTasksNow = async () => {
         try {
             const createTask = await taskService.task.post(taskDetails)
-            const defaultTaskDetails = {
-                title: '',
-                description: '',
-                typeCollection: '',
-                startDate: '',
-                deliveryDate: '',
-                assigned: '',
-                priority: '',
-                taskStatus: '',
-                estimated: '',
-                assigner: user.displayName,
-                assignerPhotoURL: user.photoURL,
-                assignerId: user.uid,
-                assignerTasksCreated: 0,
-                tags: '',
-                completionPercentage: '',
-                requiredResources: '',
-                communications: '',
-                attachments: '',
-                activityLogs: '',
-                changeHistory: '',
-                comments: [],
-                relatedTasks: [],
-                responsibles: [],
-                collaborators: []
-            };
-            setTaskDetails(defaultTaskDetails);
+            setActiveStep(1)
             console.log("tarefa adicionada com sucesso!!", createTask);
         } catch (err) {
             console.error(err);
