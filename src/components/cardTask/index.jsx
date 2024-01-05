@@ -27,7 +27,6 @@ export const TaskCard = ({
     taskId
 }) => {
     const matches = useMediaQuery('(min-width:600px)');
-
     function handleClick() {
         setTask(task);
         setOpenMoreInfo(!openMoreInfo);
