@@ -9,6 +9,10 @@ import { Close, Comment, Description, Edit, Group } from '@mui/icons-material';
 import { Root } from '../Global/Root/root_styles';
 import { useState } from 'react';
 import { CommentArea } from '../Dialog/components/MyComments';
+import { CommentsTasks } from '../CommentsTasks/index.jsx';
+import { commentsData } from '../../mask/comments.js'
+import { BullPoint } from '../Bull';
+import * as Tag from './styles/index.js'
 export const TaskDetailed = ({
     handleClick, open, task
 }) => {
@@ -24,23 +28,12 @@ export const TaskDetailed = ({
         flexDirection: 'row',
     }
     const colors = taskStatusColors[task.taskStatus];
-    const bull = (
-        <Box
-            component="span"
-            sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-        >
-            •
-        </Box>
-    );
     return (
-        <Dialog open={open} onClose={handleClick} sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        }}>
-            <Paper sx={{ width: 500, height: '95vh' }}>
-                <MenuList >
+        <Tag.DialogDetails open={open} onClose={handleClick}>
+            <Paper sx={{ width: 500, height: 'auto' }}>
+                <MenuList>
                     <Stack sx={{
+
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
@@ -49,7 +42,7 @@ export const TaskDetailed = ({
                         height: '3rem'
                     }}>
                         <Box ml={2} component={'div'}>
-                            {bull}
+                            {<BullPoint />}
                             {checkKeyIsValid(task.typeCollection)}
                         </Box>
                         <Box mr={4} sx={{ cursor: 'pointer' }}>
@@ -68,23 +61,23 @@ export const TaskDetailed = ({
                         gap: 1,
                     }}>
                         <Box ml={3} gap={20} sx={startDiv}>
-                            <Box width={100} >{bull}Status</Box>
-                            <Button sx={{ backgroundColor: colors ? colors : taskStatusColors.empty }}>{bull}{checkKeyIsValid(task.taskStatus)}</Button>
+                            <Box width={100} >{<BullPoint />}Status</Box>
+                            <Button sx={{ backgroundColor: colors ? colors : taskStatusColors.empty }}>{<BullPoint />}{checkKeyIsValid(task.taskStatus)}</Button>
                         </Box>
                         <Box ml={3} gap={20} sx={startDiv}>
-                            <Box width={100} >{bull}Start Date</Box>
+                            <Box width={100} >{<BullPoint />}Start Date</Box>
                             <Box>
                                 {checkKeyIsValid(task.startDate)}
                             </Box>
                         </Box>
                         <Box ml={3} gap={20} sx={startDiv}>
-                            <Box width={100} >{bull}Delivery </Box>
+                            <Box width={100} >{<BullPoint />}Delivery </Box>
                             <Box>
                                 {checkKeyIsValid(task.deliveryDate)}
                             </Box>
                         </Box>
                         <Box ml={3} gap={20} sx={startDiv}>
-                            <Box width={100} >{bull}Assigned</Box>
+                            <Box width={100} >{<BullPoint />}Assigned</Box>
                             <Box>
                                 {checkKeyIsValid(task.assigned)}
                             </Box>
@@ -114,13 +107,20 @@ export const TaskDetailed = ({
                                     )
                                 })}
                         </BottomNavigation>
-                        {value === 0 && (
+                        {value === 0 && (<>
                             <CommentArea />
+                            {commentsData.map((comment, index) => {
+                                return (
+                                    <CommentsTasks comment={comment}/>
+                                )
+                            })}
+
+                        </>
                         )}
                     </Box>
                 </MenuList>
             </Paper>
 
-        </Dialog>
+        </Tag.DialogDetails>
     )
 }

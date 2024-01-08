@@ -82,7 +82,7 @@ export const CommentArea = () => {
                             }} variant='none'>#temaBom</Button>
                             <Button disabled sx={{
                                 mr: 1,
-                                backgroundColor: taskStatusBgcolor.InProgress
+                                backgroundColor: 'rgba(0,0, 255, 0.2)'
                             }} variant='none'>@isayyoudo</Button>
                             <Button>Send</Button>
                         </Box>
