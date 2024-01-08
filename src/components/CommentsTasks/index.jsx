@@ -10,7 +10,6 @@ export const CommentsTasks = ({
     const extractMentionsAndHashtags = (text) => {
         const mentionRegex = /@([\wÀ-ÖØ-öø-ÿ]+)/g;
         const hashtagRegex = /#([\wÀ-ÖØ-öø-ÿ]+)/g;
-
         const mentions = text.match(mentionRegex) || [];
         const hashtags = text.match(hashtagRegex) || [];
         return { mentions, hashtags };
@@ -22,7 +21,8 @@ export const CommentsTasks = ({
                 <strong style="
                     background-color: rgba(0,0, 255, 0.2); 
                     color: blue;
-                    padding: 3px;
+                    font-size: 13px;
+                    padding: 2px;
                     border-radius: 8px;
                     margin-right: 4px,
                 ">
@@ -33,14 +33,15 @@ export const CommentsTasks = ({
         hashtags.forEach((hashtag) => {
             updatedText = updatedText.replace(hashtag, `
             <strong style="
-            background-color: rgba(25,31, 52, 0.2); 
-            color: brown;
-            padding: 3px;
-            border-radius: 8px;
-            margin-right: 4px,
-        ">
-            ${hashtag}
-        </strong>
+                background-color: rgba(25,31, 52, 0.2); 
+                color: brown;
+                font-size: 13px;
+                padding: 2px;
+                border-radius: 8px;
+                margin-right: 4px,
+            ">
+                ${hashtag}
+            </strong>
             `);
         });
         return <div dangerouslySetInnerHTML={{ __html: updatedText }} />;
