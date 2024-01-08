@@ -1,4 +1,4 @@
-import { Divider, Stack, useMediaQuery } from '@mui/material'
+import { Stack, useMediaQuery } from '@mui/material'
 import { LogoPage } from '../../../components/Logo'
 import *as T from './styles/index'
 import { MyButton } from '../../../components/Global/Styles/styles'
@@ -9,10 +9,9 @@ import { MyLogout } from '../../../components/Logout/styles'
 import { useContext } from 'react'
 import { AuthContext } from '../../../authcontext/index'
 import { SelectItem } from '../../../components/SelectItem'
-import { LogoutComponent } from '../../../components/Logout/index.jsx'
 import { Link } from 'react-router-dom'
 export const Menu = (
-    { setIsLinks, isLinks, children }
+    { setIsLinks, isLinks }
 ) => {
     const { logout } = useContext(AuthContext)
     const isSmallScreen = useMediaQuery('(max-width:600px)');

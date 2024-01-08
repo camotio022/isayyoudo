@@ -10,12 +10,12 @@ import { CardTaskMobile } from "../../components/CardTaskMobile/index.jsx";
 export const HomePage = () => {
     const matches = useMediaQuery('(min-width:1300px)');
     const mobile = useMediaQuery('(max-width:380px)');
-    const [tasks, setTasks] = useState([])
     const [task, setTask] = useState({})
     const [openMoreInfo, setOpenMoreInfo] = useState(false);
     function handleClick() {
         setOpenMoreInfo(false);
     }
+    const [tasks, setTasks] = useState([])
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
             const timesTempTasks = snapshot.docs.map((doc) => ({
