@@ -47,8 +47,8 @@ export const HomePage = () => {
                                 dateDelivery={task.deliveryDate}
                                 stateTask={task.taskStatus}
                                 colorStatus={colors}
-                                setTask={setTask}
                                 task={task}
+                                setTask={setTask}
                                 openMoreInfo={openMoreInfo}
                                 setOpenMoreInfo={setOpenMoreInfo}
                                 backgroundColor={backgroundColor}
@@ -78,9 +78,14 @@ export const HomePage = () => {
                             empty={empty}
                             emptyBgcolor={emptyBgcolor}
                             mobile={mobile}
+                            setTask={setTask}
+                            openMoreInfo={openMoreInfo}
+                            setOpenMoreInfo={setOpenMoreInfo}
                         />
                     )
                 })}
+                <TaskDetailed open={openMoreInfo} handleClick={handleClick} task={task} />
+
             </CardTaskMacthes>
         </>
     )

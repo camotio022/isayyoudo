@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
-export const CommentMainTag = styled(Box)(({ theme }) => ({
-    width: 450, 
+export const CommentMainTag = styled(Box)(({ theme, isMobileQuery }) => ({
+    width: isMobileQuery? '90%':450, 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

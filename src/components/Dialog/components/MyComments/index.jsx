@@ -14,12 +14,22 @@ import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Check from '@mui/icons-material/Check';
 import { taskStatusBgcolor } from '../../../../pages/createTasks/quirys/taskStatus';
 
-export const CommentArea = () => {
+export const CommentArea = ({
+    isMobileQuery
+}) => {
+    console.log(isMobileQuery)
     const [italic, setItalic] = React.useState(false);
     const [fontWeight, setFontWeight] = React.useState('normal');
     const [anchorEl, setAnchorEl] = React.useState(null);
     return (
-        <FormControl sx={{ mt: 3 }}>
+        <FormControl sx={{
+            mt: 3, 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            width: isMobileQuery?'90%': '100%'
+        }}>
             <Textarea
                 placeholder="Type something here…"
                 minRows={3}
@@ -77,11 +87,9 @@ export const CommentArea = () => {
                         </IconButton>
                         <Box gap={2} sx={{ ml: 'auto' }}>
                             <Button disabled sx={{
-                                mr: 1,
                                 backgroundColor: taskStatusBgcolor.Archived
                             }} variant='none'>#temaBom</Button>
                             <Button disabled sx={{
-                                mr: 1,
                                 backgroundColor: 'rgba(0,0, 255, 0.2)'
                             }} variant='none'>@isayyoudo</Button>
                             <Button>Send</Button>
@@ -89,7 +97,8 @@ export const CommentArea = () => {
                     </Box>
                 }
                 sx={{
-                    minWidth: 300,
+                    width: isMobileQuery ? '100%' : '100%',
+                    height: isMobileQuery ? 'auto' : 200,
                     fontWeight,
                     fontStyle: italic ? 'italic' : 'initial',
                 }}

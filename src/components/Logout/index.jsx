@@ -1,5 +1,5 @@
 import { Comment, Logout, Menu, Person, Search } from '@mui/icons-material';
-import { Stack, useMediaQuery } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Stack, useMediaQuery } from "@mui/material";
 import { MyLogout } from "./styles";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../authcontext/index";
@@ -9,7 +9,11 @@ import { taskStatusColors } from '../../pages/createTasks/quirys/taskStatus';
 export const LogoutComponent = () => {
     const [isLinks, setIsLinks] = useState(false)
     const matches = useMediaQuery('(max-width:601px)');
-    const matchesJsx ={
+    const [value, setValue] = useState(0);
+    if (value === 1) {
+        setIsLinks(true)
+    }
+    const matchesJsx = {
         position: 'fixed',
         display: 'flex',
         alignItems: 'center',
@@ -19,13 +23,11 @@ export const LogoutComponent = () => {
         width: '100%',
         bottom: '0px',
         bgcolor: Root.white,
-        // borderTop: Root.border,
         zIndex: 1,
-        color: taskStatusColors.Completed
     }
     return (
-        <MyLogout sx={matches&&matchesJsx} matches={matches}>
-            {matches&& <Stack sx={{
+        <MyLogout sx={matches && matchesJsx} matches={matches}>
+            {matches && <Stack sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -33,10 +35,36 @@ export const LogoutComponent = () => {
                 width: '95%',
                 height: '100%'
             }}>
-                <Menu fontSize='large' onClick={() => setIsLinks(!isLinks)} />
+                <BottomNavigation
+                    sx={{ width: '100%' }}
+                    showLabels
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                >
+                    {
+                        [
+                            { label: 'Menu', icon: <Menu /> },
+                            { label: 'Search', icon: <Search /> },
+                            { label: 'Comments', icon: <Comment /> },
+                            { label: 'Perfil', icon: <Person /> }
+                        ].map((action, index) => {
+                            return (
+                                <BottomNavigationAction sx={{
+                                    ':focus': {
+                                        outline: 'none',
+                                        color: Root.color_button
+                                    },
+                                    borderBottom: value === index && `3px solid ${Root.color_button}`
+                                }} label={action.label} icon={action.icon} />
+                            )
+                        })}
+                </BottomNavigation>
+                {/* <Menu fontSize='large' onClick={() => setIsLinks(!isLinks)} />
                 <Search fontSize='large' onClick={() => setIsLinks(!isLinks)} />
                 <Comment fontSize='large' onClick={() => setIsLinks(!isLinks)} />
-                <Person fontSize='large' onClick={() => setIsLinks(!isLinks)} />
+                <Person fontSize='large' onClick={() => setIsLinks(!isLinks)} /> */}
             </Stack>}
             {isLinks && <MenuLinks setIsLinks={setIsLinks} isLinks={isLinks} />}
         </MyLogout>

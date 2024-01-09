@@ -5,7 +5,8 @@ import * as Tag from './index.js'
 import { Root } from "../Global/Root/root_styles.jsx"
 const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
 export const CommentsTasks = ({
-    comment
+    comment,
+    isMobileQuery
 }) => {
     const extractMentionsAndHashtags = (text) => {
         const mentionRegex = /@([\wÀ-ÖØ-öø-ÿ]+)/g;
@@ -48,12 +49,12 @@ export const CommentsTasks = ({
     };
     const { mentions, hashtags } = extractMentionsAndHashtags(comment.text);
     return (
-        <Tag.CommentMainTag gap={1} mt={1}>
+        <Tag.CommentMainTag isMobileQuery={isMobileQuery} gap={1} mt={1}>
             <Tag.CommentMainParte1 mt={5}>
                 <Tag.CommentMainParteA >
                     <Avatar sx={{ height: 35, width: 35 }} src={comment.avatar} />
                     <Stack sx={{
-                        fontWeight: 800
+                        fontWeight: isMobileQuery? 500 :800
                     }}>
                         {comment.name}
                     </Stack>
@@ -90,7 +91,7 @@ export const CommentsTasks = ({
                     width: '1px',
                 }} />
                 <Stack sx={{
-                    fontWeight: 800
+                    fontWeight: isMobileQuery? 400 :800
                 }}>
                     Replay
                 </Stack>
