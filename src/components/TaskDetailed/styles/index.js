@@ -7,19 +7,7 @@ export const DialogDetails = styled(Dialog)(({ theme, isMobileQuery }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all .3s',
-    '&::-webkit-scrollbar': {
-        width: '12px',
-    },
-    '&::-webkit-scrollbar-track': {
-        backgroundColor: '#f1f1f1',
-    },
-    '&::-webkit-scrollbar-thumb': {
-        backgroundColor: '#888',
-        borderRadius: '6px',
-    },
-    '&::-webkit-scrollbar-thumb:hover': {
-        backgroundColor: '#555',
-    },
+   
 
 }));
 export const BoxItem = styled(Box)(({ theme, isMobileQuery }) => (

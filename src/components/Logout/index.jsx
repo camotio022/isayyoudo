@@ -1,4 +1,4 @@
-import { Comment, Logout, Menu, Person, Search } from '@mui/icons-material';
+import { Add, Comment, Explore, Logout, Menu, Person, Search } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction, Stack, useMediaQuery } from "@mui/material";
 import { MyLogout } from "./styles";
 import { useContext, useState } from "react";
@@ -25,6 +25,11 @@ export const LogoutComponent = () => {
         bgcolor: Root.white,
         zIndex: 1,
     }
+    const handleRoute = (navegation) => {
+        if (navegation === 'Menu') {
+            setIsLinks(!isLinks)
+        }
+    }
     return (
         <MyLogout sx={matches && matchesJsx} matches={matches}>
             {matches && <Stack sx={{
@@ -47,24 +52,23 @@ export const LogoutComponent = () => {
                         [
                             { label: 'Menu', icon: <Menu /> },
                             { label: 'Search', icon: <Search /> },
-                            { label: 'Comments', icon: <Comment /> },
+                            { label: 'Explorar', icon: <Explore /> },
                             { label: 'Perfil', icon: <Person /> }
                         ].map((action, index) => {
                             return (
-                                <BottomNavigationAction sx={{
-                                    ':focus': {
-                                        outline: 'none',
-                                        color: Root.color_button
-                                    },
-                                    borderBottom: value === index && `3px solid ${Root.color_button}`
-                                }} label={action.label} icon={action.icon} />
+                                <BottomNavigationAction
+                                    onClick={() => handleRoute(action.label)}
+                                    sx={{
+                                        ':focus': {
+                                            outline: 'none',
+                                            color: Root.color_button
+                                        },
+                                        borderTop: value === index && `3px solid ${Root.color_button}`
+                                    }} label={action.label} icon={action.icon} />
                             )
                         })}
                 </BottomNavigation>
-                {/* <Menu fontSize='large' onClick={() => setIsLinks(!isLinks)} />
-                <Search fontSize='large' onClick={() => setIsLinks(!isLinks)} />
-                <Comment fontSize='large' onClick={() => setIsLinks(!isLinks)} />
-                <Person fontSize='large' onClick={() => setIsLinks(!isLinks)} /> */}
+
             </Stack>}
             {isLinks && <MenuLinks setIsLinks={setIsLinks} isLinks={isLinks} />}
         </MyLogout>

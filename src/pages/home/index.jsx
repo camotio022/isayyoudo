@@ -9,7 +9,7 @@ import { useMediaQuery } from "@mui/material";
 import { CardTaskMobile } from "../../components/CardTaskMobile/index.jsx";
 export const HomePage = () => {
     const matches = useMediaQuery('(min-width:1300px)');
-    const mobile = useMediaQuery('(max-width:380px)');
+    const mobile = useMediaQuery('(max-width:400px)');
     const [task, setTask] = useState({})
     const [openMoreInfo, setOpenMoreInfo] = useState(false);
     function handleClick() {
@@ -84,7 +84,7 @@ export const HomePage = () => {
                         />
                     )
                 })}
-                <TaskDetailed open={openMoreInfo} handleClick={handleClick} task={task} />
+                <TaskDetailed open={openMoreInfo} setOpenMoreInfo={setOpenMoreInfo} handleClick={handleClick} task={task} />
 
             </CardTaskMacthes>
         </>

@@ -4,7 +4,6 @@ export const LateralMenu = styled('div')(({ theme, isSmallScreen }) => ({
     position: isSmallScreen && 'fixed',
     top: 0,
     left: 0,
-    zIndex: 99999,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

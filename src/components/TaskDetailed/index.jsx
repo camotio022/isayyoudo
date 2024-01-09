@@ -14,7 +14,7 @@ import { commentsData } from '../../mask/comments.js'
 import { BullPoint } from '../Bull';
 import * as Tag from './styles/index.js'
 export const TaskDetailed = ({
-    handleClick, open, task
+    handleClick, open, task, setOpenMoreInfo
 }) => {
     const isMobileQuery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState(0);
@@ -45,7 +45,7 @@ export const TaskDetailed = ({
                     </Box>
                     <Box mr={2} sx={{ cursor: 'pointer' }}>
                         <Edit sx={itemDetailsSX} />
-                        <Close sx={{ color: 'white', boxShadow: Root.boxShadow, border: '1px solid white' }} />
+                        <Close onClick={()=> setOpenMoreInfo(!open)} sx={{ color: 'white', boxShadow: Root.boxShadow, border: '1px solid white' }} />
                     </Box>
                 </Tag.NavBarFixed>
                 <Divider sx={{ mt: 3 }} />

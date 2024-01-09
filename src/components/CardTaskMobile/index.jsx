@@ -18,42 +18,83 @@ export const CardTaskMobile = (
 ) => {
     const firstThreeItems = avatars.slice(0, 6);
     const threePoints = {
-        width: '250px',
-        whiteSpace: 'nowrap',
+        width: '160px',
+        height: mobile ? '60px' : '120px',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        flexWrap: 'wrap',
         overflow: 'hidden',
-        textOverflow: 'ellipsis'
+        lineHeight: 1.3,
+        fontWeight: 900
     }
     const handleClick = () => {
         setTask(task)
         setOpenMoreInfo(!openMoreInfo)
     }
+    const calculateExecutionDays = () => {
+        const startDate = new Date(task?.dateStarted);
+        const deliveryDate = new Date(task?.dateDelivery);
+        if (isNaN(startDate) || isNaN(deliveryDate)) {
+            return false;
+        }
+        const timeDifference = deliveryDate - startDate;
+        const executionDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        return executionDays;
+    };
     return (
         <>
             <Tooltip title={'Click para ver mais informações dessa tarefa!!'}>
                 <Grid onClick={handleClick} item xs={8} sx={{
-                    width: mobile ? '320px' : 275,
-                    height: 150,
+                    width: mobile ? '90%' : 278,
+                    height: mobile ? 138 : 200,
                     cursor: 'pointer',
-                    boxShadow: Root.boxShadow
-
+                    boxShadow: Root.boxShadow,
                 }}>
                     <Card variant="outlined" sx={{
                         height: '100%',
                         borderRadius: 'none',
-                        border: 'none'
+                        border: 'none',
+                        mt: 1
                     }}>
-                        <CardContent>
+                        <Stack sx={{
+                            display: 'flex',
+                            alignItems: 'space-beetwen',
+                            justifyContent: 'flex-start',
+                            flexDirection: 'row',
+                            width: '95%'
+                        }}>
+                            <Box ml={1}>
+                                <Typography
+                                    sx={threePoints}
+                                    variant="div"
+                                    component="div"
+                                >
+                                    {task.title ? task?.title : 'Empty'}
+                                </Typography>
+                                <Typography mt={1} color="green">
+                                    {task.typeCollection ? task.typeCollection : 'Empty'}
+                                </Typography>
+                            </Box>
                             <Typography
-                                sx={threePoints}
-                                variant="h5"
+                                sx={{
+                                    width: '160px',
+                                    height: mobile ? '40px' : '120px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: color ?
+                                    color :
+                                    empty,
+                                    fontSize: '2.5rem',
+                                    fontWeight: 900
+                                }}
+                                variant="div"
                                 component="div"
                             >
-                                {task.title ? task?.title : 'Empty'}
+                                {calculateExecutionDays()}
                             </Typography>
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                {task.typeCollection ? task.typeCollection : 'Empty'}
-                            </Typography>
-                        </CardContent>
+                        </Stack>
                         <CardActions sx={{ flexDirection: 'row' }}>
                             <Button
                                 sx={{
@@ -63,12 +104,10 @@ export const CardTaskMobile = (
                                 }} size="small">
                                 {task.taskStatus ? task.taskStatus : 'Empty'}
                             </Button>
-
                             <Stack direction="row" spacing={-1.5} alignItems="center">
                                 {firstThreeItems.map((avatar) => (
                                     <>
                                         <Avatar sx={{ width: 30, height: 30 }} key={avatar.id} src={avatar.src} alt={`Avatar ${avatar.id}`} />
-
                                     </>
                                 ))}
                             </Stack>
