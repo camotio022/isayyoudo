@@ -21,40 +21,34 @@ export const TaskDetailed = ({
     const checkKeyIsValid = (key) => {
         return key ? key : 'Empty'
     }
-    const startDiv = {
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        flexDirection: 'row',
+    const itemDetailsSX = {
+        mr: 2, color: 'white', boxShadow: Root.boxShadow,
+        border: '1px solid white'
     }
     const colors = taskStatusColors[task.taskStatus];
     return (
-        <Tag.DialogDetails isMobileQuery={isMobileQuery} open={open} onClose={handleClick}>
+        <Tag.DialogDetails scroll="paper" isMobileQuery={isMobileQuery} open={open} onClose={handleClick}>
             <Stack sx={{
+                position: 'relative',
                 width: isMobileQuery ? '95vw' : 500,
                 minHeight: isMobileQuery ? '95vh' : 'auto',
-                marginBlock: 5
+                marginBlock: 5,
             }}>
-                <Stack sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexDirection: 'row',
-                    width: '100%',
-                    height: 'auto',
-                    marginBlock: '0.3rem',
-mt:-3
-                }}>
+                <Tag.NavBarFixed
+                    taskStatusColors={taskStatusColors.empty}
+                    isMobileQuery={isMobileQuery}
+                    colors={colors}
+                >
                     <Box ml={2} component={'div'}>
                         {<BullPoint />}
                         {checkKeyIsValid(task.typeCollection)}
                     </Box>
                     <Box mr={2} sx={{ cursor: 'pointer' }}>
-                        <Edit sx={{ mr: 2, color: colors ? colors : 'gray', boxShadow: Root.boxShadow }} />
-                        <Close sx={{ mr: 1, color: colors ? colors : 'gray', boxShadow: Root.boxShadow }} />
+                        <Edit sx={itemDetailsSX} />
+                        <Close sx={{ color: 'white', boxShadow: Root.boxShadow, border: '1px solid white' }} />
                     </Box>
-                </Stack>
-                <Divider />
+                </Tag.NavBarFixed>
+                <Divider sx={{ mt: 3 }} />
                 <Box ml={3} mt={4} component={'h3'} sx={{ height: 'auto', maxWidth: '90%' }}>
                     {checkKeyIsValid(task.title)}
                 </Box>

@@ -23,78 +23,89 @@ export const CommentArea = ({
     const [anchorEl, setAnchorEl] = React.useState(null);
     return (
         <FormControl sx={{
-            mt: 3, 
+            mt: 3,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            width: isMobileQuery?'90%': '100%'
+            width: isMobileQuery ? '90%' : '100%'
         }}>
             <Textarea
                 placeholder="Type something here…"
                 minRows={3}
                 endDecorator={
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            gap: 'var(--Textarea-paddingBlock)',
-                            pt: 'var(--Textarea-paddingBlock)',
-                            borderTop: '1px solid',
-                            borderColor: 'divider',
-                            flex: 'auto',
-                        }}
-                    >
-                        <IconButton
-                            variant="plain"
-                            color="neutral"
-                            onClick={(event) => setAnchorEl(event.currentTarget)}
+                    <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 'var(--Textarea-paddingBlock)',
+                                pt: 'var(--Textarea-paddingBlock)',
+                                borderTop: '1px solid',
+                                borderColor: 'divider',
+                                flex: 'auto',
+                            }}
                         >
-                            <FormatBold />
-                            <KeyboardArrowDown fontSize="md" />
-                        </IconButton>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={() => setAnchorEl(null)}
-                            size="sm"
-                            placement="bottom-start"
-                            sx={{ '--ListItemDecorator-size': '24px' }}
-                        >
-                            {['200', 'normal', 'bold'].map((weight) => (
-                                <MenuItem
-                                    key={weight}
-                                    selected={fontWeight === weight}
-                                    onClick={() => {
-                                        setFontWeight(weight);
-                                        setAnchorEl(null);
-                                    }}
-                                    sx={{ fontWeight: weight }}
-                                >
-                                    <ListItemDecorator>
-                                        {fontWeight === weight && <Check fontSize="sm" />}
-                                    </ListItemDecorator>
-                                    {weight === '200' ? 'lighter' : weight}
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                        <IconButton
-                            variant={italic ? 'soft' : 'plain'}
-                            color={italic ? 'primary' : 'neutral'}
-                            aria-pressed={italic}
-                            onClick={() => setItalic((bool) => !bool)}
-                        >
-                            <FormatItalic />
-                        </IconButton>
-                        <Box gap={2} sx={{ ml: 'auto' }}>
-                            <Button disabled sx={{
-                                backgroundColor: taskStatusBgcolor.Archived
-                            }} variant='none'>#temaBom</Button>
-                            <Button disabled sx={{
-                                backgroundColor: 'rgba(0,0, 255, 0.2)'
-                            }} variant='none'>@isayyoudo</Button>
-                            <Button>Send</Button>
+                            <IconButton
+                                variant="plain"
+                                color="neutral"
+                                onClick={(event) => setAnchorEl(event.currentTarget)}
+                            >
+                                <FormatBold />
+                                <KeyboardArrowDown fontSize="md" />
+                            </IconButton>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={() => setAnchorEl(null)}
+                                size="sm"
+                                placement="bottom-start"
+                                sx={{ '--ListItemDecorator-size': '24px' }}
+                            >
+                                {['200', 'normal', 'bold'].map((weight) => (
+                                    <MenuItem
+                                        key={weight}
+                                        selected={fontWeight === weight}
+                                        onClick={() => {
+                                            setFontWeight(weight);
+                                            setAnchorEl(null);
+                                        }}
+                                        sx={{ fontWeight: weight }}
+                                    >
+                                        <ListItemDecorator>
+                                            {fontWeight === weight && <Check fontSize="sm" />}
+                                        </ListItemDecorator>
+                                        {weight === '200' ? 'lighter' : weight}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+
+                            <IconButton
+                                variant={italic ? 'soft' : 'plain'}
+                                color={italic ? 'primary' : 'neutral'}
+                                aria-pressed={italic}
+                                onClick={() => setItalic((bool) => !bool)}
+                            >
+                                <FormatItalic />
+                            </IconButton>
+                            <Box  sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                width: 'auto',
+                                gap: '0.5rem'
+                            }}>
+                                <span style={{
+                                    backgroundColor: taskStatusBgcolor.Archived,
+                                    padding: '4px'
+                                }} variant='none'>#topic</span>
+                                <span style={{
+                                    backgroundColor: 'rgba(0,0, 255, 0.2)',
+                                    padding: '4px'
+                                }} variant='none'>@</span>
+                                <Button>Comentar</Button>
+                            </Box>
                         </Box>
-                    </Box>
+                    </>
                 }
                 sx={{
                     width: isMobileQuery ? '100%' : '100%',
