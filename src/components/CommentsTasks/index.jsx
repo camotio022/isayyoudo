@@ -3,11 +3,26 @@ import { BullPoint } from "../Bull"
 import { MoreHoriz, ThumbUpOffAlt } from "@mui/icons-material"
 import * as Tag from './index.js'
 import { Root } from "../Global/Root/root_styles.jsx"
+import { db } from "../../firebaseConfig.js"
+import { commentService } from "../../api/comments/addComments.js"
+import { collection, onSnapshot } from "firebase/firestore"
+import { useEffect, useState } from "react"
 const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
 export const CommentsTasks = ({
     comment,
-    isMobileQuery
+    isMobileQuery,
+    task
 }) => {
+    const [comments, setComments] = useState([])
+    const taskId = task.taskId;
+    useEffect(() => {
+        const unsubscribe = onSnapshot(collection(db, 'comments'), async (snapshot) => {
+            const commentsForTask = await commentService.comment.getCommentsForTask(taskId);
+            setComments(commentsForTask);
+        });
+        return () => unsubscribe();
+    }, [taskId]);
+    console.log(comments)
     const extractMentionsAndHashtags = (text) => {
         const mentionRegex = /@([\wÀ-ÖØ-öø-ÿ]+)/g;
         const hashtagRegex = /#([\wÀ-ÖØ-öø-ÿ]+)/g;
@@ -15,7 +30,8 @@ export const CommentsTasks = ({
         const hashtags = text.match(hashtagRegex) || [];
         return { mentions, hashtags };
     };
-    const renderButtons = (text, mentions, hashtags) => {
+    const renderButtons = (text) => {
+        const { mentions, hashtags } = extractMentionsAndHashtags(text);
         let updatedText = text;
         mentions.forEach((mention) => {
             updatedText = updatedText.replace(mention, `
@@ -47,55 +63,61 @@ export const CommentsTasks = ({
         });
         return <div dangerouslySetInnerHTML={{ __html: updatedText }} />;
     };
-    const { mentions, hashtags } = extractMentionsAndHashtags(comment.text);
-    return (
-        <Tag.CommentMainTag isMobileQuery={isMobileQuery} gap={1} mt={1}>
-            <Tag.CommentMainParte1 mt={5}>
-                <Tag.CommentMainParteA >
-                    <Avatar sx={{ height: 35, width: 35 }} src={comment.avatar} />
-                    <Stack sx={{
-                        fontWeight: isMobileQuery? 500 :800
-                    }}>
-                        {comment.name}
-                    </Stack>
-                    <BullPoint />
-                    <Typography color={'text.secondary'}>
-                        {comment.time}
-                    </Typography>
-                </Tag.CommentMainParteA>
-                <Box>
-                    <MoreHoriz sx={{ cursor: 'pointer' }} />
-                </Box>
-            </Tag.CommentMainParte1>
 
-            <Tag.CommentMainParteA color={'text.secondary'}>
-                {mentions.length > 0 || hashtags.length > 0 ? (
-                    <>
-                        {renderButtons(comment.text, mentions, hashtags)}
-                    </>
-                ) : (
-                    <Typography color={'text.secondary'}>
-                        {comment.text}
-                    </Typography>
-                )}
-            </Tag.CommentMainParteA>
+    {
+        comments.map((comment, index) => {
+            return (
+                <Tag.CommentMainTag isMobileQuery={isMobileQuery} gap={1} mt={1}>
+                    <Tag.CommentMainParte1 mt={5}>
+                        <Tag.CommentMainParteA >
+                            <Avatar sx={{ height: 35, width: 35 }} 
+                            src={comment.author.avatar} />
+                            <Stack sx={{
+                                fontWeight: isMobileQuery ? 500 : 800
+                            }}>
+                                {comment.name}
+                            </Stack>
+                            <BullPoint />
+                            <Typography color={'text.secondary'}>
+                                {comment.time}
+                            </Typography>
+                        </Tag.CommentMainParteA>
+                        <Box>
+                            <MoreHoriz sx={{ cursor: 'pointer' }} />
+                        </Box>
+                    </Tag.CommentMainParte1>
 
-            <Tag.CommentMainParteA sx={{ gap: 2, width: '100%', color: 'text.secondary' }} diretion={'flex-start'} >
-                <Tag.CommentMainParteA>
-                    <ThumbUpOffAlt />
-                    {comment.likes}
-                </Tag.CommentMainParteA>
-                <Stack sx={{
-                    borderRight: Root.border,
-                    height: '1rem',
-                    width: '1px',
-                }} />
-                <Stack sx={{
-                    fontWeight: isMobileQuery? 400 :800
-                }}>
-                    Replay
-                </Stack>
-            </Tag.CommentMainParteA>
-        </Tag.CommentMainTag>
-    )
+                    <Tag.CommentMainParteA color={'text.secondary'}>
+                        {renderButtons(comment.content) ? (
+                            <>
+                                {renderButtons(comment.content)}
+                            </>
+                        ) : (
+                            <Typography color={'text.secondary'}>
+                                {comment.content}
+                            </Typography>
+                        )}
+                    </Tag.CommentMainParteA>
+
+                    <Tag.CommentMainParteA sx={{ gap: 2, width: '100%', color: 'text.secondary' }} diretion={'flex-start'} >
+                        <Tag.CommentMainParteA>
+                            <ThumbUpOffAlt />
+                            {comment.actions.likes}
+                        </Tag.CommentMainParteA>
+                        <Stack sx={{
+                            borderRight: Root.border,
+                            height: '1rem',
+                            width: '1px',
+                        }} />
+                        <Stack sx={{
+                            fontWeight: isMobileQuery ? 400 : 800
+                        }}>
+                            Replay
+                        </Stack>
+                    </Tag.CommentMainParteA>
+                </Tag.CommentMainTag>
+            )
+        })
+    }
+
 }

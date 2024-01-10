@@ -14,6 +14,7 @@ import { BullPoint } from '../Bull';
 import * as Tag from './styles/index.js'
 import { useContext } from 'react';
 import { AuthContext } from '../../authcontext/index.jsx';
+import { commentService } from '../../api/comments/addComments.js';
 export const TaskDetailed = ({
     handleClick, open, task, setOpenMoreInfo
 }) => {
@@ -22,13 +23,14 @@ export const TaskDetailed = ({
     const [value, setValue] = useState(0);
     const [commentArea, setCommentArea] = useState('')
     const [comment, setComment] = useState({
+        taskId: task.taskId,
         author: {
             userId: user.uid,
             name: user.displayName,
             avatar: user.photoURL,
         },
         content: commentArea,
-        timestamp: new Date(),
+        timestamp: new Date().toLocaleString(),
         actions: {
             likes: 10,
             replies: 3,
@@ -46,12 +48,19 @@ export const TaskDetailed = ({
     const handleCommentChange = (event) => {
         const { name, value } = event.target;
         setComment((c) => ({
-          ...c,
-          [name]: value,
+            ...c,
+            [name]: value,
         }));
     };
-    function addComment() {
-        console.log(comment)
+    const addComment = async () => {
+        if (comment.content) {
+            try {
+                const res = await commentService.comment.post(comment)
+                console.log(res)
+            } catch (err) {
+                console.error(err)
+            }
+        }
     }
     return (
         <Tag.DialogDetails scroll="paper" isMobileQuery={isMobileQuery} open={open} onClose={handleClick}>
@@ -146,12 +155,7 @@ export const TaskDetailed = ({
                             handleCommentChange={handleCommentChange}
                             addComment={addComment}
                         />
-                        {commentsData.map((comment, index) => {
-                            return (
-                                <CommentsTasks key={index} comment={comment} isMobileQuery={isMobileQuery} />
-                            )
-                        })}
-
+                        <CommentsTasks isMobileQuery={isMobileQuery} task={task} />
                     </>
                     )}
                 </Box>
