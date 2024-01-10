@@ -1,18 +1,15 @@
-import { Add, Comment, Explore, Logout, Menu, Person, Search } from '@mui/icons-material';
+import {  Explore, Home, Person, Search } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction, Stack, useMediaQuery } from "@mui/material";
 import { MyLogout } from "./styles";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../authcontext/index";
+import { useState } from "react";
 import { Menu as MenuLinks } from '../../layout/components/menu';
 import { Root } from '../Global/Root/root_styles';
-import { taskStatusColors } from '../../pages/createTasks/quirys/taskStatus';
+import { useNavigate } from 'react-router-dom';
 export const LogoutComponent = () => {
+    const navigate = useNavigate()
     const [isLinks, setIsLinks] = useState(false)
     const matches = useMediaQuery('(max-width:601px)');
     const [value, setValue] = useState(0);
-    if (value === 1) {
-        setIsLinks(true)
-    }
     const matchesJsx = {
         position: 'fixed',
         display: 'flex',
@@ -25,11 +22,6 @@ export const LogoutComponent = () => {
         bgcolor: Root.white,
         zIndex: 1,
     }
-    const handleRoute = (navegation) => {
-        if (navegation === 'Menu') {
-            setIsLinks(!isLinks)
-        }
-    }
     return (
         <MyLogout sx={matches && matchesJsx} matches={matches}>
             {matches && <Stack sx={{
@@ -38,7 +30,8 @@ export const LogoutComponent = () => {
                 justifyContent: 'space-between',
                 flexDirection: 'row',
                 width: '95%',
-                height: '100%'
+                height: '100%',
+                
             }}>
                 <BottomNavigation
                     sx={{ width: '100%' }}
@@ -50,14 +43,17 @@ export const LogoutComponent = () => {
                 >
                     {
                         [
-                            { label: 'Menu', icon: <Menu /> },
-                            { label: 'Search', icon: <Search /> },
-                            { label: 'Explorar', icon: <Explore /> },
-                            { label: 'Perfil', icon: <Person /> }
+                            { label: 'Home', icon: <Home />, link: '/'},
+                            { label: 'Search', icon: <Search />, link: '/' },
+                            { label: 'Explorar', icon: <Explore />, link: '/' },
+                            { label: 'Perfil', icon: <Person />, link: '/' }
                         ].map((action, index) => {
                             return (
+                                
                                 <BottomNavigationAction
-                                    onClick={() => handleRoute(action.label)}
+                                    onClick={() => {
+                                        navigate(action.link)
+                                    }}
                                     sx={{
                                         ':focus': {
                                             outline: 'none',

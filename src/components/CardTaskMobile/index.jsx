@@ -1,7 +1,8 @@
 import { Avatar, Box, Button, Card, CardActions, CardContent, Grid, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { Root } from "../Global/Root/root_styles";
 import { avatars } from "./avatars";
-import { BullPoint } from "../Bull";
+
+import { taskStatusBgcolor } from "../../pages/createTasks/quirys/taskStatus";
 export const CardTaskMobile = (
     {
         taskId,
@@ -32,9 +33,9 @@ export const CardTaskMobile = (
         setTask(task)
         setOpenMoreInfo(!openMoreInfo)
     }
-    const calculateExecutionDays = () => {
-        const startDate = new Date(task?.dateStarted);
-        const deliveryDate = new Date(task?.dateDelivery);
+    const calculateExecutionDays = (start, delivery) => {
+        const startDate = new Date(start);
+        const deliveryDate = new Date(delivery);
         if (isNaN(startDate) || isNaN(deliveryDate)) {
             return false;
         }
@@ -72,28 +73,37 @@ export const CardTaskMobile = (
                                 >
                                     {task.title ? task?.title : 'Empty'}
                                 </Typography>
-                                <Typography mt={1} color="green">
+                                <Typography mt={1} color={'text.secondary'}>
                                     {task.typeCollection ? task.typeCollection : 'Empty'}
                                 </Typography>
                             </Box>
-                            <Typography
-                                sx={{
-                                    width: '160px',
-                                    height: mobile ? '40px' : '120px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: color ?
-                                    color :
-                                    empty,
-                                    fontSize: '2.5rem',
-                                    fontWeight: 900
-                                }}
-                                variant="div"
-                                component="div"
-                            >
-                                {calculateExecutionDays()}
-                            </Typography>
+                            {calculateExecutionDays(task.startDate, task.deliveryDate) &&
+                                <Stack
+                                    sx={{
+                                        width: '160px',
+                                        height: mobile ? '50px' : '120px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: 
+                                            Root.color_button,
+                                        fontSize: '1.5rem',
+                                        fontWeight: 600
+                                    }}
+                                    variant="div"
+                                    component="div"
+                                >
+                                    <Box>
+                                        {calculateExecutionDays(task.startDate, task.deliveryDate)}
+                                    </Box>
+                                    <Box sx={{
+                                        fontSize: '0.8rem',
+                                        fontWeight: 600
+                                    }}>
+                                        Days Delivery
+                                    </Box>
+                                </Stack>
+                            }
                         </Stack>
                         <CardActions sx={{ flexDirection: 'row' }}>
                             <Button

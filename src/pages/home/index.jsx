@@ -5,8 +5,9 @@ import { TaskDetailed } from "../../components/TaskDetailed/index.jsx";
 import { taskStatusBgcolor, taskStatusColors } from "../createTasks/quirys/taskStatus.js";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebaseConfig.js";
-import { useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { CardTaskMobile } from "../../components/CardTaskMobile/index.jsx";
+import { CardMobileLoading } from "../../components/Loadinds/cardMobile/index.jsx";
 export const HomePage = () => {
     const matches = useMediaQuery('(min-width:1300px)');
     const mobile = useMediaQuery('(max-width:400px)');
@@ -26,6 +27,15 @@ export const HomePage = () => {
         });
         return () => unsubscribe();
     }, []);
+    if (tasks.length === 0) {
+        return (
+            <ContainerTasks>
+                <CardMobileLoading />
+                <CardMobileLoading />
+                <CardMobileLoading />
+            </ContainerTasks>
+        )
+    }
     if (matches) {
         return (
             <ContainerTasks>
@@ -59,8 +69,6 @@ export const HomePage = () => {
             </ContainerTasks>
         )
     }
-
-
     return (
         <>
             <CardTaskMacthes mobile={mobile}>
