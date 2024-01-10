@@ -1,12 +1,13 @@
 import { Stack, styled } from "@mui/material";
-export const MyLogout = styled(Stack)(({ theme, position }) => ({
+export const MyLogout = styled(Stack)(({matches}) => ({
     position: 'fixed',
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     flexDirection: 'column',
     width: '100%',
-    top: "1.5rem",
-    right: position? position:"1rem",
+    top: !matches && "1.5rem",
+    right: !matches && "1rem",
     cursor: 'pointer',
+    border: 'none'
 }));

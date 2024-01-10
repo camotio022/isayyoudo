@@ -1,5 +1,7 @@
+import { grey } from "@mui/material/colors";
+
 export const Root = {
-  containTask: '#F0FFFE',
+  containTask: 'white',
   gray_desfius: '#A8ADB3',
     color_default: '#ffffff',
     color_button: '#932dd2',

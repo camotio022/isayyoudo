@@ -22,7 +22,7 @@ export const MainContent = ({
         return (
             <ContainerGlobal>
                 {children}
-                <AuthFooter />
+                {/* <AuthFooter /> */}
             </ContainerGlobal>
         )
     }

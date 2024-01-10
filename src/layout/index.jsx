@@ -1,4 +1,3 @@
-import { Fragment } from "react"
 import { useMediaQuery } from '@mui/material';
 import { MainContent } from "./components/MainContent";
 import { useState } from "react";
@@ -18,12 +17,10 @@ export const MainLayout = ({ children }) => {
       }
       setSelectedLink(newLink)
       setAnchorEl(event.target)
-  
     }
     const handleClose = () => {
       setSelectedLink(null)
       setAnchorEl(null)
-  
     }
     const handleClick = (event) => {
       setopens(event.currentTarget)
