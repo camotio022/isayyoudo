@@ -13,14 +13,18 @@ import FormatItalic from '@mui/icons-material/FormatItalic';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Check from '@mui/icons-material/Check';
 import { taskStatusBgcolor } from '../../../../pages/createTasks/quirys/taskStatus';
-
+import { useState } from 'react';
 export const CommentArea = ({
-    isMobileQuery
+    isMobileQuery,
+    comment,
+    addComment,
+    handleCommentChange
 }) => {
-    console.log(isMobileQuery)
-    const [italic, setItalic] = React.useState(false);
-    const [fontWeight, setFontWeight] = React.useState('normal');
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [italic, setItalic] = useState(false);
+    const [fontWeight, setFontWeight] = useState('normal');
+    const [anchorEl, setAnchorEl] = useState(null);
+
+
     return (
         <FormControl sx={{
             mt: 3,
@@ -33,6 +37,9 @@ export const CommentArea = ({
             <Textarea
                 placeholder="Type something here…"
                 minRows={3}
+                value={comment.content}
+                name="content"
+                onChange={handleCommentChange}
                 endDecorator={
                     <>
                         <Box
@@ -63,13 +70,14 @@ export const CommentArea = ({
                             >
                                 {['200', 'normal', 'bold'].map((weight) => (
                                     <MenuItem
+                                    
                                         key={weight}
                                         selected={fontWeight === weight}
                                         onClick={() => {
                                             setFontWeight(weight);
                                             setAnchorEl(null);
                                         }}
-                                        sx={{ fontWeight: weight }}
+                                        sx={{ fontWeight: weight, }}
                                     >
                                         <ListItemDecorator>
                                             {fontWeight === weight && <Check fontSize="sm" />}
@@ -102,7 +110,7 @@ export const CommentArea = ({
                                     backgroundColor: 'rgba(0,0, 255, 0.2)',
                                     padding: '4px'
                                 }} variant='none'>@</span>
-                                <Button>Comentar</Button>
+                                <Button onClick={addComment}>Comentar</Button>
                             </Box>
                         </Box>
                     </>

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
 import { taskStatusColors } from '../../pages/createTasks/quirys/taskStatus';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import { Box, Divider, MenuList, Paper, Stack, useMediaQuery } from '@mui/material';
+import { Box, Divider, Stack, useMediaQuery } from '@mui/material';
 import { Close, Comment, Description, Edit, Group } from '@mui/icons-material';
 import { Root } from '../Global/Root/root_styles';
 import { useState } from 'react';
@@ -13,11 +12,29 @@ import { CommentsTasks } from '../CommentsTasks/index.jsx';
 import { commentsData } from '../../mask/comments.js'
 import { BullPoint } from '../Bull';
 import * as Tag from './styles/index.js'
+import { useContext } from 'react';
+import { AuthContext } from '../../authcontext/index.jsx';
 export const TaskDetailed = ({
     handleClick, open, task, setOpenMoreInfo
 }) => {
+    const { user } = useContext(AuthContext)
     const isMobileQuery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState(0);
+    const [commentArea, setCommentArea] = useState('')
+    const [comment, setComment] = useState({
+        author: {
+            userId: user.uid,
+            name: user.displayName,
+            avatar: user.photoURL,
+        },
+        content: commentArea,
+        timestamp: new Date(),
+        actions: {
+            likes: 10,
+            replies: 3,
+        },
+        replies: [],
+    });
     const checkKeyIsValid = (key) => {
         return key ? key : 'Empty'
     }
@@ -26,6 +43,16 @@ export const TaskDetailed = ({
         border: '1px solid white'
     }
     const colors = taskStatusColors[task.taskStatus];
+    const handleCommentChange = (event) => {
+        const { name, value } = event.target;
+        setComment((c) => ({
+          ...c,
+          [name]: value,
+        }));
+    };
+    function addComment() {
+        console.log(comment)
+    }
     return (
         <Tag.DialogDetails scroll="paper" isMobileQuery={isMobileQuery} open={open} onClose={handleClick}>
             <Stack sx={{
@@ -45,7 +72,7 @@ export const TaskDetailed = ({
                     </Box>
                     <Box mr={2} sx={{ cursor: 'pointer' }}>
                         <Edit sx={itemDetailsSX} />
-                        <Close onClick={()=> setOpenMoreInfo(!open)} sx={{ color: 'white', boxShadow: Root.boxShadow, border: '1px solid white' }} />
+                        <Close onClick={() => setOpenMoreInfo(!open)} sx={{ color: 'white', boxShadow: Root.boxShadow, border: '1px solid white' }} />
                     </Box>
                 </Tag.NavBarFixed>
                 <Divider sx={{ mt: 3 }} />
@@ -102,7 +129,7 @@ export const TaskDetailed = ({
                             { label: 'Assigners', icon: <Group /> }
                             ].map((action, index) => {
                                 return (
-                                    <BottomNavigationAction sx={{
+                                    <BottomNavigationAction key={action.label} sx={{
                                         ':focus': {
                                             outline: 'none',
                                             color: Root.color_button
@@ -113,10 +140,15 @@ export const TaskDetailed = ({
                             })}
                     </BottomNavigation>
                     {value === 0 && (<>
-                        <CommentArea isMobileQuery={isMobileQuery} />
+                        <CommentArea
+                            isMobileQuery={isMobileQuery}
+                            comment={comment}
+                            handleCommentChange={handleCommentChange}
+                            addComment={addComment}
+                        />
                         {commentsData.map((comment, index) => {
                             return (
-                                <CommentsTasks comment={comment} isMobileQuery={isMobileQuery} />
+                                <CommentsTasks key={index} comment={comment} isMobileQuery={isMobileQuery} />
                             )
                         })}
 
