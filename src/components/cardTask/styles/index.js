@@ -1,7 +1,7 @@
 import { Box, Stack, Tooltip, Typography, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
-export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor }) => ({
+export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor, showBorder }) => ({
     width: width? width: '95%',
     minHeight: 'auto',
     paddingBlock: '1rem',
@@ -9,9 +9,10 @@ export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor }) 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    border: showBorder&& Root.border,
     backgroundColor: backgroundColor? backgroundColor: Root.white,
     gap: 10,
-    boxShadow: Root.boxShadowTask,
+    boxShadow: showBorder&&Root.boxShadowTask,
 
     '&::-webkit-scrollbar': {
         width: '5px',
