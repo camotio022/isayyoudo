@@ -32,5 +32,6 @@ export const NavBarFixed = styled(Stack)(({ theme, isMobileQuery, colors, taskSt
         marginBlock: '1rem',
         marginTop: '-2.5rem',
         zIndex: 1,
-
+        borderTopLeftRadius: '0.3rem',
+        borderTopRightRadius: '0.3rem',
     }));
