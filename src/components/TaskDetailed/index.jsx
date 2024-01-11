@@ -16,21 +16,25 @@ import { useContext } from 'react';
 import { AuthContext } from '../../authcontext/index.jsx';
 import { commentService } from '../../api/comments/addComments.js';
 export const TaskDetailed = ({
-    handleClick, open, task, setOpenMoreInfo
+    handleClick, open, task,taskId, setOpenMoreInfo
 }) => {
+    const date = new Date().toLocaleString();
     const { user } = useContext(AuthContext)
     const isMobileQuery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState(0);
     const [commentArea, setCommentArea] = useState('')
+    const getIdTask = ()=> {
+        return taskId
+    }
     const [comment, setComment] = useState({
-        taskId: task.taskId,
+        taskId: getIdTask()? taskId: 'empty',
         author: {
             userId: user.uid,
             name: user.displayName,
             avatar: user.photoURL,
         },
         content: commentArea,
-        timestamp: new Date().toLocaleString(),
+        timestamp: date,
         actions: {
             likes: 10,
             replies: 3,
@@ -56,7 +60,6 @@ export const TaskDetailed = ({
         if (comment.content) {
             try {
                 const res = await commentService.comment.post(comment)
-                console.log(res)
             } catch (err) {
                 console.error(err)
             }
@@ -155,7 +158,11 @@ export const TaskDetailed = ({
                             handleCommentChange={handleCommentChange}
                             addComment={addComment}
                         />
-                        <CommentsTasks isMobileQuery={isMobileQuery} task={task} />
+                        <CommentsTasks
+                            isMobileQuery={isMobileQuery}
+                            task={task}
+                            taskId={task.taskId}
+                        />
                     </>
                     )}
                 </Box>
