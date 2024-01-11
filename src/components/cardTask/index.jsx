@@ -24,7 +24,8 @@ export const TaskCard = ({
     width,
     backgroundColor,
     typeShowTask,
-    taskId
+    taskId,
+    tasks
 }) => {
     const matches = useMediaQuery('(min-width:600px)');
     function handleClick() {
@@ -59,7 +60,7 @@ export const TaskCard = ({
         }
     }
     return (
-        <T.TabsMain width={width} backgroundColor={false} onDoubleClick={deleteTask}>
+        <T.TabsMain showBorder={tasks?.length < 5} width={width} backgroundColor={false} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
             <T.CircleStateTask color={colorStatus} sx={{
                 position: 'absolute',

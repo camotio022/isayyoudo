@@ -5,6 +5,7 @@ import { avatars } from "./avatars";
 import { taskStatusBgcolor } from "../../pages/createTasks/quirys/taskStatus";
 export const CardTaskMobile = (
     {
+        tasks,
         taskId,
         color,
         backgroundColor,
@@ -46,17 +47,17 @@ export const CardTaskMobile = (
     return (
         <>
             <Tooltip title={'Click para ver mais informações dessa tarefa!!'}>
-                <Grid onClick={handleClick} item xs={8} sx={{
+                <Grid showBorder={tasks.length} onClick={handleClick} item xs={8} sx={{
                     width: mobile ? '90%' : 278,
                     height: mobile ? 138 : 200,
                     cursor: 'pointer',
-                    boxShadow: Root.boxShadow,
+                    boxShadow: tasks?.length > 5&&Root.boxShadow,
+                    border: tasks?.length < 5 && Root.border 
                 }}>
                     <Card variant="outlined" sx={{
                         height: '100%',
                         borderRadius: 'none',
                         border: 'none',
-                        mt: 1
                     }}>
                         <Stack sx={{
                             display: 'flex',
@@ -73,7 +74,7 @@ export const CardTaskMobile = (
                                 >
                                     {task.title ? task?.title : 'Empty'}
                                 </Typography>
-                                <Typography mt={1} color={'text.secondary'}>
+                                <Typography sx={{textTransform: 'uppercase'}} mt={1} color={'text.secondary'}>
                                     {task.typeCollection ? task.typeCollection : 'Empty'}
                                 </Typography>
                             </Box>

@@ -11,7 +11,6 @@ import { FormatRelativeTime } from "./formatRelativeTime.jsx"
 const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
 export const CommentsTasks = ({
     isMobileQuery,
-
     taskId
 }) => {
     const [comments, setComments] = useState([])
@@ -62,19 +61,23 @@ export const CommentsTasks = ({
         });
         return <div dangerouslySetInnerHTML={{ __html: updatedText }} />;
     };
-const splitNameUserInScreens = (name)=> {
-    if(isMobileQuery){
-        return name.split(' ')[0];
+    const splitNameUserInScreens = (name) => {
+        if (isMobileQuery) {
+            return name.split(' ')[0];
+        }
+        return name;
     }
-    return name;
-}
     return (
         <>
             {
                 comments.map((comment, index) => {
                     return (
-                        <Tag.CommentMainTag key={index} isMobileQuery={isMobileQuery} gap={1} mt={1}>
-                            <Tag.CommentMainParte1 mt={index === 0? 5: 2} >
+                        <Tag.CommentMainTag
+                            key={index} isMobileQuery={isMobileQuery}
+                            gap={1} mt={1}
+                            mb={(comments.length - 1) === index && 5}
+                        >
+                            <Tag.CommentMainParte1 mt={index === 0 ? 5 : 2} >
                                 <Tag.CommentMainParteA diretion={'flex-start'}>
                                     <Avatar sx={{ height: 35, width: 35 }}
                                         src={comment.author.avatar} />
@@ -85,7 +88,7 @@ const splitNameUserInScreens = (name)=> {
                                     </Stack>
                                     <BullPoint />
                                     <Typography color={'text.secondary'}>
-                                        <FormatRelativeTime dateTimeString={comment.timestamp}/>
+                                        <FormatRelativeTime dateTimeString={comment.timestamp} />
                                     </Typography>
                                 </Tag.CommentMainParteA>
                                 <Box>
@@ -95,7 +98,7 @@ const splitNameUserInScreens = (name)=> {
 
                             <Tag.CommentMainParteA
                                 sx={{
-                                    borderLeft: Root.border, 
+                                    borderLeft: Root.border,
                                     paddingInline: '0.8rem'
                                 }}
                                 diretion={'flex-start'} color={'text.secondary'}>

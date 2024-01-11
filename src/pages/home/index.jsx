@@ -15,7 +15,6 @@ export const HomePage = () => {
     const [task, setTask] = useState({})
     const [openMoreInfo, setOpenMoreInfo] = useState(false);
     const [showNotFound, setShowNotFound] = useState(false);
-
     function handleClick() {
         setOpenMoreInfo(false);
     }
@@ -57,70 +56,73 @@ export const HomePage = () => {
         );
     }
 
-if (matches) {
+    if (matches) {
+        return (
+            <ContainerTasks >
+                {tasks
+                    .map((task) => {
+                        const colors = taskStatusColors[task.taskStatus];
+                        const backgroundColor = taskStatusBgcolor[task.taskStatus]
+                        return (
+                            <TaskCard
+                                tasks={tasks}
+                                key={task.taskId}
+                                taskId={task.taskId}
+                                name={task.title}
+                                action={task.typeCollection}
+                                assigner={task.assigner}
+                                avatar={''}
+                                assignerTo={'SnowManLabs'}
+                                missingTime={task.missingTime}
+                                dateStarted={task.startDate}
+                                dateDelivery={task.deliveryDate}
+                                stateTask={task.taskStatus}
+                                colorStatus={colors}
+                                task={task}
+                                setTask={setTask}
+                                openMoreInfo={openMoreInfo}
+                                setOpenMoreInfo={setOpenMoreInfo}
+                                backgroundColor={backgroundColor}
+                            />
+                        );
+                    })}
+                <TaskDetailed
+
+                    taskId={task.taskId}
+                    open={openMoreInfo}
+                    handleClick={handleClick}
+                    task={task} />
+            </ContainerTasks>
+        )
+    }
     return (
-        <ContainerTasks>
-            {tasks
-                .map((task) => {
-                    const colors = taskStatusColors[task.taskStatus];
+        <>
+            <CardTaskMacthes mobile={mobile}>
+                {tasks.map((task, index) => {
+                    const color = taskStatusColors[task.taskStatus]
                     const backgroundColor = taskStatusBgcolor[task.taskStatus]
+                    const empty = taskStatusBgcolor.empty
+                    const emptyBgcolor = taskStatusColors.empty
                     return (
-                        <TaskCard
-                            key={task.taskId}
+                        <CardTaskMobile
+                            tasks={tasks}
                             taskId={task.taskId}
-                            name={task.title}
-                            action={task.typeCollection}
-                            assigner={task.assigner}
-                            avatar={''}
-                            assignerTo={'SnowManLabs'}
-                            missingTime={task.missingTime}
-                            dateStarted={task.startDate}
-                            dateDelivery={task.deliveryDate}
-                            stateTask={task.taskStatus}
-                            colorStatus={colors}
                             task={task}
+                            color={color}
+                            backgroundColor={backgroundColor}
+                            empty={empty}
+                            emptyBgcolor={emptyBgcolor}
+                            mobile={mobile}
                             setTask={setTask}
                             openMoreInfo={openMoreInfo}
                             setOpenMoreInfo={setOpenMoreInfo}
-                            backgroundColor={backgroundColor}
                         />
-                    );
+                    )
                 })}
-            <TaskDetailed
-                taskId={task.taskId}
-                open={openMoreInfo}
-                handleClick={handleClick}
-                task={task} />
-        </ContainerTasks>
-    )
-}
-return (
-    <>
-        <CardTaskMacthes mobile={mobile}>
-            {tasks.map((task, index) => {
-                const color = taskStatusColors[task.taskStatus]
-                const backgroundColor = taskStatusBgcolor[task.taskStatus]
-                const empty = taskStatusBgcolor.empty
-                const emptyBgcolor = taskStatusColors.empty
-                return (
-                    <CardTaskMobile
-                        taskId={task.taskId}
-                        task={task}
-                        color={color}
-                        backgroundColor={backgroundColor}
-                        empty={empty}
-                        emptyBgcolor={emptyBgcolor}
-                        mobile={mobile}
-                        setTask={setTask}
-                        openMoreInfo={openMoreInfo}
-                        setOpenMoreInfo={setOpenMoreInfo}
-                    />
-                )
-            })}
-            <TaskDetailed
-                taskId={task.taskId} open={openMoreInfo} setOpenMoreInfo={setOpenMoreInfo} handleClick={handleClick} task={task} />
+                <TaskDetailed
+                    taskId={task.taskId} open={openMoreInfo} setOpenMoreInfo={setOpenMoreInfo} handleClick={handleClick} task={task} />
 
-        </CardTaskMacthes>
-    </>
-)
+            </CardTaskMacthes>
+        </>
+    )
 };
