@@ -125,12 +125,12 @@ export const Items = styled(Stack)(({ theme }) => ({
     padding: '1px',
 }));
 
-export const ContainerTasks = styled(Stack)(({ theme }) => ({
+export const ContainerTasks = styled(Stack)(({ theme, direction }) => ({
     position: 'relative',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: direction? direction:"flex-start",
     gap: '20px',
     width: "100%",
     minHeight: "50%",
@@ -138,6 +138,7 @@ export const ContainerTasks = styled(Stack)(({ theme }) => ({
     overflow: 'auto',
     paddingBlock: '3rem',
     color: Root.gray,
+    overflowX: 'hidden',
     backgroundColor: Root.containTask,
     '&::-webkit-scrollbar': {
         width: '4px',
