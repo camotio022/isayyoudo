@@ -7,7 +7,7 @@ import { db } from "../../firebaseConfig.js"
 import { commentService } from "../../api/comments/addComments.js"
 import { collection, onSnapshot } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { FormatRelativeTime } from "./FormatRelativeTime.jsx"
+import { FormatRelativeTime } from "./formatRelativeTime.jsx"
 const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
 export const CommentsTasks = ({
     isMobileQuery,
