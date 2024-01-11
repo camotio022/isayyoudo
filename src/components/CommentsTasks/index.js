@@ -16,5 +16,6 @@ export const CommentMainParteA = styled(Box)(({ theme, diretion }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: diretion? diretion:'center',
-    gap: '0.2rem'
+    gap: '0.2rem',
+    width: '90%'
 }));
