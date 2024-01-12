@@ -5,10 +5,14 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/joy/Typography';
+import { useMediaQuery } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export const NotFound = ({
-    mobile
+    noDoc
 }) => {
+    const navigate = useNavigate();
+    const mobile = useMediaQuery('(max-width:600px)');
     return (
         <Card
             size="lg"
@@ -35,24 +39,33 @@ export const NotFound = ({
                     }}
                 >
                     <Typography fontSize="xl4" fontWeight="xl" textColor="#fff">
-                        404
+                        {!noDoc? 'No page': 404}
                     </Typography>
                 </CardOverflow>
             )}
             <CardContent sx={{ gap: 1.5, minWidth: mobile ? '90%' : 200 }}>
-                <AspectRatio  ratio="19/8" objectFit="contain" variant="plain">
+                <AspectRatio ratio="19/8" objectFit="contain" variant="plain">
                     <img
-                    style={{
-                        width: mobile&& '100%'
-                    }}
+                        style={{
+                            width: mobile && '100%'
+                        }}
                         alt=""
-                        src="https://static-00.iconduck.com/assets.00/404-page-not-found-illustration-2048x998-yjzeuy4v.png"
+                        src={!noDoc?
+                            "https://static-00.iconduck.com/assets.00/404-page-not-found-illustration-2048x998-yjzeuy4v.png":
+                        'https://t4.ftcdn.net/jpg/03/88/63/83/360_F_388638369_wSBADhKfhiTx6Q5Pz1xfdpy6zotku1Sg.jpg'}
                     />
                 </AspectRatio>
                 <CardContent>
-                    <Typography level="title-lg">Not Found 404</Typography>
+                    <Typography level="title-lg">{!noDoc? "Página não encontrada!"
+                    : "Not Found 404"}</Typography>
                 </CardContent>
                 <Button
+                    onClick={() => {
+                        if(noDoc){
+                            return window.location.reload();
+                        }
+                        return navigate(-1);
+                    }}
                     variant="outlined"
                     color="primary"
                     sx={{
@@ -62,7 +75,8 @@ export const NotFound = ({
                         mx: 'auto',
                     }}
                 >
-                    Tentar Novamente
+                    {noDoc? "Tentar Novamente"
+                    : "Voltar para página anterior"}
                 </Button>
             </CardContent>
         </Card>
