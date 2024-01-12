@@ -17,7 +17,8 @@ export const BoxItem = styled(Box)(({ theme, isMobileQuery }) => (
         width: '90%',
         height: '2rem',
     }));
-export const NavBarFixed = styled(Stack)(({ theme, isMobileQuery, colors, taskStatusColors }) => (
+export const NavBarFixed = styled(Stack)(({ theme, 
+    isMobileQuery, colors, taskStatusColors }) => (
     {
         position: 'fixed',
         display: 'flex',
@@ -25,11 +26,12 @@ export const NavBarFixed = styled(Stack)(({ theme, isMobileQuery, colors, taskSt
         justifyContent: 'space-between',
         flexDirection: 'row',
         width: isMobileQuery ? '95vw' : 500,
-        backgroundColor: colors ? colors : taskStatusColors,
+        backgroundColor: Root.white,
         height: '4rem',
         marginBlock: '1rem',
         marginTop: '-2.5rem',
         zIndex: 1,
         borderTopLeftRadius: '0.3rem',
         borderTopRightRadius: '0.3rem',
+        borderBottom: Root.border
     }));

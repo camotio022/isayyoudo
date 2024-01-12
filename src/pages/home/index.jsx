@@ -55,7 +55,6 @@ export const HomePage = () => {
             </ContainerTasks>
         );
     }
-
     if (matches) {
         return (
             <ContainerTasks >
@@ -85,13 +84,15 @@ export const HomePage = () => {
                                 backgroundColor={backgroundColor}
                             />
                         );
-                    })}
+                    })
+                }
                 <TaskDetailed
-
                     taskId={task.taskId}
                     open={openMoreInfo}
+                    setOpenMoreInfo={setOpenMoreInfo}
                     handleClick={handleClick}
-                    task={task} />
+                    task={task}
+                />
             </ContainerTasks>
         )
     }
@@ -120,8 +121,12 @@ export const HomePage = () => {
                     )
                 })}
                 <TaskDetailed
-                    taskId={task.taskId} open={openMoreInfo} setOpenMoreInfo={setOpenMoreInfo} handleClick={handleClick} task={task} />
-
+                    taskId={task.taskId}
+                    open={openMoreInfo}
+                    setOpenMoreInfo={setOpenMoreInfo}
+                    handleClick={handleClick}
+                    task={task}
+                />
             </CardTaskMacthes>
         </>
     )

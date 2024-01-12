@@ -6,6 +6,7 @@ export const Root = {
     color_default: '#ffffff',
     color_button: '#932dd2',
     color_button_secondary: "#932dd2",
+    color_button_opacity: 'rgba(147, 45, 210, 0.3)',
     color_link: '#93dd2',
     subButton: 'rgba(169, 169, 169, 0.5)',
     blue: '#007bff',
