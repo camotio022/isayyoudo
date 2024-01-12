@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { FieldValue, addDoc, arrayUnion, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 
 
@@ -72,6 +72,16 @@ export const commentService = {
                 return comments;
             } catch (error) {
                 console.error("Erro ao obter os comentários:", error);
+            }
+        },
+        likeComment: async (commentId, userId) => {
+            try {
+                const commentRef = doc(db, 'comments', commentId);
+                await updateDoc(commentRef, {
+                    'actions.likes': arrayUnion(userId),
+                });
+            } catch (error) {
+                console.error('Erro ao dar like no comentário:', error);
             }
         },
         updateComment: async (commentId, updatedComment) => {

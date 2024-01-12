@@ -7,8 +7,6 @@ export const DialogDetails = styled(Dialog)(({ theme, isMobileQuery }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all .3s',
-   
-
 }));
 export const BoxItem = styled(Box)(({ theme, isMobileQuery }) => (
     {

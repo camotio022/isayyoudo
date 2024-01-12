@@ -9,7 +9,6 @@ import { Root } from '../Global/Root/root_styles';
 import { useState } from 'react';
 import { CommentArea } from '../Dialog/components/MyComments';
 import { CommentsTasks } from '../CommentsTasks/index.jsx';
-import { commentsData } from '../../mask/comments.js'
 import { BullPoint } from '../Bull';
 import * as Tag from './styles/index.js'
 import { useContext } from 'react';
@@ -23,11 +22,8 @@ export const TaskDetailed = ({
     const isMobileQuery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState(0);
     const [commentArea, setCommentArea] = useState('')
-    const getIdTask = ()=> {
-        return taskId
-    }
     const [comment, setComment] = useState({
-        taskId: getIdTask()? taskId: 'empty',
+        taskId: '',
         author: {
             userId: user.uid,
             name: user.displayName,
@@ -36,8 +32,8 @@ export const TaskDetailed = ({
         content: commentArea,
         timestamp: date,
         actions: {
-            likes: 10,
-            replies: 3,
+            likes: [],
+            replies: [],
         },
         replies: [],
     });
@@ -53,6 +49,7 @@ export const TaskDetailed = ({
         const { name, value } = event.target;
         setComment((c) => ({
             ...c,
+            taskId: taskId,
             [name]: value,
         }));
     };
@@ -159,6 +156,7 @@ export const TaskDetailed = ({
                             addComment={addComment}
                         />
                         <CommentsTasks
+                        colors={colors}
                             isMobileQuery={isMobileQuery}
                             task={task}
                             taskId={task.taskId}
