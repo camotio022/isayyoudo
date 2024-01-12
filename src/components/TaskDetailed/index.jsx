@@ -39,12 +39,11 @@ export const TaskDetailed = ({
         },
         replies: [],
     });
-    const checkKeyIsValid = (key) => {
-        return key ? key : 'Empty'
+    const capitalizeFirstLetter = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
-    const itemDetailsSX = {
-        mr: 2, color: 'white', boxShadow: Root.boxShadow,
-        border: '1px solid white'
+    const checkKeyIsValid = (key) => {
+        return key ? capitalizeFirstLetter(key) : 'Empty';
     }
     const colors = taskStatusColors[task.taskStatus];
     const backgroundColor = taskStatusBgcolor[task.taskStatus];
@@ -71,6 +70,14 @@ export const TaskDetailed = ({
             }
         }
     }
+    const itemDetailsSX = {
+        mr: 2,
+        width: '32px',
+        height: '32px',
+        boxShadow: Root.boxShadow,
+        bgcolor: backgroundColor ? backgroundColor : taskStatusBgcolor.empty,
+        color: colors ? colors : taskStatusColors.empty
+    }
     return (
         <Tag.DialogDetails scroll="paper" isMobileQuery={isMobileQuery} open={open} onClose={handleClick}>
             <Stack sx={{
@@ -90,7 +97,15 @@ export const TaskDetailed = ({
                     </Box>
                     <Box mr={2} sx={{ cursor: 'pointer' }}>
                         <Edit sx={itemDetailsSX} />
-                        <Close onClick={() => setOpenMoreInfo(!open)} sx={{ color: 'white', boxShadow: Root.boxShadow, border: '1px solid white' }} />
+                        <Close
+                            onClick={() => setOpenMoreInfo(!open)}
+                            sx={{
+                                color: colors ? colors : taskStatusColors.empty,
+                                boxShadow: Root.boxShadow,
+                                bgcolor: backgroundColor ? backgroundColor : taskStatusBgcolor.empty,
+                                width: '32px',
+                                height: '32px',
+                            }} />
                     </Box>
                 </Tag.NavBarFixed>
                 <Divider sx={{ mt: 3 }} />
@@ -105,7 +120,14 @@ export const TaskDetailed = ({
                 }}>
                     <Tag.BoxItem isMobileQuery={isMobileQuery}>
                         <Box >{<BullPoint />}Status</Box>
-                        <Button sx={{ backgroundColor: colors ? colors : taskStatusColors.empty }}>{<BullPoint />}{checkKeyIsValid(task.taskStatus)}</Button>
+                        <Button
+                            sx={{
+                                minWidth: 85,
+                                color: colors ? colors : taskStatusColors.empty,
+                                backgroundColor: backgroundColor ? backgroundColor : taskStatusBgcolor.empty
+                            }}>
+                            {checkKeyIsValid(task.taskStatus)}
+                        </Button>
                     </Tag.BoxItem>
                     <Tag.BoxItem isMobileQuery={isMobileQuery}>
                         <Box >{<BullPoint />}Start Date</Box>
