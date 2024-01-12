@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useHref } from "react-router-dom"
 
 import { MainLayout } from "../layout/"
 import { HomePage } from "../pages/home/"
@@ -16,12 +16,27 @@ import { ArchivedTasks } from "../pages/subpages/archived/index.jsx"
 import { CompletedTasks } from "../pages/subpages/completed/index.jsx"
 import { TasksClosed } from "../pages/subpages/close/index.jsx"
 import { CreateTask } from "../pages/createTasks/index.jsx"
+import { NotFound } from "../components/NotFound/index.jsx"
+const pageUrls = [
+    '/',
+    '/community',
+    '/catalog',
+    '/mytasks',
+    '/taskArchived',
+    '/taskCompleted',
+    '/taskClose',
+    '/createTask'
+];
 export const Main = () => {
+  
+
+    const refRouter = useHref()
     const auth = useContext(AuthContext)
     if (auth?.isLoggedIn) {
-        return (
-            <MainLayout children={
-                <>
+        if (pageUrls.includes(refRouter)) {
+            return (
+                <MainLayout>
+                    <>
                     <LogoutComponent />
                     <Routes>
                         <Route path='/' element={<HomePage />} />
@@ -31,15 +46,20 @@ export const Main = () => {
                         <Route path='/taskArchived' element={<ArchivedTasks />} />
                         <Route path='/taskCompleted' element={<CompletedTasks />} />
                         <Route path='/taskClose' element={<TasksClosed />} />
-                        <Route path='/createTask' element={<CreateTask/>}/>
+                        <Route path='/createTask' element={<CreateTask />} />
                     </Routes>
-                </>}>
+                    </>
+                </MainLayout>
+            )
+        }
+        return (
+            <MainLayout>
+                <NotFound/>
             </MainLayout>
         )
     }
     return (
         <>
-
             <Fragment>
                 <Routes>
                     <Route path='/' element={<Login />} />
@@ -47,7 +67,6 @@ export const Main = () => {
                 </Routes>
                 <Footer />
             </Fragment>
-
         </>
     )
 }

@@ -42,7 +42,7 @@ export const HomePage = () => {
     if (showNotFound) {
         return (
             <ContainerTasks direction={'center'}>
-                <NotFound mobile={mobile} />
+                <NotFound noDoc={true}/>
             </ContainerTasks>
         );
     }
