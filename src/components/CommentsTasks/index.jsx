@@ -1,18 +1,21 @@
 import { Avatar, Box, Button, Divider, Stack, Typography } from "@mui/material"
 import { BullPoint } from "../Bull"
-import { MoreHoriz, ThumbUpOffAlt } from "@mui/icons-material"
+import { MoreHoriz, ThumbUp, ThumbUpOffAlt } from "@mui/icons-material"
 import * as Tag from './index.js'
 import { Root } from "../Global/Root/root_styles.jsx"
 import { db } from "../../firebaseConfig.js"
 import { commentService } from "../../api/comments/addComments.js"
 import { collection, onSnapshot } from "firebase/firestore"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { FormatRelativeTime } from "./formatRelativeTime.jsx"
+import { AuthContext } from "../../authcontext/index.jsx"
 const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
 export const CommentsTasks = ({
     isMobileQuery,
-    taskId
+    taskId,
+    colors
 }) => {
+    const { user } = useContext(AuthContext)
     const [comments, setComments] = useState([])
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'comments'), async (snapshot) => {
@@ -113,9 +116,17 @@ export const CommentsTasks = ({
                                 )}
                             </Tag.CommentMainParteA>
                             <Tag.CommentMainParteA sx={{ gap: 2, width: '100%', color: 'text.secondary' }} diretion={'flex-start'} >
-                                <Tag.CommentMainParteA diretion={'flex-start'} sx={{ width: 'auto' }}>
-                                    <ThumbUpOffAlt />
-                                    {comment.actions.likes}
+                                <Tag.CommentMainParteA
+                                    onClick={() => {
+                                        commentService.comment.likeComment(
+                                            comment.commentId, user.uid
+                                        )
+                                    }}
+                                    diretion={'flex-start'} sx={{ width: 'auto' }}>
+                                    {comment.actions.likes.includes(user.uid) ?
+                                        <ThumbUp sx={{color: colors? colors: Root.color_button}}/>
+                                        : <ThumbUpOffAlt />}
+                                    {comment.actions.likes.length}
                                 </Tag.CommentMainParteA>
                                 <Stack sx={{
                                     borderRight: Root.border,

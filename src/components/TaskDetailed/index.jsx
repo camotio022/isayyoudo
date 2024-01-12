@@ -156,6 +156,7 @@ export const TaskDetailed = ({
                             addComment={addComment}
                         />
                         <CommentsTasks
+                        colors={colors}
                             isMobileQuery={isMobileQuery}
                             task={task}
                             taskId={task.taskId}
