@@ -1,5 +1,5 @@
-import {  Explore, Home, Person, Search } from '@mui/icons-material';
-import { BottomNavigation, BottomNavigationAction, Stack, useMediaQuery } from "@mui/material";
+import { Explore, Home, Person, Search } from '@mui/icons-material';
+import { BottomNavigation, BottomNavigationAction, Menu, Stack, useMediaQuery } from "@mui/material";
 import { MyLogout } from "./styles";
 import { useState } from "react";
 import { Menu as MenuLinks } from '../../layout/components/menu';
@@ -31,7 +31,7 @@ export const LogoutComponent = () => {
                 flexDirection: 'row',
                 width: '95%',
                 height: '100%',
-                
+
             }}>
                 <BottomNavigation
                     sx={{ width: '100%' }}
@@ -43,13 +43,13 @@ export const LogoutComponent = () => {
                 >
                     {
                         [
-                            { label: 'Home', icon: <Home />, link: '/'},
+                            { label: 'Home', icon: <Home />, link: '/' },
                             { label: 'Search', icon: <Search />, link: '/' },
                             { label: 'Explorar', icon: <Explore />, link: '/' },
                             { label: 'Perfil', icon: <Person />, link: '/' }
                         ].map((action, index) => {
                             return (
-                                
+
                                 <BottomNavigationAction
                                     onClick={() => {
                                         navigate(action.link)
