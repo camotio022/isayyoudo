@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { taskStatusColors } from '../../pages/createTasks/quirys/taskStatus';
+import { taskStatusBgcolor, taskStatusColors } from '../../pages/createTasks/quirys/taskStatus';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Box, Divider, Stack, useMediaQuery } from '@mui/material';
@@ -14,8 +14,10 @@ import * as Tag from './styles/index.js'
 import { useContext } from 'react';
 import { AuthContext } from '../../authcontext/index.jsx';
 import { commentService } from '../../api/comments/addComments.js';
+import { Descriptions } from '../Descriptions/index.jsx';
+import { descriptionService } from '../../api/descriptions/index.js';
 export const TaskDetailed = ({
-    handleClick, open, task,taskId, setOpenMoreInfo
+    handleClick, open, task, taskId, setOpenMoreInfo
 }) => {
     const date = new Date().toLocaleString();
     const { user } = useContext(AuthContext)
@@ -45,6 +47,7 @@ export const TaskDetailed = ({
         border: '1px solid white'
     }
     const colors = taskStatusColors[task.taskStatus];
+    const backgroundColor = taskStatusBgcolor[task.taskStatus];
     const handleCommentChange = (event) => {
         const { name, value } = event.target;
         setComment((c) => ({
@@ -54,9 +57,15 @@ export const TaskDetailed = ({
         }));
     };
     const addComment = async () => {
-        if (comment.content) {
+        if (comment.content && value === 0) {
             try {
                 const res = await commentService.comment.post(comment)
+            } catch (err) {
+                console.error(err)
+            }
+        } else if (comment.content && value === 1) {
+            try {
+                const res = await descriptionService.description.post(comment)
             } catch (err) {
                 console.error(err)
             }
@@ -148,21 +157,31 @@ export const TaskDetailed = ({
                                 )
                             })}
                     </BottomNavigation>
+                    <CommentArea
+                        isMobileQuery={isMobileQuery}
+                        comment={comment}
+                        handleCommentChange={handleCommentChange}
+                        addComment={addComment}
+                    />
                     {value === 0 && (<>
-                        <CommentArea
-                            isMobileQuery={isMobileQuery}
-                            comment={comment}
-                            handleCommentChange={handleCommentChange}
-                            addComment={addComment}
-                        />
                         <CommentsTasks
-                        colors={colors}
+                            colors={colors}
                             isMobileQuery={isMobileQuery}
                             task={task}
                             taskId={task.taskId}
                         />
                     </>
                     )}
+                    {
+                        value === 1 && (<>
+                            <Descriptions
+                                backgroundColor={backgroundColor}
+                                colors={colors}
+                                isMobileQuery={isMobileQuery}
+                                taskId={task.taskId}
+                            />
+                        </>)
+                    }
                 </Box>
             </Stack>
         </Tag.DialogDetails>
