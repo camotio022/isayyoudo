@@ -17,6 +17,7 @@ export const LateralMenu = styled('div')(({ theme, isSmallScreen }) => ({
     borderRight: !isSmallScreen && Root.border,
     boxSizing: "border-box",
     transition: 'all .3s ease-in-out',
+    zIndex: 99999,
 }));
 export const MinhaLista = styled(List)(() => ({
     overflow: 'auto',

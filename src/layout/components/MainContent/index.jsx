@@ -1,9 +1,11 @@
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 import { ContainerGlobal, ContainerGlobalChildrens } from "../../../components/Global/Styles/styles"
-import { Menu } from "../menu"
+import { Menu as MuiMenu } from "@mui/icons-material"
 import { AuthFooter } from "../../../components/Footer"
-import { Stack } from "@mui/material"
+import { MenuItem, Stack } from "@mui/material"
 import { TepsMenuTasks } from "../../../components/Teps/index.jsx"
+import { Root } from "../../../components/Global/Root/root_styles.jsx"
+import { Menu } from "../menu/index.jsx"
 
 export const MainContent = ({
     children,
@@ -14,15 +16,38 @@ export const MainContent = ({
     Close,
     handleSelectLink,
     handleOpenUserMenu,
-    showLinks,
-    setShowLinks,
     isSmallScreen
 }) => {
+    const [showLinks, setShowLinks] = useState(false)
     if (isSmallScreen) {
         return (
             <ContainerGlobal>
+                <Stack sx={{
+                    position: 'fixed',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                    cursor: 'pointer',
+                    top: '1rem',
+                    right: '1rem',
+                    zIndex: !showLinks&& 99999,
+                }} onClick={() => {
+                    setShowLinks(!showLinks)
+                }}>
+                    <MuiMenu sx={{ height: 36, width: 36 }} />
+                </Stack>
+                {showLinks && <Menu
+                    selectedLink={selectedLink}
+                    anchorEl={anchorEl}
+                    handleClose={handleClose}
+                    open={open}
+                    Close={Close}
+                    handleSelectLink={handleSelectLink}
+                    handleOpenUserMenu={handleOpenUserMenu}
+                    setShowLinks={setShowLinks}
+                    showLinks={showLinks}
+                />}
                 {children}
-                {/* <AuthFooter /> */}
             </ContainerGlobal>
         )
     }

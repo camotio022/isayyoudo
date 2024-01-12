@@ -11,7 +11,7 @@ import { AuthContext } from '../../../authcontext/index'
 import { SelectItem } from '../../../components/SelectItem'
 import { Link } from 'react-router-dom'
 export const Menu = (
-    { setIsLinks, isLinks }
+    { setShowLinks, showLinks }
 ) => {
     const { logout } = useContext(AuthContext)
     const isSmallScreen = useMediaQuery('(max-width:600px)');
@@ -19,7 +19,7 @@ export const Menu = (
         <T.LateralMenu isSmallScreen={isSmallScreen}>
             <LogoPage />
             <MyLogout position={'90%'}>
-                {isLinks && <SelectItem item={<Close onClick={() => setIsLinks(false)} />} />}
+                {isSmallScreen && <SelectItem item={<Close onClick={() => setShowLinks(false)} />} />}
             </MyLogout>
             <Link
                 to={'/createTask'}
@@ -42,8 +42,7 @@ export const Menu = (
                             {...li}
                             name={li.name}
                             canShowAlert={li.name === 'My Tasks'}
-                            closeMenuLinks={() => setIsLinks(false)}
-                            isLinks={isLinks}
+                            closeMenuLinks={() => setShowLinks(false)}
                         />
                     )
                 })}

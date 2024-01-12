@@ -14,7 +14,6 @@ export const Links_a = ({
   icon,
   canShowAlert,
   closeMenuLinks,
-  isLinks
 }) => {
   const location = useLocation();
   const isRoute = location.pathname === link
