@@ -3,6 +3,8 @@ import { Root } from "../Global/Root/root_styles";
 import { avatars } from "./avatars";
 
 import { taskStatusBgcolor } from "../../pages/createTasks/quirys/taskStatus";
+import { DescriptionsAndComments } from "../DescriptionsAndComments";
+import { useState } from "react";
 export const CardTaskMobile = (
     {
         tasks,
@@ -44,15 +46,16 @@ export const CardTaskMobile = (
         const executionDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         return executionDays;
     };
+    const [open, setOPen] = useState(false)
     return (
         <>
-            <Tooltip title={'Click para ver mais informações dessa tarefa!!'}>
-                <Grid showBorder={tasks.length} onClick={handleClick} item xs={8} sx={{
+            <Tooltip title={'Click para ver mais informações dessa tarefa!!'} >
+                <Grid showBorder={tasks.length} item xs={8} sx={{
                     width: mobile ? '90%' : 278,
                     height: mobile ? 138 : 200,
                     cursor: 'pointer',
-                    boxShadow: tasks?.length > 5&&Root.boxShadow,
-                    border: tasks?.length < 5 && Root.border 
+                    boxShadow: tasks?.length > 5 && Root.boxShadow,
+                    border: tasks?.length < 5 && Root.border
                 }}>
                     <Card variant="outlined" sx={{
                         height: '100%',
@@ -68,13 +71,16 @@ export const CardTaskMobile = (
                         }}>
                             <Box ml={1}>
                                 <Typography
+                                    onClick={() => (
+                                        setOPen(true)
+                                    )}
                                     sx={threePoints}
                                     variant="div"
                                     component="div"
                                 >
                                     {task.title ? task?.title : 'Empty'}
                                 </Typography>
-                                <Typography sx={{textTransform: 'uppercase'}} mt={1} color={'text.secondary'}>
+                                <Typography sx={{ textTransform: 'uppercase' }} mt={1} color={'text.secondary'}>
                                     {task.typeCollection ? task.typeCollection : 'Empty'}
                                 </Typography>
                             </Box>
@@ -86,7 +92,7 @@ export const CardTaskMobile = (
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        color: 
+                                        color:
                                             Root.color_button,
                                         fontSize: '1.5rem',
                                         fontWeight: 600
@@ -108,6 +114,7 @@ export const CardTaskMobile = (
                         </Stack>
                         <CardActions sx={{ flexDirection: 'row' }}>
                             <Button
+                                onClick={handleClick}
                                 sx={{
                                     bgcolor: backgroundColor ?
                                         backgroundColor :
@@ -124,6 +131,7 @@ export const CardTaskMobile = (
                             </Stack>
                         </CardActions>
                     </Card>
+                    {open && <DescriptionsAndComments setOPen={setOPen} />}
                 </Grid>
             </Tooltip>
         </>
