@@ -6,6 +6,7 @@ import { CircularRedAlert } from '../CircularRedAlert/index.jsx'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { taskService } from '../../api/tasks/addTask.js'
 import { useEffect, useState } from 'react'
+import { DescriptionsAndComments } from '../DescriptionsAndComments/index.jsx'
 
 export const TaskCard = ({
     name,
@@ -32,6 +33,7 @@ export const TaskCard = ({
         setTask(task);
         setOpenMoreInfo(!openMoreInfo);
     }
+    const [open, setOPen] = useState(false)
     const calculateExecutionDays = () => {
         const startDate = new Date(dateStarted);
         const deliveryDate = new Date(dateDelivery);
@@ -62,6 +64,7 @@ export const TaskCard = ({
     return (
         <T.TabsMain showBorder={tasks?.length < 5} width={width} backgroundColor={false} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
+            {open && <DescriptionsAndComments setOPen={setOPen}/>}
             <T.CircleStateTask color={colorStatus} sx={{
                 position: 'absolute',
                 ml: 4,
@@ -116,18 +119,20 @@ export const TaskCard = ({
                     </T.TaskAssigner>
                 </T.TaskTitle>
             </T.LastInfosTask>
-            {matches&&<>
-            <T.LastInfosTask>
-                <T.BoxTypeButtonMain width={width}>
-                    <T.CircleStateTask color={colorStatus} />
-                    {stateTask}
-                </T.BoxTypeButtonMain>
-                <Stack position={'relative'}>
-                    <Message />
-                    <CircularRedAlert />
-                </Stack>
-                <MoreHoriz cursor={'pointer'} onClick={handleClick} />
-            </T.LastInfosTask></>}
+            {matches && <>
+                <T.LastInfosTask>
+                    <T.BoxTypeButtonMain width={width}>
+                        <T.CircleStateTask color={colorStatus} />
+                        {stateTask}
+                    </T.BoxTypeButtonMain>
+                    <Stack onClick={() => {
+                        setOPen(true)
+                    }} position={'relative'}>
+                        <Message />
+                        <CircularRedAlert />
+                    </Stack>
+                    <MoreHoriz cursor={'pointer'} onClick={handleClick} />
+                </T.LastInfosTask></>}
         </T.TabsMain>
     )
 }
