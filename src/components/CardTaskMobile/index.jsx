@@ -4,6 +4,7 @@ import { avatars } from "./avatars";
 import { taskStatusBgcolor } from "../../pages/createTasks/quirys/taskStatus";
 import { DescriptionsAndComments } from "../DescriptionsAndComments";
 import { useState } from "react";
+import { TaskDetailed } from "../TaskDetailed";
 export const CardTaskMobile = (
     {
         tasks,
@@ -15,10 +16,9 @@ export const CardTaskMobile = (
         task,
         empty,
         setTask,
-        openMoreInfo,
-        setOpenMoreInfo,
     }
 ) => {
+    const [openMoreInfo, setOpenMoreInfo] = useState(false);
     const firstThreeItems = avatars.slice(0, 6);
     const threePoints = {
         width: '160px',
@@ -31,6 +31,7 @@ export const CardTaskMobile = (
         lineHeight: 1.3,
         fontWeight: 900
     }
+
     const handleClick = () => {
         setTask(task)
         setOpenMoreInfo(!openMoreInfo)
@@ -53,7 +54,7 @@ export const CardTaskMobile = (
                     width: mobile ? '90%' : 278,
                     height: mobile ? 138 : 200,
                     cursor: 'pointer',
-                    boxShadow:  Root.boxShadow,
+                    boxShadow: Root.boxShadow,
                 }}>
                     <Card variant="outlined" sx={{
                         height: '100%',
@@ -130,6 +131,13 @@ export const CardTaskMobile = (
                         </CardActions>
                     </Card>
                     {open && <DescriptionsAndComments setOPen={setOPen} />}
+                    <TaskDetailed
+                        taskId={task.taskId}
+                        open={openMoreInfo}
+                        setOpenMoreInfo={setOpenMoreInfo}
+                        handleClick={handleClick}
+                        task={task}
+                    />
                 </Grid>
             </Tooltip>
         </>
