@@ -109,7 +109,7 @@ export const LastInfosTask = styled(Box)(({ theme, border }) => ({
 export const BoxTypeButtonMain= styled(Box)(({ theme, width }) => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     gap: '8px',
     minHeight:'30%',
     minWidth: 100,
