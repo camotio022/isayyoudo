@@ -7,6 +7,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { taskService } from '../../api/tasks/addTask.js'
 import { useEffect, useState } from 'react'
 import { DescriptionsAndComments } from '../DescriptionsAndComments/index.jsx'
+import { TaskDetailed } from '../TaskDetailed/index.jsx'
 
 export const TaskCard = ({
     name,
@@ -23,7 +24,6 @@ export const TaskCard = ({
     setOpenMoreInfo,
     openMoreInfo,
     width,
-    backgroundColor,
     typeShowTask,
     taskId,
     tasks
@@ -68,6 +68,13 @@ export const TaskCard = ({
         <T.TabsMain width={width} backgroundColor={false} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
             {open && <DescriptionsAndComments setOPen={setOPen} />}
+            <TaskDetailed
+                taskId={taskId}
+                open={openMoreInfo}
+                setOpenMoreInfo={setOpenMoreInfo}
+                handleClick={handleClick}
+                task={task}
+            />
             <T.CircleStateTask color={colorStatus} sx={{
                 position: 'absolute',
                 ml: 4,
