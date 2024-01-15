@@ -19,6 +19,7 @@ import { CreateTask } from "../pages/createTasks/index.jsx"
 import { NotFound } from "../components/NotFound/index.jsx"
 const pageUrls = [
     '/',
+    '/active',
     '/community',
     '/catalog',
     '/mytasks',
