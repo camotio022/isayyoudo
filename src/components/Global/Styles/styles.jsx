@@ -156,9 +156,12 @@ export const ContainerTasks = styled(Stack)(({ theme, direction }) => ({
 }))
 export const CardTaskMacthes = styled(Box)(({ mobile }) => ({
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    marginBlock: '4rem',
+    maxHeight: '90%',
+    width:'100%',
     flexWrap: 'wrap',
     overflow: 'auto',
     gap: '1rem',
