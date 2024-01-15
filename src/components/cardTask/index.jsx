@@ -29,6 +29,9 @@ export const TaskCard = ({
     tasks
 }) => {
     const matches = useMediaQuery('(min-width:600px)');
+    const CheckKey = (key) => {
+        return key ? key : 'Empty';
+    }
     function handleClick() {
         setTask(task);
         setOpenMoreInfo(!openMoreInfo);
@@ -64,7 +67,7 @@ export const TaskCard = ({
     return (
         <T.TabsMain showBorder={tasks?.length < 5} width={width} backgroundColor={false} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
-            {open && <DescriptionsAndComments setOPen={setOPen}/>}
+            {open && <DescriptionsAndComments setOPen={setOPen} />}
             <T.CircleStateTask color={colorStatus} sx={{
                 position: 'absolute',
                 ml: 4,
@@ -73,15 +76,15 @@ export const TaskCard = ({
             }} />
             <T.TaskTitleButton>
                 <T.TaskTitle>
-                    {name}
+                    {CheckKey(name)}
                 </T.TaskTitle>
                 <T.Infos>
-                    {action}
+                    {CheckKey(action)}
                 </T.Infos>
             </T.TaskTitleButton>
             <T.TaskTitleButton>
                 <T.TaskTitle>
-                    {assigner}<br />
+                    {CheckKey(assigner)}<br />
                     <T.TaskAssigner>
                         assigner
                     </T.TaskAssigner>
@@ -113,7 +116,7 @@ export const TaskCard = ({
             <T.LastInfosTask justifyContent={'center !important'}>
                 <Avatar src={avatar}></Avatar>
                 <T.TaskTitle>
-                    {assignerTo}<br />
+                    {CheckKey(assignerTo)}<br />
                     <T.TaskAssigner>
                         assigned to
                     </T.TaskAssigner>
@@ -123,7 +126,7 @@ export const TaskCard = ({
                 <T.LastInfosTask>
                     <T.BoxTypeButtonMain width={width}>
                         <T.CircleStateTask color={colorStatus} />
-                        {stateTask}
+                        {CheckKey(stateTask)}
                     </T.BoxTypeButtonMain>
                     <Stack onClick={() => {
                         setOPen(true)

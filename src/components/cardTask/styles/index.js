@@ -112,7 +112,7 @@ export const BoxTypeButtonMain= styled(Box)(({ theme, width }) => ({
     justifyContent: 'flex-start',
     gap: '8px',
     minHeight:'30%',
-    minWidth: width,
+    minWidth: 100,
     width:'auto',
     padding: '8px',
     border:'1px solid gray',
