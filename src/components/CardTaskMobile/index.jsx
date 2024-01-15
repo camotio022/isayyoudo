@@ -1,7 +1,6 @@
 import { Avatar, Box, Button, Card, CardActions, CardContent, Grid, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { Root } from "../Global/Root/root_styles";
 import { avatars } from "./avatars";
-
 import { taskStatusBgcolor } from "../../pages/createTasks/quirys/taskStatus";
 import { DescriptionsAndComments } from "../DescriptionsAndComments";
 import { useState } from "react";
@@ -50,12 +49,11 @@ export const CardTaskMobile = (
     return (
         <>
             <Tooltip title={'Click para ver mais informações dessa tarefa!!'} >
-                <Grid showBorder={tasks.length} item xs={8} sx={{
+                <Grid item xs={8} sx={{
                     width: mobile ? '90%' : 278,
                     height: mobile ? 138 : 200,
                     cursor: 'pointer',
-                    boxShadow: tasks?.length > 5 && Root.boxShadow,
-                    border: tasks?.length < 5 && Root.border
+                    boxShadow:  Root.boxShadow,
                 }}>
                     <Card variant="outlined" sx={{
                         height: '100%',

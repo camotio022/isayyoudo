@@ -65,7 +65,7 @@ export const TaskCard = ({
         }
     }
     return (
-        <T.TabsMain showBorder={tasks?.length < 5} width={width} backgroundColor={false} onDoubleClick={deleteTask}>
+        <T.TabsMain width={width} backgroundColor={false} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
             {open && <DescriptionsAndComments setOPen={setOPen} />}
             <T.CircleStateTask color={colorStatus} sx={{

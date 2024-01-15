@@ -5,12 +5,12 @@ import { TaskDetailed } from "../../components/TaskDetailed/index.jsx";
 import { taskStatusBgcolor, taskStatusColors } from "../createTasks/quirys/taskStatus.js";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebaseConfig.js";
-import { Box, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { CardTaskMobile } from "../../components/CardTaskMobile/index.jsx";
 import { CardMobileLoading } from "../../components/Loadinds/cardMobile/index.jsx";
 import { NotFound } from "../../components/NotFound/index.jsx";
 export const HomePage = () => {
-    const matches = useMediaQuery('(min-width:1300px)');
+    const matches = useMediaQuery('(min-width:1050px)');
     const mobile = useMediaQuery('(max-width:600px)');
     const [task, setTask] = useState({})
     const [openMoreInfo, setOpenMoreInfo] = useState(false);

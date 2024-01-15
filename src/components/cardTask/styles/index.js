@@ -9,10 +9,9 @@ export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor, sh
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    border: showBorder&& Root.border,
     backgroundColor: backgroundColor? backgroundColor: Root.white,
     gap: 10,
-    boxShadow: showBorder&&Root.boxShadowTask,
+    boxShadow: Root.boxShadowTask,
 
     '&::-webkit-scrollbar': {
         width: '5px',
