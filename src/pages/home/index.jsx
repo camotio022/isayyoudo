@@ -15,9 +15,6 @@ export const HomePage = () => {
     const [task, setTask] = useState({})
     const [openMoreInfo, setOpenMoreInfo] = useState(false);
     const [showNotFound, setShowNotFound] = useState(false);
-    function handleClick() {
-        setOpenMoreInfo(false);
-    }
     const [tasks, setTasks] = useState([])
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
@@ -86,15 +83,7 @@ export const HomePage = () => {
                         );
                     })
                 }
-                <TaskDetailed
-                    taskId={task.taskId}
-                    open={openMoreInfo}
-                    setOpenMoreInfo={setOpenMoreInfo}
-                    handleClick={handleClick}
-                    task={task}
-                />
-
-
+ 
             </ContainerTasks>
         )
     }
@@ -122,13 +111,6 @@ export const HomePage = () => {
                         />
                     )
                 })}
-                <TaskDetailed
-                    taskId={task.taskId}
-                    open={openMoreInfo}
-                    setOpenMoreInfo={setOpenMoreInfo}
-                    handleClick={handleClick}
-                    task={task}
-                />
             </CardTaskMacthes>
         </>
     )
