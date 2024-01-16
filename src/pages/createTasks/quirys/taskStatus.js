@@ -19,7 +19,7 @@ export const taskStatusColors = {
     Completed:  '#8BC34A',
     Cancelled: '#F44336',
     WaitingforApproval: '#E91E63',
-    empty: '#cfe2ff'
+    empty: 'rgba(207, 226, 255,)'
 };
 export const taskStatusBgcolor = {
     ToDo:'rgba(33, 150, 243, 0.3)',
