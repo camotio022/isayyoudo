@@ -65,7 +65,7 @@ export const TepsMenuTasks = () => {
         {
             title: 'Close',
             link: '/taskClose',
-            taskNumber: tasks.filter((task) => task.taskStatus === 'Close').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Closed').length,
         }
     ]
     const newRoute = {

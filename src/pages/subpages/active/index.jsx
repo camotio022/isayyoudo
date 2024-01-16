@@ -8,7 +8,7 @@ import { taskStatusBgcolor, taskStatusColors } from "../../createTasks/quirys/ta
 import { useMediaQuery } from '@mui/material';
 import { CardTaskMobile } from '../../../components/CardTaskMobile/index.jsx';
 import { NoTasksFromThisState } from '../../../components/NoTaskThisStates/index.jsx';
-export const CompletedTasks = () => {
+export const TasksActiveOrToDo = () => {
     const matches = useMediaQuery('(min-width:1050px)');
     const mobile = useMediaQuery('(max-width:600px)');
     const [tasks, setTasks] = useState([])
@@ -17,7 +17,7 @@ export const CompletedTasks = () => {
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
             const tempTasks = snapshot.docs
-                .filter(task => task.data().taskStatus === 'Completed')
+                .filter(task => task.data().taskStatus === 'ToDo')
                 .map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
@@ -52,12 +52,13 @@ export const CompletedTasks = () => {
                             />
                         );
                     }) : (
-                    <NoTasksFromThisState routeTasks={'Completed'} />
+                    <NoTasksFromThisState routeTasks={'Closed'} />
                 )}
             </ContainerTasks>
         )
     }
     return (
+
         <CardTaskMacthes mobile={mobile}>
             {tasks.length > 0 ?
                 tasks.map((task, index) => {
@@ -79,7 +80,7 @@ export const CompletedTasks = () => {
                         />
                     )
                 }) : (
-                    <NoTasksFromThisState routeTasks={'Completed'} />
+                    <NoTasksFromThisState routeTasks={'Closed'} />
                 )}
         </CardTaskMacthes>
 
