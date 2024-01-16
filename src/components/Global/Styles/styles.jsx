@@ -41,15 +41,15 @@ export const BoxMain = styled(Box)(({
     boxShadow: Root.boxShadow,
     border: border ? '0' : Root.border,
 }));
-export const MyButton = styled(Button)(({ theme }) => ({
+export const MyButton = styled(Button)(({ theme, backgroundColor, colorsTask }) => ({
     cursor: 'pointer',
-    color: Root.color_default,
+    color: colorsTask? colorsTask: Root.color_default,
     width: "100%",
     fontWeight: 900,
     outline: 'none !important',
     mt: 3,
     mb: 2,
-    backgroundColor: Root.color_button_secondary,
+    backgroundColor: backgroundColor? backgroundColor: Root.color_button_secondary,
     borderRadius: '0',
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
@@ -156,9 +156,12 @@ export const ContainerTasks = styled(Stack)(({ theme, direction }) => ({
 }))
 export const CardTaskMacthes = styled(Box)(({ mobile }) => ({
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    marginBlock: '4rem',
+    maxHeight: '90%',
+    width:'100%',
     flexWrap: 'wrap',
     overflow: 'auto',
     gap: '1rem',

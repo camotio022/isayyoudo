@@ -50,7 +50,7 @@ export const TepsMenuTasks = () => {
         {
             title: 'Active',
             link: '/active',
-            taskNumber: tasks.filter((task) => task.taskStatus === 'Active').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'ToDo').length,
         },
         {
             title: 'Completed',
@@ -65,7 +65,7 @@ export const TepsMenuTasks = () => {
         {
             title: 'Close',
             link: '/taskClose',
-            taskNumber: tasks.filter((task) => task.taskStatus === 'Close').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Closed').length,
         }
     ]
     const newRoute = {

@@ -9,10 +9,9 @@ export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor, sh
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    border: showBorder&& Root.border,
     backgroundColor: backgroundColor? backgroundColor: Root.white,
     gap: 10,
-    boxShadow: showBorder&&Root.boxShadowTask,
+    boxShadow: Root.boxShadowTask,
 
     '&::-webkit-scrollbar': {
         width: '5px',
@@ -109,10 +108,10 @@ export const LastInfosTask = styled(Box)(({ theme, border }) => ({
 export const BoxTypeButtonMain= styled(Box)(({ theme, width }) => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     gap: '8px',
     minHeight:'30%',
-    minWidth: width,
+    minWidth: 100,
     width:'auto',
     padding: '8px',
     border:'1px solid gray',
