@@ -73,7 +73,7 @@ export const TaskCard = ({
                 open={openMoreInfo}
                 setOpenMoreInfo={setOpenMoreInfo}
                 handleClick={handleClick}
-                task={task}
+                task={task ? task : {}}
             />
             <T.CircleStateTask color={colorStatus} sx={{
                 position: 'absolute',

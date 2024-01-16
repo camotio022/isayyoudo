@@ -38,7 +38,6 @@ export const StepTwo = ({
                     value={taskDetails.startDate instanceof Date ? taskDetails.startDate.toISOString().split('T')[0] : taskDetails.startDate}
                     onChange={(e) => handleInputChange('startDate', e.target.value)}
                     fullWidth
-                    required
                     type='date'
                     size="small"
                     id="outlined-required"
@@ -55,7 +54,6 @@ export const StepTwo = ({
                     value={taskDetails.deliveryDate instanceof Date ? taskDetails.deliveryDate.toISOString().split('T')[0] : taskDetails.deliveryDate}
                     onChange={(e) => handleInputChange('deliveryDate', e.target.value)}
                     fullWidth
-                    required
                     type='date'
                     size="small"
                     id="outlined-required"
@@ -72,7 +70,6 @@ export const StepTwo = ({
                     value={taskDetails.assigned}
                     onChange={(e) => handleInputChange('assigned', e.target.value)}
                     fullWidth
-                    required
                     size="small"
                     id="outlined-required"
                     label="assigned"
