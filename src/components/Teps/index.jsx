@@ -50,7 +50,7 @@ export const TepsMenuTasks = () => {
         {
             title: 'Active',
             link: '/active',
-            taskNumber: tasks.filter((task) => task.taskStatus === 'Active').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'ToDo').length,
         },
         {
             title: 'Completed',
