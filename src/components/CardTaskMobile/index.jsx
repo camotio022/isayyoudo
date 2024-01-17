@@ -148,14 +148,20 @@ export const CardTaskMobile = (
                         color={color ? color : taskStatusColors.empty}
                     />
                 </Tooltip>
-                {open && <DescriptionsAndComments setOPen={setOPen} />}
-                <TaskDetailed
+                {open && <DescriptionsAndComments
+                    color={color}
+                    backgroundColor={backgroundColor}
+                    taskId={task.taskId}
+                    task={task}
+                    setOPen={setOPen}
+                />}
+                {openMoreInfo && <TaskDetailed
                     taskId={task.taskId}
                     open={openMoreInfo}
                     setOpenMoreInfo={setOpenMoreInfo}
                     handleClick={handleClick}
-                    task={task}
-                />
+                    task={task ? task : {}}
+                />}
             </Grid>
 
         </>

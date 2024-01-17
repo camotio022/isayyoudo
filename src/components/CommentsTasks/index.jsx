@@ -11,9 +11,11 @@ import { FormatRelativeTime } from "./formatRelativeTime.jsx"
 import { AuthContext } from "../../authcontext/index.jsx"
 const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
 export const CommentsTasks = ({
+    shadow,
     isMobileQuery,
     taskId,
-    colors
+    colors,
+    mt
 }) => {
     const { user } = useContext(AuthContext)
     const [comments, setComments] = useState([])
@@ -78,11 +80,11 @@ export const CommentsTasks = ({
                         <Tag.CommentMainTag
                             key={index} isMobileQuery={isMobileQuery}
                             gap={1} mt={1}
-                            mb={(comments.length - 1) === index && 5}
+                            mb={(comments.length - 1) === index && (shadow ? '5rem' : 5)}
                         >
-                            <Tag.CommentMainParte1 mt={index === 0 ? 5 : 2} >
+                            <Tag.CommentMainParte1 mt={index === 0 ? (shadow ? '10rem' : 5) : 2}>
                                 <Tag.CommentMainParteA diretion={'flex-start'}>
-                                    <Avatar sx={{ height: 35, width: 35 }}
+                                    <Avatar sx={{ height: 30, width: 30 }}
                                         src={comment.author.avatar} />
                                     <Stack sx={{
                                         fontWeight: isMobileQuery ? 500 : 800
@@ -124,7 +126,7 @@ export const CommentsTasks = ({
                                     }}
                                     diretion={'flex-start'} sx={{ width: 'auto' }}>
                                     {comment.actions.likes.includes(user.uid) ?
-                                        <ThumbUp sx={{color: colors? colors: Root.color_button}}/>
+                                        <ThumbUp sx={{ color: colors ? colors : Root.color_button }} />
                                         : <ThumbUpOffAlt />}
                                     {comment.actions.likes.length}
                                 </Tag.CommentMainParteA>
