@@ -64,7 +64,7 @@ export const TaskDetailed = ({
             }
         } else if (comment.content && value === 1) {
             try {
-                const res = await descriptionService.description.post(comment)
+                await descriptionService.description.post(comment)
             } catch (err) {
                 console.error(err)
             }
@@ -79,13 +79,8 @@ export const TaskDetailed = ({
         color: colors ? colors : taskStatusColors.empty
     }
     return (
-        <Tag.DialogDetails scroll="paper" isMobileQuery={isMobileQuery} open={open} onClose={handleClick}>
-            <Stack sx={{
-                position: 'relative',
-                width: isMobileQuery ? '95vw' : 500,
-                minHeight: isMobileQuery ? '95vh' : 'auto',
-                marginBlock: 5,
-            }}>
+        <Tag.DialogDetails scroll="paper" isMobileQuery={isMobileQuery} onClick={handleClick}>
+            <Tag.ContainerDialog isMobileQuery={isMobileQuery}>
                 <Tag.NavBarFixed
                     taskStatusColors={taskStatusColors.empty}
                     isMobileQuery={isMobileQuery}
@@ -109,7 +104,7 @@ export const TaskDetailed = ({
                     </Box>
                 </Tag.NavBarFixed>
                 <Divider sx={{ mt: 3 }} />
-                <Box ml={3} mt={4} component={'h3'} sx={{ height: 'auto', maxWidth: '90%' }}>
+                <Box ml={3} mt={8} component={'h3'} sx={{ height: 'auto', maxWidth: '90%' }}>
                     {checkKeyIsValid(task.title)}
                 </Box>
                 <Stack mt={4} sx={{
@@ -205,7 +200,7 @@ export const TaskDetailed = ({
                         </>)
                     }
                 </Box>
-            </Stack>
+            </Tag.ContainerDialog>
         </Tag.DialogDetails>
     )
 }

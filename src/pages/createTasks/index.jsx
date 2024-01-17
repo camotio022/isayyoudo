@@ -89,7 +89,18 @@ export const CreateTask = () => {
     };
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        const canNextStepOne = taskDetails.title && taskDetails.typeCollection;
+        if (activeStep === 0 && canNextStepOne) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        } else if (activeStep === 2 && taskDetails.priority && taskDetails.taskStatus) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        } else if (activeStep === 1) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        } else if (activeStep === 3) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        } else {
+            alert('Por favor preencha os campos obrigadórios!!')
+        }
     };
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -148,8 +159,8 @@ export const CreateTask = () => {
                         setTaskDetails={setTaskDetails}
                     />
                 )}
-                {activeStep === 3 &&(
-                    <PreviewTask taskDetails={taskDetails}/>
+                {activeStep === 3 && (
+                    <PreviewTask taskDetails={taskDetails} />
                 )}
                 {activeStep === steps.length && (
                     <Box sx={{ mt: 2 }}>

@@ -13,7 +13,6 @@ export const PreviewTask = (
             assigner={taskDetails.assigner}
             avatar={taskDetails.assignerPhotoURL}
             assignerTo={'SnowManLabs'}
-            missingTime={0}
             dateStarted={taskDetails.startDate}
             dateDelivery={taskDetails.deliveryDate}
             stateTask={taskDetails.taskStatus}

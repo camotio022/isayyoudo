@@ -1,24 +1,75 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
     useMediaQuery,
-    Button
+    Button,
+    Stack
 } from "@mui/material"
 
 import * as Tag from './styles/index.js'
 import { Root } from "../Global/Root/root_styles.jsx";
 import { Close, Comment, Description } from "@mui/icons-material";
 import { Textarea } from "@mui/joy";
+import { CardTaskMacthes } from "../Global/Styles/styles.jsx";
+import { CommentsTasks } from "../CommentsTasks/index.jsx";
+import { AuthContext } from "../../authcontext/index.jsx";
+import { commentService } from "../../api/comments/addComments.js";
+import { descriptionService } from "../../api/descriptions/index.js";
 export const DescriptionsAndComments = ({
-    setOPen
+    setOPen,
+    task,
+    taskId,
+    color,
+    backgroundColor
 }) => {
+    const { user } = useContext(AuthContext)
     const isMobileQuery = useMediaQuery('(max-width:600px)');
+    const date = new Date()
     const [value, setValue] = useState('Comments');
+    const [commentArea, setCommentArea] = useState('')
+    const [comment, setComment] = useState({
+        taskId: '',
+        author: {
+            userId: user.uid,
+            name: user.displayName,
+            avatar: user.photoURL,
+        },
+        content: commentArea,
+        timestamp: date,
+        actions: {
+            likes: [],
+            replies: [],
+        },
+        replies: [],
+    });
     const handleChange = (event, newValue) => {
         if (newValue === 'close') {
             setOPen(false)
         }
         setValue(newValue);
     };
+    const handleCommentChange = (event) => {
+        const { name, value } = event.target;
+        setComment((c) => ({
+            ...c,
+            taskId: taskId,
+            [name]: value,
+        }));
+    };
+    const addNew = async () => {
+        if (comment.content && value === 'Comments') {
+            try {
+                const res = await commentService.comment.post(comment)
+            } catch (err) {
+                console.error(err)
+            }
+        } else if (comment.content && value === 'Descriptions') {
+            try {
+                await descriptionService.description.post(comment)
+            } catch (err) {
+                console.error(err)
+            }
+        }
+    }
     return (
 
         <Tag.DialogDetails
@@ -59,8 +110,19 @@ export const DescriptionsAndComments = ({
                         value={'close'}
                         icon={<Close />}
                     />
-
                 </Tag.MuiBottomNavigation>
+
+                {value === 'Comments' && (<>
+                    <CommentsTasks
+                        shadow={true}
+                        colors={color}
+                        backgroundColor={backgroundColor}
+                        isMobileQuery={isMobileQuery}
+                        task={task}
+                        taskId={task.taskId}
+                    />
+                </>
+                )}
 
                 <Tag.MuiBottomTextarea
                     isMobileQuery={isMobileQuery}
@@ -69,6 +131,9 @@ export const DescriptionsAndComments = ({
                         isMobileQuery={isMobileQuery}
                     >
                         <Textarea
+                            name="content"
+                            value={comment.content}
+                            onChange={handleCommentChange}
                             sx={{ width: 1 }}
                             minRows={1}
                             placeholder={value === 'Descriptions' ? (
@@ -77,7 +142,7 @@ export const DescriptionsAndComments = ({
                                 'Add your new comment now'
                             )}
                         />
-                        <Button variant="contained">
+                        <Button onClick={addNew} variant="contained">
                             Bublish
                         </Button>
                     </Tag.MuiBottomMainTextarea>
