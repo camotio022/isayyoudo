@@ -80,7 +80,7 @@ export const CommentsTasks = ({
                         <Tag.CommentMainTag
                             key={index} isMobileQuery={isMobileQuery}
                             gap={1} mt={1}
-                            mb={(comments.length - 1) === index && (shadow ? '5rem' : 5)}
+                            mb={(comments.length - 1) === index && (shadow ? '10rem' : 5)}
                         >
                             <Tag.CommentMainParte1 mt={index === 0 ? (shadow ? '10rem' : 5) : 2}>
                                 <Tag.CommentMainParteA diretion={'flex-start'}>

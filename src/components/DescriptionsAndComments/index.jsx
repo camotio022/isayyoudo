@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import {
     useMediaQuery,
     Button,
-    Stack
+    Stack,
+    Container
 } from "@mui/material"
 
 import * as Tag from './styles/index.js'
@@ -111,19 +112,19 @@ export const DescriptionsAndComments = ({
                         icon={<Close />}
                     />
                 </Tag.MuiBottomNavigation>
-
-                {value === 'Comments' && (<>
-                    <CommentsTasks
-                        shadow={true}
-                        colors={color}
-                        backgroundColor={backgroundColor}
-                        isMobileQuery={isMobileQuery}
-                        task={task}
-                        taskId={task.taskId}
-                    />
-                </>
-                )}
-
+                <Tag.MuiContainer isMobileQuery={isMobileQuery} maxWidth="sm">
+                    {value === 'Comments' && (<>
+                        <CommentsTasks
+                            shadow={true}
+                            colors={color}
+                            backgroundColor={backgroundColor}
+                            isMobileQuery={isMobileQuery}
+                            task={task}
+                            taskId={task.taskId}
+                        />
+                    </>
+                    )}
+                </Tag.MuiContainer>
                 <Tag.MuiBottomTextarea
                     isMobileQuery={isMobileQuery}
                 >

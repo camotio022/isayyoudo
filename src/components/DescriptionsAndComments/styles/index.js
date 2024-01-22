@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, Box, Dialog, Paper, Stack, styled } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Box, Container, Dialog, Paper, Stack, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
 export const DialogDetails = styled(Stack)(({ theme, isMobileQuery }) => ({
@@ -24,7 +24,7 @@ export const MuiPaper = styled(Paper)(({ theme, isMobileQuery }) => ({
     width: isMobileQuery ? '100%' : 600,
     height: isMobileQuery ? '100%' : '95vh',
     borderRadius: 0,
-    overflow: 'auto'
+    overflow: 'hidden'
 }));
 export const MuiBottomNavigation = styled(BottomNavigation)(({ theme, isMobileQuery }) => ({
     position: isMobileQuery ? 'fixed' : 'static',
@@ -62,4 +62,7 @@ export const MuiBottomMainTextarea = styled(Box)(({ theme, isMobileQuery }) => (
     minHeight: 50,
     height: 'auto',
     marginInline: isMobileQuery ? '0.5rem' : '1rem'
+}));
+export const MuiContainer = styled(Container)(({ theme, isMobileQuery }) => ({
+    height: '100vh', overflow: 'auto'
 }));
