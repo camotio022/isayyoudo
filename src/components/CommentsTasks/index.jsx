@@ -9,7 +9,7 @@ import { collection, onSnapshot } from "firebase/firestore"
 import { useContext, useEffect, useState } from "react"
 import { FormatRelativeTime } from "./formatRelativeTime.jsx"
 import { AuthContext } from "../../authcontext/index.jsx"
-const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
+import { LoCommAndDesc } from "../Loadinds/LoCommAndDesc/index.jsx"
 export const CommentsTasks = ({
     shadow,
     isMobileQuery,
@@ -71,6 +71,11 @@ export const CommentsTasks = ({
             return name.split(' ')[0];
         }
         return name;
+    }
+    if(comments.length === 0){
+        return(
+            <LoCommAndDesc/>
+        )
     }
     return (
         <>

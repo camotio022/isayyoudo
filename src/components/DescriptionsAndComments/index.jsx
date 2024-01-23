@@ -15,6 +15,8 @@ import { CommentsTasks } from "../CommentsTasks/index.jsx";
 import { AuthContext } from "../../authcontext/index.jsx";
 import { commentService } from "../../api/comments/addComments.js";
 import { descriptionService } from "../../api/descriptions/index.js";
+import { Descriptions } from "../Descriptions/index.jsx";
+import { serverTimestamp } from "firebase/firestore";
 export const DescriptionsAndComments = ({
     setOPen,
     task,
@@ -24,7 +26,6 @@ export const DescriptionsAndComments = ({
 }) => {
     const { user } = useContext(AuthContext)
     const isMobileQuery = useMediaQuery('(max-width:600px)');
-    const date = new Date()
     const [value, setValue] = useState('Comments');
     const [commentArea, setCommentArea] = useState('')
     const [comment, setComment] = useState({
@@ -35,7 +36,7 @@ export const DescriptionsAndComments = ({
             avatar: user.photoURL,
         },
         content: commentArea,
-        timestamp: date,
+        timestamp: serverTimestamp(),
         actions: {
             likes: [],
             replies: [],
@@ -115,6 +116,17 @@ export const DescriptionsAndComments = ({
                 <Tag.MuiContainer isMobileQuery={isMobileQuery} maxWidth="sm">
                     {value === 'Comments' && (<>
                         <CommentsTasks
+                            shadow={true}
+                            colors={color}
+                            backgroundColor={backgroundColor}
+                            isMobileQuery={isMobileQuery}
+                            task={task}
+                            taskId={task.taskId}
+                        />
+                    </>
+                    )}
+                    {value === 'Descriptions' && (<>
+                        <Descriptions
                             shadow={true}
                             colors={color}
                             backgroundColor={backgroundColor}

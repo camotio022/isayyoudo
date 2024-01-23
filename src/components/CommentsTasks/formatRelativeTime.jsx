@@ -1,6 +1,6 @@
-export const FormatRelativeTime = ({dateTimeString}) => {
+export const FormatRelativeTime = ({ dateTimeString }) => {
     const currentDate = new Date();
-    const postDate = new Date(dateTimeString);
+    const postDate = new Date(dateTimeString?.seconds * 1000 + dateTimeString?.nanoseconds / 1e6);
     const timeDifference = currentDate.getTime() - postDate.getTime();
     const secondsDifference = Math.floor(timeDifference / 1000);
     const minutesDifference = Math.floor(secondsDifference / 60);
