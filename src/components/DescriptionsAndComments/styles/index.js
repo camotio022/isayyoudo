@@ -17,9 +17,9 @@ export const DialogDetails = styled(Stack)(({ theme, isMobileQuery }) => ({
 }));
 export const MuiPaper = styled(Paper)(({ theme, isMobileQuery }) => ({
     display: 'flex',
-    alignItems:"center",
-    justifyContent:'center',
-    flexDirection:'column',
+    alignItems: "center",
+    justifyContent: 'center',
+    flexDirection: 'column',
     position: !isMobileQuery && 'relative',
     width: isMobileQuery ? '100%' : 600,
     height: isMobileQuery ? '100%' : '95vh',
@@ -27,7 +27,7 @@ export const MuiPaper = styled(Paper)(({ theme, isMobileQuery }) => ({
     overflow: 'hidden'
 }));
 export const MuiBottomNavigation = styled(BottomNavigation)(({ theme, isMobileQuery }) => ({
-    position: isMobileQuery ? 'fixed' : 'static',
+    position: isMobileQuery ? 'fixed' : 'absolute',
     left: 0,
     top: 0,
     zIndex: 9999,
@@ -64,5 +64,24 @@ export const MuiBottomMainTextarea = styled(Box)(({ theme, isMobileQuery }) => (
     marginInline: isMobileQuery ? '0.5rem' : '1rem'
 }));
 export const MuiContainer = styled(Container)(({ theme, isMobileQuery }) => ({
-    height: '100vh', overflow: 'auto'
+    overflow: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '&::-webkit-scrollbar': {
+        width: '5px',
+        height: '3px'
+    },
+
+    '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#f1f1f1',
+        borderRadius: '6px',
+    },
+
+    '&::-webkit-scrollbar-track': {
+        backgroundColor: '#f1f1f1',
+    },
+    scrollbarWidth: 'thin',
+    scrollbarColor: '#888 #f1f1f1',
 }));

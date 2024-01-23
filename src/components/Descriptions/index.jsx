@@ -1,19 +1,20 @@
 import * as React from 'react';
 import Card from '@mui/joy/Card';
+import * as Tag from './styles/index'
 import CardContent from '@mui/joy/CardContent';
-import Skeleton from '@mui/joy/Skeleton';
 import { Avatar, Stack } from '@mui/material';
 import { Root } from '../Global/Root/root_styles';
 import { descriptionService } from '../../api/descriptions';
 import { db } from '../../firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { LoCommAndDesc } from '../Loadinds/LoCommAndDesc';
 export const Descriptions = ({
     isMobileQuery,
     colors,
     backgroundColor,
-    taskId = { task }
+    taskId,
+    task
 }) => {
     const [descriptions, setDescriptions] = useState([])
     useEffect(() => {
@@ -23,15 +24,33 @@ export const Descriptions = ({
         });
         return () => unsubscribe();
     }, [taskId]);
+    if(descriptions.length === 0){
+        return(
+            <LoCommAndDesc/>
+        )
+    }
     return (
         <>
             {descriptions.map((description, index) => {
+                const dataCompleta = new Date(description.timestamp.seconds * 1000 + description.timestamp.nanoseconds / 1e6);
+                const dataFormatada = dataCompleta.toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                });
+
+                const horasFormatadas = dataCompleta.toLocaleTimeString('pt-BR', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    timeZoneName: 'short',
+                });
                 return (
                     <Card
                         variant="outlined"
                         sx={{
-                            mt: index === 0 ? 7 : 2,
-                            mb: descriptions.length - 1 === index && 7,
+                            mt: index === 0 ? 10 : 2,
+                            mb: (descriptions.length - 1) === index && 10,
                             boxShadow: Root.boxShadow,
                             width: isMobileQuery ? '80%' : 'max(92%, 60%)',
                             borderRadius: '8px', '--Card-radius': 0,
@@ -40,7 +59,8 @@ export const Descriptions = ({
                     >
                         <CardContent orientation="horizontal" sx={{
                             position: 'relative',
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            zIndex: 0
                         }}>
                             <Avatar
                                 src={description.author.avatar}
@@ -53,25 +73,22 @@ export const Descriptions = ({
                             }}>
                                 {description.author.name}
                             </Stack>
-                            <Stack sx={{
-                                position: 'absolute',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: "center",
-                                bgcolor: backgroundColor ? backgroundColor : Root.color_button_opacity,
-                                right: 0,
-                                borderRight: `0.5rem solid ${colors ? colors : Root.color_button}`,
-                                color: Root.black,
-                                fontSize: 14
-                            }} variant="rectangular" width={100} height={44} >
-                                {description.timestamp.split(',')[0]}
-                                <br />
-                                <span style={{fontWeight: 400}}>
-                                    {description.timestamp.split(',')[1]}
-                                </span>
-                            </Stack>
+                            <Tag.ShowTimes
+                                isMobileQuery={isMobileQuery}
+                                backgroundColor={backgroundColor}
+                                colors={colors}
+                                width={100}
+                                height={44}
+                            >
+                                <div>
+                                    {horasFormatadas}
+                                </div>
+                                <div style={{ fontWeight: 400 }}>
+                                    {dataFormatada}
+                                </div>
+                            </Tag.ShowTimes>
                         </CardContent>
-                        <CardContent sx={{ gap: 0.5, mt: 0.4 }}>
+                        <CardContent sx={{ gap: 0.5, mt: 0.4, zIndex: 0 }}>
                             <Stack level="body-xs" color="text.secondary" width="100%">
                                 {description.content}
                             </Stack>

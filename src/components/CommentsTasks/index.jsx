@@ -9,7 +9,7 @@ import { collection, onSnapshot } from "firebase/firestore"
 import { useContext, useEffect, useState } from "react"
 import { FormatRelativeTime } from "./formatRelativeTime.jsx"
 import { AuthContext } from "../../authcontext/index.jsx"
-const text = 'Lorem ipsum dolor @Temotio Luis sit amet, #consectetur.'
+import { LoCommAndDesc } from "../Loadinds/LoCommAndDesc/index.jsx"
 export const CommentsTasks = ({
     shadow,
     isMobileQuery,
@@ -72,6 +72,11 @@ export const CommentsTasks = ({
         }
         return name;
     }
+    if(comments.length === 0){
+        return(
+            <LoCommAndDesc/>
+        )
+    }
     return (
         <>
             {
@@ -82,12 +87,14 @@ export const CommentsTasks = ({
                             gap={1} mt={1}
                             mb={(comments.length - 1) === index && (shadow ? '10rem' : 5)}
                         >
-                            <Tag.CommentMainParte1 mt={index === 0 ? (shadow ? '10rem' : 5) : 2}>
+                            <Tag.CommentMainParte1 mt={index === 0 ? (shadow ? '5rem' : 5) : 2}>
                                 <Tag.CommentMainParteA diretion={'flex-start'}>
-                                    <Avatar sx={{ height: 30, width: 30 }}
+                                    <Avatar sx={{ height:35, width:35 }}
                                         src={comment.author.avatar} />
                                     <Stack sx={{
-                                        fontWeight: isMobileQuery ? 500 : 800
+                                        color: Root.color_button,
+                                        fontSize: '1.2rem',
+                                        fontWeight: isMobileQuery ? 500 : 900
                                     }}>
                                         {splitNameUserInScreens(comment.author.name)}
                                     </Stack>
@@ -96,9 +103,18 @@ export const CommentsTasks = ({
                                         <FormatRelativeTime dateTimeString={comment.timestamp} />
                                     </Typography>
                                 </Tag.CommentMainParteA>
-                                <Box>
-                                    <MoreHoriz sx={{ cursor: 'pointer' }} />
-                                </Box>
+                                <div style={{
+                                    border: Root.border,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    height: 'auto',
+                                    cursor: 'pointer',
+                                    padding: '2px',
+                                    color: Root.color_button
+                                }}>
+                                    <MoreHoriz  />
+                                </div>
                             </Tag.CommentMainParte1>
 
                             <Tag.CommentMainParteA

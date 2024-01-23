@@ -8,6 +8,7 @@ import { taskService } from '../../api/tasks/addTask.js'
 import { useEffect, useState } from 'react'
 import { DescriptionsAndComments } from '../DescriptionsAndComments/index.jsx'
 import { TaskDetailed } from '../TaskDetailed/index.jsx'
+import { taskStatusBgcolor, taskStatusColors } from '../../pages/createTasks/quirys/taskStatus.js'
 
 export const TaskCard = ({
     name,
@@ -67,8 +68,14 @@ export const TaskCard = ({
     return (
         <T.TabsMain width={width} backgroundColor={false} onDoubleClick={deleteTask}>
             <Assignment sx={{ margin: '1rem', color: colorStatus }} />
-            {open && <DescriptionsAndComments setOPen={setOPen} />}
-            {openMoreInfo&&<TaskDetailed
+            {open && <DescriptionsAndComments
+                color={taskStatusColors[task.taskStatus]}
+                backgroundColor={taskStatusBgcolor[task.taskStatus]}
+                taskId={task.taskId}
+                task={task}
+                setOPen={setOPen}
+            />}
+            {openMoreInfo && <TaskDetailed
                 taskId={taskId}
                 open={openMoreInfo}
                 setOpenMoreInfo={setOpenMoreInfo}

@@ -16,10 +16,10 @@ import { AuthContext } from '../../authcontext/index.jsx';
 import { commentService } from '../../api/comments/addComments.js';
 import { Descriptions } from '../Descriptions/index.jsx';
 import { descriptionService } from '../../api/descriptions/index.js';
+import { serverTimestamp } from 'firebase/firestore';
 export const TaskDetailed = ({
     handleClick, open, task, taskId, setOpenMoreInfo
 }) => {
-    const date = new Date().toLocaleString();
     const { user } = useContext(AuthContext)
     const isMobileQuery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState(0);
@@ -32,7 +32,7 @@ export const TaskDetailed = ({
             avatar: user.photoURL,
         },
         content: commentArea,
-        timestamp: date,
+        timestamp: serverTimestamp(),
         actions: {
             likes: [],
             replies: [],
