@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import * as Tag from './styles/index.js'
 import image from './imgs/juggle---drop.gif'
-import { Box, Stepper, Step, StepLabel, Button, Typography, Stack } from '@mui/material';
-import { Info, Preview, Save, Timeline, Warning } from '@mui/icons-material';
+import { Box, Stepper, Step, StepLabel, Button, Typography, Stack, useMediaQuery } from '@mui/material';
+import { Delete, Info, Preview, Save, Timeline, Warning } from '@mui/icons-material';
 import { StepOne } from './components/StepOne/index.jsx';
 import { StepTwo } from './components/StepTwo/index.jsx';
 import { AuthContext } from '../../authcontext/index.jsx';
@@ -19,7 +19,10 @@ const steps = [
     { label: 'Preview Task', icon: <Preview /> }
 ];
 export const CreateTask = () => {
-    const { user } = useContext(AuthContext)
+    const { isCreatingTask, setIsCreatingTask } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+    const isMobileQuery = useMediaQuery('(max-width:600px)');
+    const canSetColorMenu = isCreatingTask && isMobileQuery;
     const [activeStep, setActiveStep] = useState(0);
     const [taskDetails, setTaskDetails] = useState({
         title: '',
@@ -47,6 +50,32 @@ export const CreateTask = () => {
         responsibles: [],
         collaborators: []
     });
+    const nullStateTasks = {
+        title: '',
+        description: '',
+        typeCollection: '',
+        startDate: '',
+        deliveryDate: '',
+        assigned: '',
+        priority: '',
+        taskStatus: '',
+        estimated: '',
+        assigner: user.displayName,
+        assignerPhotoURL: user.photoURL,
+        assignerId: user.uid,
+        assignerTasksCreated: 0,
+        tags: '',
+        completionPercentage: '',
+        requiredResources: '',
+        communications: '',
+        attachments: '',
+        activityLogs: '',
+        changeHistory: '',
+        comments: [],
+        relatedTasks: [],
+        responsibles: [],
+        collaborators: [],
+    };
 
     const handleSelecao = (event) => {
         const selectedValue = event.target.value;
@@ -81,6 +110,7 @@ export const CreateTask = () => {
     const createTasksNow = async () => {
         try {
             const createTask = await taskService.task.post(taskDetails)
+            setTaskDetails(nullStateTasks)
             setActiveStep(1)
             console.log("tarefa adicionada com sucesso!!", createTask);
         } catch (err) {
@@ -114,9 +144,9 @@ export const CreateTask = () => {
         color: '#000',
     };
     return (
-        <Tag.ContentNewTask>
-            <CardTopCreateTask image={image} activeStep={activeStep} />
-            <Tag.CardNewTask>
+        <Tag.ContentNewTask isMobileQuery={isMobileQuery} bg={taskDetails.taskStatus}>
+            {!isMobileQuery && <CardTopCreateTask image={image} activeStep={activeStep} />}
+            <Tag.CardNewTask isMobileQuery={isMobileQuery}>
                 <Stepper sx={{ width: '100%' }} alternativeLabel activeStep={activeStep < 1 ? 1 : activeStep}>
                     {steps.map((step, index) => (
                         <Step key={index}>
@@ -125,10 +155,13 @@ export const CreateTask = () => {
                                     <Stack sx={{
                                         color: activeStep > index ? Root.green : Root.color_button,
                                         borderRadius: '50%',
-                                        border: Root.border,
-                                        padding: '2px',
+                                        border: canSetColorMenu ? `1px solid ${Root.color_button}` : Root.border,
+                                        padding: '6px',
                                     }}>{step.icon}</Stack>}>
-                                {step.label}
+                                <span style={{
+                                    color: canSetColorMenu && Root.color_button,
+                                    fontWeight: canSetColorMenu && 600
+                                }}>{step.label}</span>
                             </StepLabel>
                         </Step>
                     ))}
@@ -141,6 +174,7 @@ export const CreateTask = () => {
                 {
                     activeStep === 0 && (
                         <StepOne
+                            isMobileQuery={isCreatingTask}
                             handleInputChange={handleInputChange}
                             handleSelecao={handleSelecao}
                             taskDetails={taskDetails}
@@ -148,32 +182,52 @@ export const CreateTask = () => {
                 }
                 {activeStep === 1 && (
                     <StepTwo
+                        isMobileQuery={isCreatingTask}
                         handleInputChange={handleInputChange}
                         taskDetails={taskDetails}
                     />
                 )}
                 {activeStep === 2 && (
                     <StepThree
+                        isMobileQuery={isCreatingTask}
                         handleInputChange={handleInputChange}
                         taskDetails={taskDetails}
                         setTaskDetails={setTaskDetails}
                     />
                 )}
                 {activeStep === 3 && (
-                    <PreviewTask taskDetails={taskDetails} />
+                    <PreviewTask
+                        isCreatingTask={isCreatingTask}
+                        taskDetails={taskDetails} />
                 )}
                 {activeStep === steps.length && (
-                    <Box sx={{ mt: 2 }}>
-                        <Typography>
+                    <Box sx={{ mt: 2, gap: 2 }}>
+                        <Typography sx={{
+                            padding: 1,
+                            mb: 3,
+                            backgroundColor: Root.color_button_opacity,
+                            color: Root.color_button,
+                            fontWeight: 600
+                        }}>
                             You have finished the registration steps
                             for the {taskDetails.title} task, do you want to create it?
                         </Typography>
-                        <Button onClick={handleReset}>Reset</Button>
+                        <Button size="small"
+                            sx={{
+                                backgroundColor: Root.red,
+                                fontWeight: 600
+                            }}
+                            variant="contained"
+                            startIcon={<Delete />}
+                            onClick={handleReset}>
+                            Reset
+                        </Button>
                     </Box>
                 )}
             </Tag.ContainerTitleAndMOre>
             <Tag.ContainerTitleAndMOre sx={{ flexDirection: 'row', justifyContent: 'flex-end', mt: 2 }} spacing={2}>
                 <Button
+                    size={"small"}
                     sx={{ width: activeStep === 2 && '20%', transition: 'all .4s' }}
                     variant="contained" onClick={handleBack} disabled={activeStep === 0}>
                     Back
@@ -191,6 +245,7 @@ export const CreateTask = () => {
                         <span>Create</span>
                     </LoadingButton> :
                     <Button
+                        size={"small"}
                         sx={{ width: activeStep === 1 && '20%', transition: 'all .4s' }}
                         variant="contained" onClick={handleNext}>
                         {activeStep === steps.length - 1 ? 'Finish' : 'Next'}

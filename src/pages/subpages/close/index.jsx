@@ -17,7 +17,7 @@ export const TasksClosed = () => {
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
             const tempTasks = snapshot.docs
-                .filter(task => task.data().taskStatus === 'Closed')
+                .filter(task => task.data().taskStatus === 'Close')
                 .map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
