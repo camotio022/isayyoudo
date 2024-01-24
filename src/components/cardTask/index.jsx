@@ -27,7 +27,8 @@ export const TaskCard = ({
     width,
     typeShowTask,
     taskId,
-    tasks
+    tasks,
+    isCreatingTask
 }) => {
     const matches = useMediaQuery('(min-width:600px)');
     const CheckKey = (key) => {
@@ -88,15 +89,15 @@ export const TaskCard = ({
                 mt: 2,
                 boxShadow: "rgba(0, 0, 0, 0.90) 0px 3px 8px",
             }} />
-            <T.TaskTitleButton>
-                <T.TaskTitle>
+            <T.TaskTitleButton isCreatingTask={isCreatingTask}>
+                <T.TaskTitle isCreatingTask={isCreatingTask}>
                     {CheckKey(name)}
                 </T.TaskTitle>
                 <T.Infos>
                     {CheckKey(action)}
                 </T.Infos>
             </T.TaskTitleButton>
-            <T.TaskTitleButton>
+            <T.TaskTitleButton isCreatingTask={isCreatingTask}>
                 <T.TaskTitle>
                     {CheckKey(assigner)}<br />
                     <T.TaskAssigner>
@@ -127,7 +128,7 @@ export const TaskCard = ({
                     </T.TaskMainTooltip>
                 </T.TaskMainHoverInfosDate>
             </T.TaskTitleButton>
-            <T.LastInfosTask justifyContent={'center !important'}>
+            {!isCreatingTask && <T.LastInfosTask justifyContent={'center !important'}>
                 <Avatar src={avatar}></Avatar>
                 <T.TaskTitle>
                     {CheckKey(assignerTo)}<br />
@@ -135,7 +136,7 @@ export const TaskCard = ({
                         assigned to
                     </T.TaskAssigner>
                 </T.TaskTitle>
-            </T.LastInfosTask>
+            </T.LastInfosTask>}
             {matches && <>
                 <T.LastInfosTask>
                     <T.BoxTypeButtonMain width={width}>
