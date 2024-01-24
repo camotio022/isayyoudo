@@ -82,7 +82,6 @@ export const ArchivedTasks = () => {
                     )
                 }) : (
                     <NoTasksFromThisState routeTasks={'Archived'} />
-
                 )}
         </CardTaskMacthes>
 
