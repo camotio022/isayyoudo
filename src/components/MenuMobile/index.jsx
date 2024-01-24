@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { Button } from '@mui/material';
-import { AssignmentTurnedIn, KeyboardArrowDown } from '@mui/icons-material';
+import { AssignmentTurnedIn, Close, KeyboardArrowDown, Loop } from '@mui/icons-material';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
@@ -27,9 +27,12 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { AuthContext } from '../../authcontext';
 import { useContext } from 'react';
+import { Root } from '../Global/Root/root_styles';
 ;
 
-export const MenuMobile = () => {
+export const MenuMobile = ({
+    canSetColorMenu
+}) => {
     const { user, logout } = useContext(AuthContext)
     const [anchorEl, setAnchorEl] = useState(null);
     const [tasks, setTasks] = useState([])
@@ -69,7 +72,7 @@ export const MenuMobile = () => {
         },
         {
             title: 'InProgress',
-            icon: <SettingsIcon />,
+            icon: <Loop />,
             link: '/inprogress',
             color: taskStatusBgcolor.InProgress,
             textColor: taskStatusColors.InProgress,
@@ -93,11 +96,11 @@ export const MenuMobile = () => {
         },
         {
             title: 'Close',
-            icon: <CheckCircleIcon />,
+            icon: <Close />,
             link: '/taskClose',
             color: taskStatusBgcolor.Close,
             textColor: taskStatusColors.Close,
-            taskNumber: tasks.filter((task) => task.taskStatus === 'Closed').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Close').length,
         },
         {
             title: 'Create Task',
@@ -119,6 +122,8 @@ export const MenuMobile = () => {
                     variant="none"
                     disableElevation
                     sx={{
+                        color: canSetColorMenu&& Root.color_button,
+                        fontWeight: canSetColorMenu&& 600,
                         '&:focus': {
                             border: 'none',
                             outline: 'none',
@@ -164,7 +169,7 @@ export const MenuMobile = () => {
                                 <ListItemIcon sx={{ color: task.textColor, }}>
                                     {task.icon}
                                 </ListItemIcon>
-                                <Typography variant="body2" sx={{ color: task.textColor }}>
+                                <Typography variant="body2" sx={{ fontWeight: 800, color: Root.gray }}>
                                     {task.title}
                                 </Typography>
                                 <ListItemIcon sx={{
@@ -172,7 +177,7 @@ export const MenuMobile = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'flex-end',
-                                    color: task.textColor,
+                                    color: Root.gray,
                                     width: '40%',
                                     right: '16px'
                                 }}>

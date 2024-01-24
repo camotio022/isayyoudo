@@ -7,7 +7,8 @@ import { HourglassBottom, HourglassFull, LockClock } from '@mui/icons-material';
 export const StepThree = ({
     taskDetails,
     setTaskDetails,
-    handleInputChange
+    handleInputChange,
+    isMobileQuery
 }) => {
     const handlePriority = (event) => {
         const selectedValue = event.target.value;
@@ -25,7 +26,14 @@ export const StepThree = ({
     };
     return (
         <>
-            <Stack flexDirection={'row'} sx={{ gap: 3, width: '100%' }}>
+            <Stack flexDirection={'row'} sx={isMobileQuery?{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap', gap: 3, width: '100%'
+            }:{
+                gap: 3, width: '100%'
+            }}>
                 <TextField
                     name="estimated"
                     value={taskDetails.estimated}

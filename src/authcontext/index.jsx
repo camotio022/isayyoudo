@@ -11,6 +11,7 @@ const provider = new GoogleAuthProvider()
 import { getFirestore, doc, setDoc, collection, getDocs, query, where, updateDoc } from 'firebase/firestore'
 import { DialogError } from '../components/Dialog'
 export const AuthProvider = ({ children }) => {
+    const [isCreatingTask, setIsCreatingTask] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const auth = getAuth()
     const [user, setUser] = useState(null)
@@ -113,6 +114,8 @@ export const AuthProvider = ({ children }) => {
                 loginWithGoogle,
                 loginWithEmailAndPassword,
                 user,
+                isCreatingTask,
+                setIsCreatingTask
             }}
         >
             <Fragment>

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { Fragment, useContext, useState } from "react"
 import { ContainerGlobal, ContainerGlobalChildrens } from "../../../components/Global/Styles/styles"
 import { Menu as MuiMenu } from "@mui/icons-material"
 import { AuthFooter } from "../../../components/Footer"
@@ -7,6 +7,8 @@ import { TepsMenuTasks } from "../../../components/Teps/index.jsx"
 import { Root } from "../../../components/Global/Root/root_styles.jsx"
 import { Menu } from "../menu/index.jsx"
 import { MenuMobile } from "../../../components/MenuMobile/index.jsx"
+import { AuthContext } from "../../../authcontext/index.jsx"
+import { taskStatusColors } from "../../../pages/createTasks/quirys/taskStatus.js"
 
 export const MainContent = ({
     children,
@@ -19,6 +21,8 @@ export const MainContent = ({
     handleOpenUserMenu,
     isSmallScreen
 }) => {
+    const { isCreatingTask, setIsCreatingTask } = useContext(AuthContext)
+    const canSetColorMenu = isCreatingTask && isSmallScreen;
     const [showLinks, setShowLinks] = useState(false)
     if (isSmallScreen) {
         return (
@@ -35,8 +39,8 @@ export const MainContent = ({
                 }} >
                     <MuiMenu onClick={() => {
                         setShowLinks(!showLinks)
-                    }} sx={{ height: 36, width: 36, }} />
-                    <MenuMobile />
+                    }} sx={{ height: 36, width: 36, color: canSetColorMenu &&  Root.color_button }} />
+                    <MenuMobile canSetColorMenu={canSetColorMenu}/>
                 </Stack>
                 {showLinks && <Menu
                     selectedLink={selectedLink}

@@ -19,7 +19,7 @@ export const NoTasksFromThisState = ({
         <Box sx={{
             width: mobile ? '90%' : 375,
         }}>
-            <Card variant="outlined" sx={{border: 'none', boxShadow: mobile&&Root.boxShadow}}>
+            <Card variant="outlined" sx={{border: 'none', }}>
                 <CardContent sx={{...jsx, }}>
                     <PriorityHigh sx={{ border: `2px solid`, borderRadius: '50%', padding: 0.2}} fontSize="large" />
                 </CardContent>

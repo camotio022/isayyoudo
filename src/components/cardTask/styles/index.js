@@ -29,12 +29,12 @@ export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor, sh
     scrollbarWidth: 'thin',
     scrollbarColor: '#888 #f1f1f1',
 }));
-export const TaskTitleButton = styled(Stack)(({ theme, border }) => ({
+export const TaskTitleButton = styled(Stack)(({ theme, border, isCreatingTask }) => ({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     gap: '10px',
-    width: '20%',
+    width:isCreatingTask? '30%':  '20%',
     height: 'auto'
 }));
 export const TaskTitle = styled(Typography)(({ theme, border }) => ({

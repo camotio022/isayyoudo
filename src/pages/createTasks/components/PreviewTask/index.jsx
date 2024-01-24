@@ -1,7 +1,7 @@
 import { TaskCard } from "../../../../components/cardTask";
 import { taskStatus, taskStatusBgcolor, taskStatusColors } from "../../quirys/taskStatus";
 export const PreviewTask = (
-    {taskDetails}
+    { taskDetails, isCreatingTask }
 ) => {
     const backgroundColor = taskStatusBgcolor[taskDetails.taskStatus]
     const color = taskStatusColors[taskDetails.taskStatus]
@@ -19,6 +19,7 @@ export const PreviewTask = (
             colorStatus={color}
             backgroundColor={backgroundColor}
             typeShowTask={'preview'}
+            isCreatingTask={isCreatingTask}
         />
     );
 }

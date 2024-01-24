@@ -5,7 +5,7 @@ import { HomePage } from "../pages/home/"
 import { Community } from "../pages/community/"
 import { Catalog } from "../pages/catalog/"
 import { MyTasks } from "../pages/tasks/"
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 import { Cadastro } from "../auth/Cadastro"
 import { useContext } from "react"
 import { LogoutComponent } from "../components/Logout/"
@@ -30,8 +30,7 @@ const pageUrls = [
     '/createTask'
 ];
 export const Main = () => {
-
-
+    
     const refRouter = useHref()
     const auth = useContext(AuthContext)
     if (auth?.isLoggedIn) {

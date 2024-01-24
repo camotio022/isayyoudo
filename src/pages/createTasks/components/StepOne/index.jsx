@@ -1,11 +1,18 @@
-import {Stack, TextField, Select, MenuItem} from '@mui/material';
-import { options} from '../../quirys/options.js';
+import { Stack, TextField, Select, MenuItem } from '@mui/material';
+import { options } from '../../quirys/options.js';
 export const StepOne = ({
-    taskDetails, handleInputChange, handleSelecao
+    taskDetails, handleInputChange, handleSelecao, isMobileQuery
 }) => {
     return (
         <>
-            <Stack flexDirection={'row'} sx={{ gap: 3, width: '100%' }}>
+            <Stack flexDirection={'row'} sx={isMobileQuery?{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap', gap: 3, width: '100%'
+            }:{
+                gap: 3, width: '100%'
+            }}>
                 <TextField
                     name="title"
                     value={taskDetails.title}

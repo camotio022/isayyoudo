@@ -4,7 +4,8 @@ import { Assessment, Assignment, AssignmentInd, HourglassBottom, HourglassTop, P
 
 export const StepTwo = ({
     taskDetails,
-    handleInputChange
+    handleInputChange,
+    isMobileQuery
 }) => {
     const calculateExecutionDays = () => {
         const startDate = new Date(taskDetails.startDate);
@@ -32,7 +33,14 @@ export const StepTwo = ({
                     }
                 </Alert>
             </Stack>
-            <Stack flexDirection={'row'} sx={{ gap: 3, width: '100%' }}>
+            <Stack flexDirection={'row'} sx={isMobileQuery?{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap', gap: 3, width: '100%'
+            }:{
+                gap: 3, width: '100%'
+            }}>
                 <TextField
                     name="startDate"
                     value={taskDetails.startDate instanceof Date ? taskDetails.startDate.toISOString().split('T')[0] : taskDetails.startDate}
