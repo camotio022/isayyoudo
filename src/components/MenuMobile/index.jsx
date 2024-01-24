@@ -30,7 +30,9 @@ import { useContext } from 'react';
 import { Root } from '../Global/Root/root_styles';
 ;
 
-export const MenuMobile = () => {
+export const MenuMobile = ({
+    canSetColorMenu
+}) => {
     const { user, logout } = useContext(AuthContext)
     const [anchorEl, setAnchorEl] = useState(null);
     const [tasks, setTasks] = useState([])
@@ -98,7 +100,7 @@ export const MenuMobile = () => {
             link: '/taskClose',
             color: taskStatusBgcolor.Close,
             textColor: taskStatusColors.Close,
-            taskNumber: tasks.filter((task) => task.taskStatus === 'Closed').length,
+            taskNumber: tasks.filter((task) => task.taskStatus === 'Close').length,
         },
         {
             title: 'Create Task',
@@ -120,6 +122,8 @@ export const MenuMobile = () => {
                     variant="none"
                     disableElevation
                     sx={{
+                        color: canSetColorMenu&& Root.color_button,
+                        fontWeight: canSetColorMenu&& 600,
                         '&:focus': {
                             border: 'none',
                             outline: 'none',
