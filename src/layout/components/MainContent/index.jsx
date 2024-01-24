@@ -6,6 +6,7 @@ import { MenuItem, Stack } from "@mui/material"
 import { TepsMenuTasks } from "../../../components/Teps/index.jsx"
 import { Root } from "../../../components/Global/Root/root_styles.jsx"
 import { Menu } from "../menu/index.jsx"
+import { MenuMobile } from "../../../components/MenuMobile/index.jsx"
 
 export const MainContent = ({
     children,
@@ -27,14 +28,15 @@ export const MainContent = ({
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     flexDirection: 'row',
-                    cursor: 'pointer',
+                    height: 'auto',
                     top: '1rem',
-                    right: '1rem',
-                    zIndex: !showLinks&& 99999,
-                }} onClick={() => {
-                    setShowLinks(!showLinks)
-                }}>
-                    <MuiMenu sx={{ height: 36, width: 36 }} />
+                    width: '90%',
+                    zIndex: !showLinks && 99999,
+                }} >
+                    <MuiMenu onClick={() => {
+                        setShowLinks(!showLinks)
+                    }} sx={{ height: 36, width: 36, }} />
+                    <MenuMobile />
                 </Stack>
                 {showLinks && <Menu
                     selectedLink={selectedLink}
