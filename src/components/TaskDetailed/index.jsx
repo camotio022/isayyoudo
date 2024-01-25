@@ -21,7 +21,7 @@ export const TaskDetailed = ({
     handleClick, open, task, taskId, setOpenMoreInfo
 }) => {
     const { user } = useContext(AuthContext)
-    const isMobileQuery = useMediaQuery('(max-width:600px)');
+    const ismobilequery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState(0);
     const [commentArea, setCommentArea] = useState('')
     const [comment, setComment] = useState({
@@ -46,7 +46,7 @@ export const TaskDetailed = ({
         return key ? capitalizeFirstLetter(key) : 'Empty';
     }
     const colors = taskStatusColors[task.taskStatus];
-    const backgroundColor = taskStatusBgcolor[task.taskStatus];
+    const bg = taskStatusBgcolor[task.taskStatus];
     const handleCommentChange = (event) => {
         const { name, value } = event.target;
         setComment((c) => ({
@@ -75,15 +75,14 @@ export const TaskDetailed = ({
         width: '32px',
         height: '32px',
         boxShadow: Root.boxShadow,
-        bgcolor: backgroundColor ? backgroundColor : taskStatusBgcolor.empty,
+        bgcolor: bg ? bg : taskStatusBgcolor.empty,
         color: colors ? colors : taskStatusColors.empty
     }
     return (
-        <Tag.DialogDetails scroll="paper" isMobileQuery={isMobileQuery} onClick={handleClick}>
-            <Tag.ContainerDialog isMobileQuery={isMobileQuery}>
+        <Tag.DialogDetails  ismobilequery={ismobilequery}>
+            <Tag.ContainerDialog ismobilequery={ismobilequery}>
                 <Tag.NavBarFixed
-                    taskStatusColors={taskStatusColors.empty}
-                    isMobileQuery={isMobileQuery}
+                    ismobilequery={ismobilequery}
                     colors={colors}
                 >
                     <Box ml={2} component={'div'}>
@@ -97,7 +96,7 @@ export const TaskDetailed = ({
                             sx={{
                                 color: colors ? colors : taskStatusColors.empty,
                                 boxShadow: Root.boxShadow,
-                                bgcolor: backgroundColor ? backgroundColor : taskStatusBgcolor.empty,
+                                bgcolor: bg ? bg : taskStatusBgcolor.empty,
                                 width: '32px',
                                 height: '32px',
                             }} />
@@ -113,45 +112,45 @@ export const TaskDetailed = ({
                     justifyContent: 'center',
                     gap: 0.5,
                 }}>
-                    <Tag.BoxItem isMobileQuery={isMobileQuery}>
+                    <Tag.BoxItem ismobilequery={ismobilequery}>
                         <Box >{<BullPoint />}Status</Box>
                         <Button
                             sx={{
                                 minWidth: 85,
                                 color: colors ? colors : taskStatusColors.empty,
-                                backgroundColor: backgroundColor ? backgroundColor : taskStatusBgcolor.empty
+                                backgroundColor: bg ? bg : taskStatusBgcolor.empty
                             }}>
                             {checkKeyIsValid(task.taskStatus)}
                         </Button>
                     </Tag.BoxItem>
-                    <Tag.BoxItem isMobileQuery={isMobileQuery}>
+                    <Tag.BoxItem ismobilequery={ismobilequery}>
                         <Box >{<BullPoint />}Start Date</Box>
                         <Box>
                             {checkKeyIsValid(task.startDate)}
                         </Box>
                     </Tag.BoxItem>
-                    <Tag.BoxItem isMobileQuery={isMobileQuery}>
+                    <Tag.BoxItem ismobilequery={ismobilequery}>
                         <Box >{<BullPoint />}Delivery </Box>
                         <Box>
                             {checkKeyIsValid(task.deliveryDate)}
                         </Box>
                     </Tag.BoxItem>
-                    <Tag.BoxItem isMobileQuery={isMobileQuery}>
+                    <Tag.BoxItem ismobilequery={ismobilequery}>
                         <Box >{<BullPoint />}Assigned</Box>
                         <Box>
                             {checkKeyIsValid(task.assigned)}
                         </Box>
                     </Tag.BoxItem>
                 </Stack>
-                <Box mt={5} ml={!isMobileQuery && 3} sx={{
-                    width: isMobileQuery ? '100%' : 450,
+                <Box mt={5} ml={!ismobilequery && 3} sx={{
+                    width: ismobilequery ? '100%' : 450,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'column',
                 }}>
                     <BottomNavigation
-                        sx={{ width: '100%' }}
+                        sx={{ width: '100%'}}
                         showLabels
                         value={value}
                         onChange={(event, newValue) => {
@@ -175,7 +174,7 @@ export const TaskDetailed = ({
                             })}
                     </BottomNavigation>
                     <CommentArea
-                        isMobileQuery={isMobileQuery}
+                        ismobilequery={ismobilequery}
                         comment={comment}
                         handleCommentChange={handleCommentChange}
                         addComment={addComment}
@@ -183,7 +182,7 @@ export const TaskDetailed = ({
                     {value === 0 && (<>
                         <CommentsTasks
                             colors={colors}
-                            isMobileQuery={isMobileQuery}
+                            ismobilequery={ismobilequery}
                             task={task}
                             taskId={task.taskId}
                         />
@@ -192,9 +191,9 @@ export const TaskDetailed = ({
                     {
                         value === 1 && (<>
                             <Descriptions
-                                backgroundColor={backgroundColor}
+                                bg={bg}
                                 colors={colors}
-                                isMobileQuery={isMobileQuery}
+                                ismobilequery={ismobilequery}
                                 taskId={task.taskId}
                             />
                         </>)

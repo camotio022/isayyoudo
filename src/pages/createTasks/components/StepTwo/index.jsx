@@ -5,7 +5,7 @@ import { Assessment, Assignment, AssignmentInd, HourglassBottom, HourglassTop, P
 export const StepTwo = ({
     taskDetails,
     handleInputChange,
-    isMobileQuery
+    ismobilequery
 }) => {
     const calculateExecutionDays = () => {
         const startDate = new Date(taskDetails.startDate);
@@ -33,7 +33,7 @@ export const StepTwo = ({
                     }
                 </Alert>
             </Stack>
-            <Stack flexDirection={'row'} sx={isMobileQuery?{
+            <Stack flexDirection={'row'} sx={ismobilequery?{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

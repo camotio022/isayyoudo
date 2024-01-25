@@ -15,7 +15,7 @@ import Check from '@mui/icons-material/Check';
 import { taskStatusBgcolor } from '../../../../pages/createTasks/quirys/taskStatus';
 import { useState } from 'react';
 export const CommentArea = ({
-    isMobileQuery,
+    ismobilequery,
     comment,
     addComment,
     handleCommentChange
@@ -32,7 +32,7 @@ export const CommentArea = ({
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            width: isMobileQuery ? '90%' : '100%'
+            width: ismobilequery ? '90%' : '100%'
         }}>
             <Textarea
                 placeholder="Type something here…"
@@ -116,8 +116,8 @@ export const CommentArea = ({
                     </>
                 }
                 sx={{
-                    width: isMobileQuery ? '100%' : '100%',
-                    height: isMobileQuery ? 'auto' : 200,
+                    width: ismobilequery ? '100%' : '100%',
+                    height: ismobilequery ? 'auto' : 200,
                     fontWeight,
                     fontStyle: italic ? 'italic' : 'initial',
                 }}

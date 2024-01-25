@@ -21,8 +21,8 @@ const steps = [
 export const CreateTask = () => {
     const { isCreatingTask, setIsCreatingTask } = useContext(AuthContext);
     const { user } = useContext(AuthContext);
-    const isMobileQuery = useMediaQuery('(max-width:600px)');
-    const canSetColorMenu = isCreatingTask && isMobileQuery;
+    const ismobilequery = useMediaQuery('(max-width:600px)');
+    const canSetColorMenu = isCreatingTask && ismobilequery;
     const [activeStep, setActiveStep] = useState(0);
     const [taskDetails, setTaskDetails] = useState({
         title: '',
@@ -144,9 +144,9 @@ export const CreateTask = () => {
         color: '#000',
     };
     return (
-        <Tag.ContentNewTask isMobileQuery={isMobileQuery} bg={taskDetails.taskStatus}>
-            {!isMobileQuery && <CardTopCreateTask image={image} activeStep={activeStep} />}
-            <Tag.CardNewTask isMobileQuery={isMobileQuery}>
+        <Tag.ContentNewTask ismobilequery={ismobilequery} bg={taskDetails.taskStatus}>
+            {!ismobilequery && <CardTopCreateTask image={image} activeStep={activeStep} />}
+            <Tag.CardNewTask ismobilequery={ismobilequery}>
                 <Stepper sx={{ width: '100%' }} alternativeLabel activeStep={activeStep < 1 ? 1 : activeStep}>
                     {steps.map((step, index) => (
                         <Step key={index}>
@@ -174,7 +174,7 @@ export const CreateTask = () => {
                 {
                     activeStep === 0 && (
                         <StepOne
-                            isMobileQuery={isCreatingTask}
+                            ismobilequery={isCreatingTask}
                             handleInputChange={handleInputChange}
                             handleSelecao={handleSelecao}
                             taskDetails={taskDetails}
@@ -182,14 +182,14 @@ export const CreateTask = () => {
                 }
                 {activeStep === 1 && (
                     <StepTwo
-                        isMobileQuery={isCreatingTask}
+                        ismobilequery={isCreatingTask}
                         handleInputChange={handleInputChange}
                         taskDetails={taskDetails}
                     />
                 )}
                 {activeStep === 2 && (
                     <StepThree
-                        isMobileQuery={isCreatingTask}
+                        ismobilequery={isCreatingTask}
                         handleInputChange={handleInputChange}
                         taskDetails={taskDetails}
                         setTaskDetails={setTaskDetails}

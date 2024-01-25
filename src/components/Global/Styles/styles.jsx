@@ -41,15 +41,15 @@ export const BoxMain = styled(Box)(({
     boxShadow: Root.boxShadow,
     border: border ? '0' : Root.border,
 }));
-export const MyButton = styled(Button)(({ theme, backgroundColor, colorsTask }) => ({
+export const MyButton = styled(Button)(({ theme, bg, colorstask }) => ({
     cursor: 'pointer',
-    color: colorsTask? colorsTask: Root.color_default,
+    color: colorstask ? colorstask : Root.color_default,
     width: "100%",
     fontWeight: 900,
     outline: 'none !important',
     mt: 3,
     mb: 2,
-    backgroundColor: backgroundColor? backgroundColor: Root.color_button_secondary,
+    backgroundColor: bg ? bg : Root.color_button_secondary,
     borderRadius: '0',
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
@@ -125,12 +125,12 @@ export const Items = styled(Stack)(({ theme }) => ({
     padding: '1px',
 }));
 
-export const ContainerTasks = styled(Stack)(({ theme, direction }) => ({
+export const ContainerTasks = styled(Stack)(({ theme, dire }) => ({
     position: 'relative',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: direction? direction:"flex-start",
+    justifyContent: dire ? dire : "flex-start",
     gap: '20px',
     width: "100%",
     minHeight: "80%",
@@ -161,11 +161,11 @@ export const CardTaskMacthes = styled(Box)(({ mobile }) => ({
     flexDirection: 'row',
     marginBlock: '4rem',
     maxHeight: '90%',
-    width:'100%',
+    width: '100%',
     flexWrap: 'wrap',
     overflow: 'auto',
     gap: '1rem',
-    paddingBlock: mobile? "6rem": "5rem",
+    paddingBlock: mobile === 'true' ? "6rem" : "5rem",
     '&::-webkit-scrollbar': {
         width: '4px',
     },

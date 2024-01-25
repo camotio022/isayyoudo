@@ -8,7 +8,7 @@ export const StepThree = ({
     taskDetails,
     setTaskDetails,
     handleInputChange,
-    isMobileQuery
+    ismobilequery
 }) => {
     const handlePriority = (event) => {
         const selectedValue = event.target.value;
@@ -26,7 +26,7 @@ export const StepThree = ({
     };
     return (
         <>
-            <Stack flexDirection={'row'} sx={isMobileQuery?{
+            <Stack flexDirection={'row'} sx={ismobilequery?{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

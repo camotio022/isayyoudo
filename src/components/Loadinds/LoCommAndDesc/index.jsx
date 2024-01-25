@@ -22,22 +22,22 @@ const moveAnimation = keyframes`
     transform: translateY(0);
   }
 `;
-const AnimatedBox = styled(Box)(({ theme, isMobileQuery }) => ({
+const AnimatedBox = styled(Box)(({ theme, ismobilequery }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: isMobileQuery ? '80px' : '100px',
-    height: isMobileQuery ? '80px' : '100px',
+    minWidth: ismobilequery ? '80px' : '100px',
+    height: ismobilequery ? '80px' : '100px',
     backgroundColor: Root.color_button_opacity,
     color: Root.color_button,
     borderRadius: '8px',
-    fontSize: isMobileQuery ? 20 : 28,
+    fontSize: ismobilequery ? 20 : 28,
     fontWeight: 900,
     margin: '16px',
 }));
 
 export const LoCommAndDesc = () => {
-    const isMobileQuery = useMediaQuery('(max-width:600px)');
+    const ismobilequery = useMediaQuery('(max-width:600px)');
     return (
         <Container sx={{
             display: 'flex',
@@ -62,7 +62,7 @@ export const LoCommAndDesc = () => {
                     return (
                         <AnimatedBox
                             key={index}
-                            isMobileQuery={isMobileQuery}
+                            ismobilequery={ismobilequery}
                             sx={{ animation: `${moveAnimation} ${item.time}`, }}>
                             {item.title}
                         </AnimatedBox>
@@ -75,7 +75,7 @@ export const LoCommAndDesc = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textAlign: 'center',
-                fontSize: isMobileQuery ? 20 : 28,
+                fontSize: ismobilequery ? 20 : 28,
                 fontWeight: 900,
                 color: Root.color_button,
                 width: 'auto'

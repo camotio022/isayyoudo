@@ -23,7 +23,7 @@ export const LogoutComponent = () => {
         zIndex: 1,
     }
     return (
-        <MyLogout sx={matches && matchesJsx} matches={matches}>
+        <MyLogout sx={matches && matchesJsx} matches={matches ? 'true': 'false'}>
             {matches && <Stack sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -51,6 +51,7 @@ export const LogoutComponent = () => {
                             return (
 
                                 <BottomNavigationAction
+                                    key={index}
                                     onClick={() => {
                                         navigate(action.link)
                                     }}

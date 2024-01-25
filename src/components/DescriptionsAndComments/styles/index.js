@@ -1,7 +1,7 @@
 import { BottomNavigation, BottomNavigationAction, Box, Container, Dialog, Paper, Stack, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
-export const DialogDetails = styled(Stack)(({ theme, isMobileQuery }) => ({
+export const DialogDetails = styled(Stack)(({ theme, ismobilequery }) => ({
     position: 'fixed',
     display: 'flex',
     alignItems: 'center',
@@ -15,19 +15,19 @@ export const DialogDetails = styled(Stack)(({ theme, isMobileQuery }) => ({
     top: 0,
     left: 0,
 }));
-export const MuiPaper = styled(Paper)(({ theme, isMobileQuery }) => ({
+export const MuiPaper = styled(Paper)(({ theme, ismobilequery }) => ({
     display: 'flex',
     alignItems: "center",
     justifyContent: 'center',
     flexDirection: 'column',
-    position: !isMobileQuery && 'relative',
-    width: isMobileQuery ? '100%' : 600,
-    height: isMobileQuery ? '100%' : '95vh',
+    position: !ismobilequery && 'relative',
+    width: ismobilequery ? '100%' : 600,
+    height: ismobilequery ? '100%' : '95vh',
     borderRadius: 0,
     overflow: 'hidden'
 }));
-export const MuiBottomNavigation = styled(BottomNavigation)(({ theme, isMobileQuery }) => ({
-    position: isMobileQuery ? 'fixed' : 'absolute',
+export const MuiBottomNavigation = styled(BottomNavigation)(({ theme, ismobilequery }) => ({
+    position: ismobilequery ? 'fixed' : 'absolute',
     left: 0,
     top: 0,
     zIndex: 9999,
@@ -35,15 +35,15 @@ export const MuiBottomNavigation = styled(BottomNavigation)(({ theme, isMobileQu
     borderBottom: Root.border,
     width: '100%',
 }));
-export const MuiBottomNavigationAction = styled(BottomNavigationAction)(({ theme, isMobileQuery }) => ({
+export const MuiBottomNavigationAction = styled(BottomNavigationAction)(({ theme, ismobilequery }) => ({
     width: '100%',
     ':focus': {
         outline: 'none',
         color: Root.color_button
     },
 }));
-export const MuiBottomTextarea = styled(Stack)(({ theme, isMobileQuery }) => ({
-    position: isMobileQuery ? 'fixed' : 'absolute',
+export const MuiBottomTextarea = styled(Stack)(({ theme, ismobilequery }) => ({
+    position: ismobilequery ? 'fixed' : 'absolute',
     borderBottom: Root.border,
     bottom: '0',
     width: '100%',
@@ -53,7 +53,7 @@ export const MuiBottomTextarea = styled(Stack)(({ theme, isMobileQuery }) => ({
     paddingBlock: '0.5rem',
     backgroundColor: Root.white
 }));
-export const MuiBottomMainTextarea = styled(Box)(({ theme, isMobileQuery }) => ({
+export const MuiBottomMainTextarea = styled(Box)(({ theme, ismobilequery }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -61,9 +61,9 @@ export const MuiBottomMainTextarea = styled(Box)(({ theme, isMobileQuery }) => (
     gap: '0.8rem',
     minHeight: 50,
     height: 'auto',
-    marginInline: isMobileQuery ? '0.5rem' : '1rem'
+    marginInline: ismobilequery ? '0.5rem' : '1rem'
 }));
-export const MuiContainer = styled(Container)(({ theme, isMobileQuery }) => ({
+export const MuiContainer = styled(Container)(({ theme, ismobilequery }) => ({
     overflow: 'auto',
     display: 'flex',
     alignItems: 'center',

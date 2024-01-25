@@ -22,10 +22,10 @@ export const DescriptionsAndComments = ({
     task,
     taskId,
     color,
-    backgroundColor
+    bg
 }) => {
     const { user } = useContext(AuthContext)
-    const isMobileQuery = useMediaQuery('(max-width:600px)');
+    const ismobilequery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState('Comments');
     const [commentArea, setCommentArea] = useState('')
     const [comment, setComment] = useState({
@@ -75,13 +75,13 @@ export const DescriptionsAndComments = ({
     return (
 
         <Tag.DialogDetails
-            isMobileQuery={isMobileQuery}
+        ismobilequery={ismobilequery}
         >
             <Tag.MuiPaper
-                isMobileQuery={isMobileQuery}
+                ismobilequery={ismobilequery}
             >
                 <Tag.MuiBottomNavigation
-                    isMobileQuery={isMobileQuery}
+                    ismobilequery={ismobilequery}
                     value={value}
                     onChange={handleChange}
                 >
@@ -96,6 +96,7 @@ export const DescriptionsAndComments = ({
                     }].map((nav, index) => {
                         return (
                             <Tag.MuiBottomNavigationAction
+                                key={index}
                                 sx={{
                                     borderBottom: value === nav.value &&
                                         `4px solid ${Root.color_button}`
@@ -113,13 +114,13 @@ export const DescriptionsAndComments = ({
                         icon={<Close />}
                     />
                 </Tag.MuiBottomNavigation>
-                <Tag.MuiContainer isMobileQuery={isMobileQuery} maxWidth="sm">
+                <Tag.MuiContainer ismobilequery={ismobilequery} maxWidth="sm">
                     {value === 'Comments' && (<>
                         <CommentsTasks
                             shadow={true}
                             colors={color}
-                            backgroundColor={backgroundColor}
-                            isMobileQuery={isMobileQuery}
+                            bg={bg}
+                            ismobilequery={ismobilequery}
                             task={task}
                             taskId={task.taskId}
                         />
@@ -129,8 +130,8 @@ export const DescriptionsAndComments = ({
                         <Descriptions
                             shadow={true}
                             colors={color}
-                            backgroundColor={backgroundColor}
-                            isMobileQuery={isMobileQuery}
+                            bg={bg}
+                            ismobilequery={ismobilequery}
                             task={task}
                             taskId={task.taskId}
                         />
@@ -138,10 +139,10 @@ export const DescriptionsAndComments = ({
                     )}
                 </Tag.MuiContainer>
                 <Tag.MuiBottomTextarea
-                    isMobileQuery={isMobileQuery}
+                    ismobilequery={ismobilequery}
                 >
                     <Tag.MuiBottomMainTextarea
-                        isMobileQuery={isMobileQuery}
+                        ismobilequery={ismobilequery}
                     >
                         <Textarea
                             name="content"

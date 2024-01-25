@@ -64,17 +64,18 @@ export const ArchivedTasks = () => {
 
                 tasks.map((task, index) => {
                     const color = taskStatusColors[task.taskStatus]
-                    const backgroundColor = taskStatusBgcolor[task.taskStatus]
+                    const bg = taskStatusBgcolor[task.taskStatus]
                     const empty = taskStatusBgcolor.empty
                     const emptyBgcolor = taskStatusColors.empty
                     return (
                         <CardTaskMobile
+                            key={task.taskId}
                             tasks={tasks}
                             taskId={task.taskId}
                             task={task}
                             setTask={setTask}
                             color={color}
-                            backgroundColor={backgroundColor}
+                            bg={bg}
                             empty={empty}
                             emptyBgcolor={emptyBgcolor}
                             mobile={mobile}
