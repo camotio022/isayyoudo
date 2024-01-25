@@ -58,27 +58,23 @@ export const HomePage = () => {
                 {tasks
                     .map((task) => {
                         const colors = taskStatusColors[task.taskStatus];
-                        const bg = taskStatusBgcolor[task.taskStatus]
                         return (
                             <TaskCard
-                                tasks={tasks}
                                 key={task.taskId}
                                 taskId={task.taskId}
+                                task={task}
+                                setTask={setTask}
                                 name={task.title}
-                                action={task.typeCollection}
+                                action={task.action}
                                 assigner={task.assigner}
                                 avatar={''}
-                                assignerTo={'SnowManLabs'}
-                                missingTime={task.missingTime}
+                                assignerTo={task.assigned}
                                 dateStarted={task.startDate}
                                 dateDelivery={task.deliveryDate}
                                 stateTask={task.taskStatus}
                                 colorStatus={colors}
-                                task={task}
-                                setTask={setTask}
-                                openMoreInfo={openMoreInfo}
                                 setOpenMoreInfo={setOpenMoreInfo}
-                                bg={bg}
+                                openMoreInfo={openMoreInfo}
                             />
                         );
                     })
@@ -89,7 +85,7 @@ export const HomePage = () => {
     }
     return (
         <>
-            <CardTaskMacthes mobile={mobile? 'true': 'false'}>
+            <CardTaskMacthes mobile={mobile ? 'true' : 'false'}>
                 {tasks.map((task, index) => {
                     const color = taskStatusColors[task.taskStatus]
                     const bg = taskStatusBgcolor[task.taskStatus]
@@ -105,7 +101,7 @@ export const HomePage = () => {
                             bg={bg}
                             empty={empty}
                             emptyBgcolor={emptyBgcolor}
-                            mobile={mobile? 'true': 'false'}
+                            mobile={mobile ? 'true' : 'false'}
                             setTask={setTask}
                             openMoreInfo={openMoreInfo}
                             setOpenMoreInfo={setOpenMoreInfo}
