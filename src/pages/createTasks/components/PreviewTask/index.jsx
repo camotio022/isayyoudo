@@ -3,7 +3,7 @@ import { taskStatus, taskStatusBgcolor, taskStatusColors } from "../../quirys/ta
 export const PreviewTask = (
     { taskDetails, isCreatingTask }
 ) => {
-    const backgroundColor = taskStatusBgcolor[taskDetails.taskStatus]
+    const bg = taskStatusBgcolor[taskDetails.taskStatus]
     const color = taskStatusColors[taskDetails.taskStatus]
     return (
         <TaskCard
@@ -17,7 +17,7 @@ export const PreviewTask = (
             dateDelivery={taskDetails.deliveryDate}
             stateTask={taskDetails.taskStatus}
             colorStatus={color}
-            backgroundColor={backgroundColor}
+            bg={bg}
             typeShowTask={'preview'}
             isCreatingTask={isCreatingTask}
         />

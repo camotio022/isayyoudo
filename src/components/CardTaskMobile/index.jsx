@@ -10,10 +10,10 @@ import { MyButton } from "../Global/Styles/styles.jsx";
 import { Circle, Collections, PlaylistAddCheck } from "@mui/icons-material";
 import { BullPoint } from "../Bull/index.jsx";
 const SectionsItems = ({
-    one, two, backgroundColor, color, bull
+    one, two, bg, color, bull
 }) => {
     return (
-        <Tag.MenuRadiusItem backgroundColor={backgroundColor}>
+        <Tag.MenuRadiusItem bg={bg}>
             <Tag.MuiTypography>
                 {one}
             </Tag.MuiTypography>
@@ -28,19 +28,19 @@ export const CardTaskMobile = (
         tasks,
         taskId,
         color,
-        backgroundColor,
+        bg,
         mobile,
         emptyBgcolor,
         task,
-        empty,
         setTask,
     }
 ) => {
     const [openMoreInfo, setOpenMoreInfo] = useState(false);
+    const [open, setOPen] = useState(false)
     const firstThreeItems = avatars.slice(0, 6);
     const threePoints = {
         width: '160px',
-        height: mobile ? '60px' : '120px',
+        height: mobile === 'true' ? '60px' : '120px',
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
@@ -57,22 +57,12 @@ export const CardTaskMobile = (
     const checkKey = (key) => {
         return key ? key : 'Empety'
     }
-    const calculateExecutionDays = (start, delivery) => {
-        const startDate = new Date(start);
-        const deliveryDate = new Date(delivery);
-        if (isNaN(startDate) || isNaN(deliveryDate)) {
-            return false;
-        }
-        const timeDifference = deliveryDate - startDate;
-        const executionDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-        return executionDays;
-    };
-    const [open, setOPen] = useState(false)
+
     return (
         <>
-            <Grid item xs={8} sx={{
-                width: mobile ? '90%' : 300,
-                height: mobile ? 270 : 270,
+            <Grid key={taskId} item xs={8} sx={{
+                width: mobile === 'true' ? '90%' : 300,
+                height: mobile === 'true' ? 270 : 270,
                 cursor: 'pointer',
                 boxShadow: Root.boxShadow,
                 padding: 1.2
@@ -86,75 +76,75 @@ export const CardTaskMobile = (
                     </Tag.MuiTypography>
                 </Tag.Menus>
                 <Divider sx={{ bgcolor: color ? color : emptyBgcolor }} />
-                <Tooltip onClick={handleClick} title={'Click para ver mais informações dessa tarefa!!'} >
-                    <Tag.MenuItems >
-                        <Box>
-                            <Tag.MenuStack>
-                                <PlaylistAddCheck sx={{ color: Root.black }} />
-                                <Tag.MuiTypography
-                                    fontWeight={"900"}
-                                    color={Root.black}
-                                >
-                                    {checkKey(task.typeCollection)}
-                                </Tag.MuiTypography>
-                            </Tag.MenuStack>
-                        </Box>
-                        <MyButton
-                            colorsTask={
-                                color ? color : taskStatusColors.empty
-                            }
-                            backgroundColor={
-                                backgroundColor ? backgroundColor : taskStatusBgcolor.empty}
-                        >
-                            {checkKey(task.taskStatus)}
-                        </MyButton>
-                    </Tag.MenuItems>
+                <Tooltip title={'Click para ver mais informações dessa tarefa!!'} >
+                    <div onClick={handleClick}>
+                        <Tag.MenuItems >
+                            <Box>
+                                <Tag.MenuStack>
+                                    <PlaylistAddCheck sx={{ color: Root.black }} />
+                                    <Tag.MuiTypography
+                                        fontWeight={"900"}
+                                        color={Root.black}
+                                    >
+                                        {checkKey(task.typeCollection)}
+                                    </Tag.MuiTypography>
+                                </Tag.MenuStack>
+                            </Box>
+                            <MyButton
+                                colorstask={
+                                    color ? color : taskStatusColors.empty
+                                }
+                                bg={
+                                    bg ? bg : taskStatusBgcolor.empty}
+                            >
+                                {checkKey(task.taskStatus)}
+                            </MyButton>
+                        </Tag.MenuItems>
+                    </div>
+
                 </Tooltip>
-                <Tooltip onClick={() => (
-                    setOPen(true)
-                )} title={'Click para ver mais informações sobre comentários e tarefas!!'} >
-                    <Tag.MuiTypography sx={{
-                        height: '3rem',
-                        overflowY: 'auto',
-                        overflowX: 'hidden',
-                    }}>
-                        {checkKey(task.title)}
-                    </Tag.MuiTypography>
-                    <SectionsItems
-                        backgroundColor={true}
-                        one={'Start Date'}
-                        two={checkKey(task.startDate)}
-                    />
-                    <SectionsItems
-                        backgroundColor={false}
-                        one={'Delivery Date'}
-                        two={checkKey(task.deliveryDate)}
-                    />
-                    <SectionsItems
-                        backgroundColor={true}
-                        one={'Assigner'}
-                        two={checkKey(task.assigner)}
-                    />
-                    <SectionsItems
-                        backgroundColor={false}
-                        one={'Assigned'}
-                        two={checkKey(task.assigned)}
-                    />
-                    <SectionsItems
-                        bull={true}
-                        backgroundColor={true}
-                        one={'Delivered Status'}
-                        two={checkKey(task.taskStatus)}
-                        color={color ? color : taskStatusColors.empty}
-                    />
+
+                <Tooltip title={'Click para ver mais informações sobre comentários e tarefas!!'} >
+                    <div onClick={() => (
+                        setOPen(true)
+                    )}>
+                        <Tag.MuiTypography sx={{
+                            height: '3rem',
+                            overflowY: 'auto',
+                            overflowX: 'hidden',
+                        }}>
+                            {checkKey(task.title)}
+                        </Tag.MuiTypography>
+                        <SectionsItems
+                            bg={true}
+                            one={'Start Date'}
+                            two={checkKey(task.startDate)}
+                        />
+                        <SectionsItems
+                            bg={false}
+                            one={'Delivery Date'}
+                            two={checkKey(task.deliveryDate)}
+                        />
+                        <SectionsItems
+                            bg={true}
+                            one={'Assigner'}
+                            two={checkKey(task.assigner)}
+                        />
+                        <SectionsItems
+                            bg={false}
+                            one={'Assigned'}
+                            two={checkKey(task.assigned)}
+                        />
+                        <SectionsItems
+                            bull={true}
+                            bg={true}
+                            one={'Delivered Status'}
+                            two={checkKey(task.taskStatus)}
+                            color={color ? color : taskStatusColors.empty}
+                        />
+
+                    </div>
                 </Tooltip>
-                {open && <DescriptionsAndComments
-                    color={color}
-                    backgroundColor={backgroundColor}
-                    taskId={task.taskId}
-                    task={task}
-                    setOPen={setOPen}
-                />}
                 {openMoreInfo && <TaskDetailed
                     taskId={task.taskId}
                     open={openMoreInfo}
@@ -162,8 +152,14 @@ export const CardTaskMobile = (
                     handleClick={handleClick}
                     task={task ? task : {}}
                 />}
+                {open && <DescriptionsAndComments
+                    color={color}
+                    bg={bg}
+                    taskId={task.taskId}
+                    task={task}
+                    setOPen={setOPen}
+                />}
             </Grid>
-
         </>
     )
 }

@@ -127,7 +127,6 @@ export const MenuMobile = ({
                         '&:focus': {
                             border: 'none',
                             outline: 'none',
-                            backgroundColor: 'your-focused-background-color', // Adicione a cor desejada aqui
                         },
                     }}
                     onClick={(e) => handleClick(e, 'list_tasks')}

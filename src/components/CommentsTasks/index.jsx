@@ -12,7 +12,7 @@ import { AuthContext } from "../../authcontext/index.jsx"
 import { LoCommAndDesc } from "../Loadinds/LoCommAndDesc/index.jsx"
 export const CommentsTasks = ({
     shadow,
-    isMobileQuery,
+    ismobilequery,
     taskId,
     colors,
     mt
@@ -67,7 +67,7 @@ export const CommentsTasks = ({
         return <div dangerouslySetInnerHTML={{ __html: updatedText }} />;
     };
     const splitNameUserInScreens = (name) => {
-        if (isMobileQuery) {
+        if (ismobilequery) {
             return name.split(' ')[0];
         }
         return name;
@@ -83,7 +83,7 @@ export const CommentsTasks = ({
                 comments.map((comment, index) => {
                     return (
                         <Tag.CommentMainTag
-                            key={index} isMobileQuery={isMobileQuery}
+                            key={index} ismobilequery={ismobilequery}
                             gap={1} mt={1}
                             mb={(comments.length - 1) === index && (shadow ? '10rem' : 5)}
                         >
@@ -94,7 +94,7 @@ export const CommentsTasks = ({
                                     <Stack sx={{
                                         color: Root.color_button,
                                         fontSize: '1.2rem',
-                                        fontWeight: isMobileQuery ? 500 : 900
+                                        fontWeight: ismobilequery ? 500 : 900
                                     }}>
                                         {splitNameUserInScreens(comment.author.name)}
                                     </Stack>
@@ -152,7 +152,7 @@ export const CommentsTasks = ({
                                     width: '1px',
                                 }} />
                                 <Stack sx={{
-                                    fontWeight: isMobileQuery ? 400 : 800
+                                    fontWeight: ismobilequery ? 400 : 800
                                 }}>
                                     Replay
                                 </Stack>

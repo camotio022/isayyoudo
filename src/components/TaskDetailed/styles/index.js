@@ -1,26 +1,25 @@
-import { Box, Dialog, Stack, styled } from "@mui/material";
+import { Box, Paper, Stack, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
-export const DialogDetails = styled(Box)(({ theme, isMobileQuery }) => ({
+export const DialogDetails = styled('div')(({ }) => ({
     position: 'fixed',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all .3s',
     zIndex: 99999,
-    overflow: 'hidden',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    overflowX: 'hidden',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
     height: '100vh',
     width: '100vw',
     top: 0,
-    left: 0
+    left: 0,
 }));
-export const ContainerDialog = styled(Box)(({ theme, isMobileQuery }) => ({
+export const ContainerDialog = styled(Paper)(({ theme, ismobilequery }) => ({
     position: 'relative',
-    width: isMobileQuery ? '100%' : 500,
-    height: isMobileQuery ? '100%' : '90%',
+    width: ismobilequery ? '100%' : 500,
+    height: ismobilequery ? '100%' : '90%',
     marginBlock: 5,
-    backgroundColor: Root.white,
     borderRadius: '0.3rem',
     overflow: 'auto',
     '&::-webkit-scrollbar': {
@@ -29,17 +28,17 @@ export const ContainerDialog = styled(Box)(({ theme, isMobileQuery }) => ({
     },
 
     '&::-webkit-scrollbar-thumb': {
-        backgroundColor: Root.white,
+        backgroundColor: '#f1f1f1',
         borderRadius: '6px',
     },
 
     '&::-webkit-scrollbar-track': {
-        backgroundColor: Root.color_button,
+        backgroundColor: '#f1f1f1',
     },
     scrollbarWidth: 'thin',
     scrollbarColor: '#888 #f1f1f1',
 }));
-export const BoxItem = styled(Box)(({ theme, isMobileQuery }) => (
+export const BoxItem = styled(Box)(({ }) => (
     {
         display: 'flex',
         alignItems: 'center',
@@ -48,15 +47,15 @@ export const BoxItem = styled(Box)(({ theme, isMobileQuery }) => (
         width: '90%',
         height: '2rem',
     }));
-export const NavBarFixed = styled(Stack)(({ theme,
-    isMobileQuery, colors, taskStatusColors }) => (
+export const NavBarFixed = styled(Stack)(({
+    ismobilequery }) => (
     {
         position: 'fixed',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        width: isMobileQuery ? '100%' : 500,
+        width: ismobilequery ? '100%' : 500,
         backgroundColor: Root.white,
         height: '4rem',
         zIndex: 1,

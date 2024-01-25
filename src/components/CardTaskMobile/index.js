@@ -26,11 +26,11 @@ export const MenuStack = styled(Box)(({ theme }) => ({
     height: '100%',
     gap: 0.5
 }));
-export const MenuRadiusItem = styled(Box)(({ theme, backgroundColor }) => ({
+export const MenuRadiusItem = styled(Box)(({ theme, bg }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: backgroundColor?'rgba(0, 0, 0, 0.1)': Root.white,
+    backgroundColor: bg?'rgba(0, 0, 0, 0.1)': Root.white,
     height: '1.6rem',
     color: Root.black,
     borderRadius: '2.3rem',

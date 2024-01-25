@@ -38,7 +38,7 @@ export const NoTasksFromThisState = ({
                 </CardContent>
                 <Link to={'/createTask'}>
                     <CardActions sx={{mb:1}}>
-                        <MyButton fullWidth={mobile && true} variant='contained' size="small">New Task</MyButton>
+                        <MyButton fullWidth={mobile} variant='contained' size="small">New Task</MyButton>
                     </CardActions>
                 </Link>
             </Card>

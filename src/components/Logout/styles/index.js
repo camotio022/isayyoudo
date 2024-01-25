@@ -6,8 +6,8 @@ export const MyLogout = styled(Stack)(({matches}) => ({
     justifyContent: 'flex-end',
     flexDirection: 'column',
     width: '100%',
-    top: !matches && "1.5rem",
-    right: !matches && "1rem",
+    top: matches !== 'true' && "1.5rem",
+    right: matches !== 'true' && "1rem",
     cursor: 'pointer',
     border: 'none'
 }));

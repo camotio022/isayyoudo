@@ -38,14 +38,14 @@ export const HomePage = () => {
 
     if (showNotFound) {
         return (
-            <ContainerTasks direction={'center'}>
-                <NotFound noDoc={true}/>
+            <ContainerTasks dire={'center'}>
+                <NotFound noDoc={true} />
             </ContainerTasks>
         );
     }
     if (tasks.length === 0 && !showNotFound) {
         return (
-            <ContainerTasks direction={'center'}>
+            <ContainerTasks dire={'center'}>
                 <CardMobileLoading />
                 <CardMobileLoading />
                 <CardMobileLoading />
@@ -58,7 +58,7 @@ export const HomePage = () => {
                 {tasks
                     .map((task) => {
                         const colors = taskStatusColors[task.taskStatus];
-                        const backgroundColor = taskStatusBgcolor[task.taskStatus]
+                        const bg = taskStatusBgcolor[task.taskStatus]
                         return (
                             <TaskCard
                                 tasks={tasks}
@@ -78,33 +78,34 @@ export const HomePage = () => {
                                 setTask={setTask}
                                 openMoreInfo={openMoreInfo}
                                 setOpenMoreInfo={setOpenMoreInfo}
-                                backgroundColor={backgroundColor}
+                                bg={bg}
                             />
                         );
                     })
                 }
- 
+
             </ContainerTasks>
         )
     }
     return (
         <>
-            <CardTaskMacthes mobile={mobile}>
+            <CardTaskMacthes mobile={mobile? 'true': 'false'}>
                 {tasks.map((task, index) => {
                     const color = taskStatusColors[task.taskStatus]
-                    const backgroundColor = taskStatusBgcolor[task.taskStatus]
+                    const bg = taskStatusBgcolor[task.taskStatus]
                     const empty = taskStatusBgcolor.empty
                     const emptyBgcolor = taskStatusColors.empty
                     return (
                         <CardTaskMobile
+                            key={index}
                             tasks={tasks}
                             taskId={task.taskId}
                             task={task}
                             color={color}
-                            backgroundColor={backgroundColor}
+                            bg={bg}
                             empty={empty}
                             emptyBgcolor={emptyBgcolor}
-                            mobile={mobile}
+                            mobile={mobile? 'true': 'false'}
                             setTask={setTask}
                             openMoreInfo={openMoreInfo}
                             setOpenMoreInfo={setOpenMoreInfo}

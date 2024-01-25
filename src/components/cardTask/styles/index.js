@@ -1,7 +1,7 @@
 import { Box, Stack, Tooltip, Typography, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
-export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor, showBorder }) => ({
+export const TabsMain = styled(Box)(({ theme, border, width, bg, showBorder }) => ({
     width: width? width: '95%',
     minHeight: 'auto',
     paddingBlock: '1rem',
@@ -9,7 +9,7 @@ export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor, sh
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: backgroundColor? backgroundColor: Root.white,
+    backgroundColor: bg? bg: Root.white,
     gap: 10,
     boxShadow: Root.boxShadowTask,
 
@@ -29,12 +29,12 @@ export const TabsMain = styled(Box)(({ theme, border, width, backgroundColor, sh
     scrollbarWidth: 'thin',
     scrollbarColor: '#888 #f1f1f1',
 }));
-export const TaskTitleButton = styled(Stack)(({ theme, border, isCreatingTask }) => ({
+export const TaskTitleButton = styled(Stack)(({ theme, border, iscreatingtask }) => ({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     gap: '10px',
-    width:isCreatingTask? '30%':  '20%',
+    width:iscreatingtask? '30%':  '20%',
     height: 'auto'
 }));
 export const TaskTitle = styled(Typography)(({ theme, border }) => ({
@@ -60,7 +60,7 @@ export const Infos = styled(Stack)(({ theme, border }) => ({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
 }))
-export const TaskAssigner = styled(Stack)(({ theme, border }) => ({
+export const TaskAssigner = styled('span')(({ theme, border }) => ({
     fontSize: '12px',
     fontWeight: 400,
     color: Root.gray

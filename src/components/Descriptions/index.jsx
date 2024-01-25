@@ -10,9 +10,9 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LoCommAndDesc } from '../Loadinds/LoCommAndDesc';
 export const Descriptions = ({
-    isMobileQuery,
+    ismobilequery,
     colors,
-    backgroundColor,
+    bg,
     taskId,
     task
 }) => {
@@ -52,7 +52,7 @@ export const Descriptions = ({
                             mt: index === 0 ? 10 : 2,
                             mb: (descriptions.length - 1) === index && 10,
                             boxShadow: Root.boxShadow,
-                            width: isMobileQuery ? '80%' : 'max(92%, 60%)',
+                            width: ismobilequery ? '80%' : 'max(92%, 60%)',
                             borderRadius: '8px', '--Card-radius': 0,
                             border: 'none'
                         }}
@@ -74,8 +74,8 @@ export const Descriptions = ({
                                 {description.author.name}
                             </Stack>
                             <Tag.ShowTimes
-                                isMobileQuery={isMobileQuery}
-                                backgroundColor={backgroundColor}
+                                ismobilequery={ismobilequery}
+                                bg={bg}
                                 colors={colors}
                                 width={100}
                                 height={44}
