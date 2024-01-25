@@ -1,11 +1,11 @@
 import { Stack, TextField, Select, MenuItem } from '@mui/material';
 import { options } from '../../quirys/options.js';
 export const StepOne = ({
-    taskDetails, handleInputChange, handleSelecao, isMobileQuery
+    taskDetails, handleInputChange, handleSelecao, ismobilequery
 }) => {
     return (
         <>
-            <Stack flexDirection={'row'} sx={isMobileQuery?{
+            <Stack flexDirection={'row'} sx={ismobilequery?{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
