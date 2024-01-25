@@ -75,7 +75,7 @@ export const DescriptionsAndComments = ({
     return (
 
         <Tag.DialogDetails
-        ismobilequery={ismobilequery}
+            ismobilequery={ismobilequery}
         >
             <Tag.MuiPaper
                 ismobilequery={ismobilequery}

@@ -1,19 +1,19 @@
-import { Box, Dialog, Paper, Stack, styled } from "@mui/material";
+import { Box, Paper, Stack, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
-export const DialogDetails = styled(Stack)(({ theme, ismobilequery }) => ({
+export const DialogDetails = styled('div')(({ }) => ({
     position: 'fixed',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all .3s',
     zIndex: 99999,
-    overflow: 'hidden',
-    backgroundColor: 'rgba(0, 0, 0,0.1)',
+    overflowX: 'hidden',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
     height: '100vh',
     width: '100vw',
     top: 0,
-    left: 0
+    left: 0,
 }));
 export const ContainerDialog = styled(Paper)(({ theme, ismobilequery }) => ({
     position: 'relative',
@@ -38,7 +38,7 @@ export const ContainerDialog = styled(Paper)(({ theme, ismobilequery }) => ({
     scrollbarWidth: 'thin',
     scrollbarColor: '#888 #f1f1f1',
 }));
-export const BoxItem = styled(Box)(({ theme, ismobilequery }) => (
+export const BoxItem = styled(Box)(({ }) => (
     {
         display: 'flex',
         alignItems: 'center',
@@ -47,7 +47,7 @@ export const BoxItem = styled(Box)(({ theme, ismobilequery }) => (
         width: '90%',
         height: '2rem',
     }));
-export const NavBarFixed = styled(Stack)(({ theme,
+export const NavBarFixed = styled(Stack)(({
     ismobilequery }) => (
     {
         position: 'fixed',

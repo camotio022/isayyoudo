@@ -36,6 +36,7 @@ export const CardTaskMobile = (
     }
 ) => {
     const [openMoreInfo, setOpenMoreInfo] = useState(false);
+    const [open, setOPen] = useState(false)
     const firstThreeItems = avatars.slice(0, 6);
     const threePoints = {
         width: '160px',
@@ -56,7 +57,7 @@ export const CardTaskMobile = (
     const checkKey = (key) => {
         return key ? key : 'Empety'
     }
-    const [open, setOPen] = useState(false)
+
     return (
         <>
             <Grid key={taskId} item xs={8} sx={{
@@ -75,8 +76,8 @@ export const CardTaskMobile = (
                     </Tag.MuiTypography>
                 </Tag.Menus>
                 <Divider sx={{ bgcolor: color ? color : emptyBgcolor }} />
-                <Tooltip onClick={handleClick} title={'Click para ver mais informações dessa tarefa!!'} >
-                    <>
+                <Tooltip title={'Click para ver mais informações dessa tarefa!!'} >
+                    <div onClick={handleClick}>
                         <Tag.MenuItems >
                             <Box>
                                 <Tag.MenuStack>
@@ -99,12 +100,14 @@ export const CardTaskMobile = (
                                 {checkKey(task.taskStatus)}
                             </MyButton>
                         </Tag.MenuItems>
-                    </>
+                    </div>
+
                 </Tooltip>
-                <Tooltip onClick={() => (
-                    setOPen(true)
-                )} title={'Click para ver mais informações sobre comentários e tarefas!!'} >
-                    <>
+
+                <Tooltip title={'Click para ver mais informações sobre comentários e tarefas!!'} >
+                    <div onClick={() => (
+                        setOPen(true)
+                    )}>
                         <Tag.MuiTypography sx={{
                             height: '3rem',
                             overflowY: 'auto',
@@ -139,15 +142,9 @@ export const CardTaskMobile = (
                             two={checkKey(task.taskStatus)}
                             color={color ? color : taskStatusColors.empty}
                         />
-                    </>
+
+                    </div>
                 </Tooltip>
-                {open && <DescriptionsAndComments
-                    color={color}
-                    bg={bg}
-                    taskId={task.taskId}
-                    task={task}
-                    setOPen={setOPen}
-                />}
                 {openMoreInfo && <TaskDetailed
                     taskId={task.taskId}
                     open={openMoreInfo}
@@ -155,8 +152,14 @@ export const CardTaskMobile = (
                     handleClick={handleClick}
                     task={task ? task : {}}
                 />}
+                {open && <DescriptionsAndComments
+                    color={color}
+                    bg={bg}
+                    taskId={task.taskId}
+                    task={task}
+                    setOPen={setOPen}
+                />}
             </Grid>
-
         </>
     )
 }

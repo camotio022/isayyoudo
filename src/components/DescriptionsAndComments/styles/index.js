@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, Box, Container, Dialog, Paper, Stack, styled } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Box, Container, Paper, Stack, styled } from "@mui/material";
 import { Root } from "../../Global/Root/root_styles";
 
 export const DialogDetails = styled(Stack)(({ theme, ismobilequery }) => ({
