@@ -63,7 +63,7 @@ export const TasksClosed = () => {
             {tasks.length > 0 ?
                 tasks.map((task, index) => {
                     const color = taskStatusColors[task.taskStatus]
-                    const backgroundColor = taskStatusBgcolor[task.taskStatus]
+                    const bg = taskStatusBgcolor[task.taskStatus]
                     const empty = taskStatusBgcolor.empty
                     const emptyBgcolor = taskStatusColors.empty
                     return (

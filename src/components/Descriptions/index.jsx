@@ -9,6 +9,7 @@ import { db } from '../../firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LoCommAndDesc } from '../Loadinds/LoCommAndDesc';
+import { FormatRelativeTime } from '../CommentsTasks/formatRelativeTime';
 export const Descriptions = ({
     ismobilequery,
     colors,
@@ -24,27 +25,16 @@ export const Descriptions = ({
         });
         return () => unsubscribe();
     }, [taskId]);
-    if(descriptions.length === 0){
-        return(
-            <LoCommAndDesc/>
+    if (descriptions.length === 0) {
+        return (
+            <LoCommAndDesc />
         )
     }
+    console.log(descriptions)
     return (
         <>
             {descriptions.map((description, index) => {
-                const dataCompleta = new Date(description.timestamp.seconds * 1000 + description.timestamp.nanoseconds / 1e6);
-                const dataFormatada = dataCompleta.toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                });
-
-                const horasFormatadas = dataCompleta.toLocaleTimeString('pt-BR', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                    timeZoneName: 'short',
-                });
+                const dataCompleta = <FormatRelativeTime dateTimeString={description.timestamp} />
                 return (
                     <Card
                         variant="outlined"
@@ -77,15 +67,10 @@ export const Descriptions = ({
                                 ismobilequery={ismobilequery}
                                 bg={bg}
                                 colors={colors}
-                                width={100}
+                                width={110}
                                 height={44}
                             >
-                                <div>
-                                    {horasFormatadas}
-                                </div>
-                                <div style={{ fontWeight: 400 }}>
-                                    {dataFormatada}
-                                </div>
+                                {dataCompleta}
                             </Tag.ShowTimes>
                         </CardContent>
                         <CardContent sx={{ gap: 0.5, mt: 0.4, zIndex: 0 }}>

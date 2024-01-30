@@ -94,7 +94,7 @@ export const CommentsTasks = ({
                                     <Stack sx={{
                                         color: Root.color_button,
                                         fontSize: '1.2rem',
-                                        fontWeight: ismobilequery ? 500 : 900
+                                        fontWeight: ismobilequery ? 500 : 700
                                     }}>
                                         {splitNameUserInScreens(comment.author.name)}
                                     </Stack>
