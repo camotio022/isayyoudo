@@ -21,7 +21,7 @@ export const MuiPaper = styled(Paper)(({ theme, ismobilequery }) => ({
     justifyContent: 'center',
     flexDirection: 'column',
     position: !ismobilequery && 'relative',
-    width: ismobilequery ? '100%' : 600,
+    width: ismobilequery ? '100%' : 500,
     height: ismobilequery ? '100%' : '95vh',
     borderRadius: 0,
     overflow: 'hidden'

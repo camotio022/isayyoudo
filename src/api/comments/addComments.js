@@ -1,7 +1,5 @@
 import { addDoc, arrayUnion, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
-
-
 export const commentService = {
     comment: {
         post: async (payload) => {

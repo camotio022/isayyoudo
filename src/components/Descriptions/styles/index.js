@@ -9,7 +9,8 @@ export const ShowTimes = styled(Stack)(({ theme, isMobileQuery, bg, colors }) =>
     flexWrap: 'wrap',
     backgroundColor: bg ? bg : Root.color_button_opacity,
     right: 0,
+    textTransform: 'uppercase',
     borderRight: `0.5rem solid ${colors ? colors : Root.color_button}`,
-    color: Root.black,
-    fontSize: 14
+    color: Root.gray,
+    fontSize: 11,
 }));

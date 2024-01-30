@@ -14,6 +14,9 @@ export const FormatRelativeTime = ({ dateTimeString }) => {
         return `${hoursDifference} ${hoursDifference === 1 ? 'hora' : 'horas'} atrás`;
     } else if (daysDifference === 1) {
         return "ontem";
+    } else if (daysDifference > 1) {
+        return `${daysDifference} ${daysDifference === 1 ? 'dia' : 'dias'} atrás`;
+
     } else {
         const options = { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
         return postDate.toLocaleDateString('pt-BR', options);
