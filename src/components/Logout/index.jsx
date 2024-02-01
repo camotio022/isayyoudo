@@ -46,7 +46,7 @@ export const LogoutComponent = () => {
                             { label: 'Home', icon: <Home />, link: '/' },
                             { label: 'Search', icon: <Search />, link: '/' },
                             { label: 'Explorar', icon: <Explore />, link: '/' },
-                            { label: 'Perfil', icon: <Person />, link: '/' }
+                            { label: 'Perfil', icon: <Person />, link: '/porfile' }
                         ].map((action, index) => {
                             return (
 

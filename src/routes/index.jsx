@@ -18,6 +18,7 @@ import { TasksClosed } from "../pages/subpages/close/index.jsx"
 import { CreateTask } from "../pages/createTasks/index.jsx"
 import { NotFound } from "../components/NotFound/index.jsx"
 import { TasksActiveOrToDo } from "../pages/subpages/active/index.jsx"
+import { Perfil } from "../pages/perfil/index.jsx"
 const pageUrls = [
     '/',
     '/active',
@@ -27,7 +28,8 @@ const pageUrls = [
     '/taskArchived',
     '/taskCompleted',
     '/taskClose',
-    '/createTask'
+    '/createTask',
+    '/porfile'
 ];
 export const Main = () => {
     
@@ -49,6 +51,7 @@ export const Main = () => {
                             <Route path='/taskCompleted' element={<CompletedTasks />} />
                             <Route path='/taskClose' element={<TasksClosed />} />
                             <Route path='/createTask' element={<CreateTask />} />
+                            <Route path='/porfile' element={<Perfil />} />
                         </Routes>
                     </>
                 </MainLayout>
