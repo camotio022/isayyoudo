@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Divider, Stack, Typography } from "@mui/material"
+import { Avatar, Stack, Typography } from "@mui/material"
 import { BullPoint } from "../Bull"
 import { MoreHoriz, ThumbUp, ThumbUpOffAlt } from "@mui/icons-material"
 import * as Tag from './index.js'
@@ -10,15 +10,20 @@ import { useContext, useEffect, useState } from "react"
 import { FormatRelativeTime } from "./formatRelativeTime.jsx"
 import { AuthContext } from "../../authcontext/index.jsx"
 import { LoCommAndDesc } from "../Loadinds/LoCommAndDesc/index.jsx"
+import { MoreVertMenu } from "../MoreVerMenu/index.jsx"
 export const CommentsTasks = ({
     shadow,
     ismobilequery,
     taskId,
-    colors,
-    mt
 }) => {
     const { user } = useContext(AuthContext)
     const [comments, setComments] = useState([])
+    const [openItemId, setOpenItemId] = useState(null);
+    const [isLoad, setIsLoad] = useState(null)
+
+    const handleClick = (itemId) => {
+        setOpenItemId((prevOpenItemId) => (prevOpenItemId === itemId ? null : itemId));
+    };
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'comments'), async (snapshot) => {
             const commentsForTask = await commentService.comment.getCommentsForTask(taskId);
@@ -72,9 +77,9 @@ export const CommentsTasks = ({
         }
         return name;
     }
-    if(comments.length === 0){
-        return(
-            <LoCommAndDesc/>
+    if (comments.length === 0) {
+        return (
+            <LoCommAndDesc />
         )
     }
     return (
@@ -87,9 +92,15 @@ export const CommentsTasks = ({
                             gap={1} mt={1}
                             mb={(comments.length - 1) === index && (shadow ? '10rem' : 5)}
                         >
+                            {openItemId === index &&
+                                <MoreVertMenu
+                                    id={comment.commentId}
+                                    type='comment'
+                                    setOpenItemId={setOpenItemId}
+                                />}
                             <Tag.CommentMainParte1 mt={index === 0 ? (shadow ? '5rem' : 5) : 2}>
                                 <Tag.CommentMainParteA diretion={'flex-start'}>
-                                    <Avatar sx={{ height:35, width:35 }}
+                                    <Avatar sx={{ height: 42, width: 42, ml: -2 }}
                                         src={comment.author.avatar} />
                                     <Stack sx={{
                                         color: Root.color_button,
@@ -103,18 +114,21 @@ export const CommentsTasks = ({
                                         <FormatRelativeTime dateTimeString={comment.timestamp} />
                                     </Typography>
                                 </Tag.CommentMainParteA>
-                                <div style={{
-                                    border: Root.border,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    height: 'auto',
-                                    cursor: 'pointer',
-                                    padding: '2px',
-                                    color: Root.color_button
-                                }}>
-                                    <MoreHoriz  />
-                                </div>
+                                <Stack
+                                    onPress={() => handleClick(index)}
+                                    onClick={() => handleClick(index)}
+                                    sx={{
+                                        border: Root.border,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        height: 'auto',
+                                        cursor: 'pointer',
+                                        padding: '2px',
+                                        color: Root.color_button
+                                    }}>
+                                    <MoreHoriz />
+                                </Stack>
                             </Tag.CommentMainParte1>
 
                             <Tag.CommentMainParteA
@@ -133,7 +147,7 @@ export const CommentsTasks = ({
                                     </Typography>
                                 )}
                             </Tag.CommentMainParteA>
-                            <Tag.CommentMainParteA sx={{ gap: 2, width: '100%', color: 'text.secondary' }} diretion={'flex-start'} >
+                            <Tag.CommentMainParteA sx={{ gap: 2, width: '100%', color: 'text.secondary', ml: -2 }} diretion={'flex-start'} >
                                 <Tag.CommentMainParteA
                                     onClick={() => {
                                         commentService.comment.likeComment(
@@ -142,7 +156,7 @@ export const CommentsTasks = ({
                                     }}
                                     diretion={'flex-start'} sx={{ width: 'auto' }}>
                                     {comment.actions.likes.includes(user.uid) ?
-                                        <ThumbUp sx={{ color: colors ? colors : Root.color_button }} />
+                                        <ThumbUp sx={{ color: Root.color_button }} />
                                         : <ThumbUpOffAlt />}
                                     {comment.actions.likes.length}
                                 </Tag.CommentMainParteA>
