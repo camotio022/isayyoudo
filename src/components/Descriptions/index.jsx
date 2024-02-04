@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { LoCommAndDesc } from '../Loadinds/LoCommAndDesc';
 import { FormatRelativeTime } from '../CommentsTasks/formatRelativeTime';
 import { Archive, Delete, Edit } from '@mui/icons-material';
+import { MoreVertMenu } from '../MoreVerMenu';
 export const Descriptions = ({
     ismobilequery,
     colors,
@@ -44,7 +45,6 @@ export const Descriptions = ({
                 return (
                     <Card
                         key={index}
-                        onClick={() => handleClick(index)}
                         variant="outlined"
                         sx={{
                             mt: index === 0 ? 10 : 2,
@@ -74,6 +74,8 @@ export const Descriptions = ({
                                 {description.author.name}
                             </Stack>
                             <Tag.ShowTimes
+                                onPress={() => handleClick(index)}
+                                onClick={() => handleClick(index)}
                                 ismobilequery={ismobilequery}
                                 bg={bg}
                                 colors={colors}
@@ -88,25 +90,12 @@ export const Descriptions = ({
                                 {description.content}
                             </Stack>
                         </CardContent>
-                        {openItemId === index && <Tag.Colpax>
-                            <Stack sx={{
-                                color: Root.white,
-                                backgroundColor: Root.color_button
-                            }}>
-                                <Tag.item disableRipple>
-                                    <Edit />
-                                    Edit
-                                </Tag.item>
-                                <Tag.item >
-                                    <Archive />
-                                    Archived
-                                </Tag.item>
-                                <Tag.item >
-                                    <Delete />
-                                    Delete
-                                </Tag.item>
-                            </Stack>
-                        </Tag.Colpax>}
+                        {openItemId === index &&
+                            <MoreVertMenu
+                                id={description.descriptionId}
+                                type='description'
+                                setOpenItemId={setOpenItemId}
+                            />}
                     </Card>
                 )
             })}

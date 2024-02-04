@@ -58,23 +58,21 @@ export const DescriptionsAndComments = ({
         }));
     };
     const addNew = async () => {
-        if (comment.content && value === 'Comments') {
-            try {
-                const res = await commentService.comment.post(comment)
-            } catch (err) {
-                console.error(err)
-            }
-        } else if (comment.content && value === 'Descriptions') {
-            try {
+        try {
+            if (comment.content && value === 'Comments') {
+                const res = await commentService.comment.post(comment);
+            } else if (comment.content && value === 'Descriptions') {
                 await descriptionService.description.post(comment)
-                setComment((prevComment) => ({
-                    ...prevComment,
-                    content: '',
-                }));
-            } catch (err) {
-                console.error(err)
             }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setComment((prevComment) => ({
+                ...prevComment,
+                content: '',
+            }));
         }
+
     }
     return (
 
@@ -102,6 +100,7 @@ export const DescriptionsAndComments = ({
                             <Tag.MuiBottomNavigationAction
                                 key={index}
                                 sx={{
+                                    color: value === nav.value && `${Root.color_button} !important`,
                                     borderBottom: value === nav.value &&
                                         `4px solid ${Root.color_button}`
                                 }}
@@ -160,7 +159,10 @@ export const DescriptionsAndComments = ({
                                 'Add your new comment now'
                             )}
                         />
-                        <Button onClick={addNew} variant="contained">
+                        <Button onClick={addNew} sx={{
+                            color: Root.color_button,
+                            bgcolor: Root.color_button_opacity
+                        }} variant="contained">
                             Bublish
                         </Button>
                     </Tag.MuiBottomMainTextarea>

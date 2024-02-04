@@ -144,12 +144,13 @@ export const MenuMobile = ({
                                 border: 'none',
                                 outline: 'none',
                             },
+                            background: `linear-gradient(to bottom, ${Root.color_button}, #ab83a1, #d4a5a5, #c9c3d0, orange, red)`,
                         }}
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar src={user.photoURL} sx={{ width: 38, height: 38 }}>M</Avatar>
+                        <Avatar src={user.photoURL} sx={{ width: 39, height: 39 }}>M</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
