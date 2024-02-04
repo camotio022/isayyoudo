@@ -24,8 +24,7 @@ export const DescriptionsAndComments = ({
     color,
     bg
 }) => {
-    let touchStartX = 0;
-    let touchEndX = 0;
+    let swipeDistance = 0;
     const { user } = useContext(AuthContext)
     const ismobilequery = useMediaQuery('(max-width:600px)');
     const [value, setValue] = useState('Comments');
@@ -77,20 +76,16 @@ export const DescriptionsAndComments = ({
 
     }
 
-    const handleTouchStart = (event) => {
-        touchStartX = event.touches[0].clientX;
-    };
 
-    const handleTouchEnd = () => {
-        const swipeDistance =touchStartX- touchEndX ;
-        if (swipeDistance.toFixed(0) > 300) {
+    const handleTouchEnd = (event) => {
+        swipeDistance = event.touches[0].clientX
+        if (swipeDistance.toFixed(0) > 50) {
             setValue('Descriptions')
-        } else if (swipeDistance.toFixed(0) < 300) {
+        } else if (swipeDistance.toFixed(0) < 350) {
             setValue('Comments');
         }
     }
-    document.addEventListener('touchstart', handleTouchStart, false);
-    document.addEventListener('touchend', handleTouchEnd, false);
+    document.addEventListener('touchmove', handleTouchEnd, false);;
     return (
 
         <Tag.DialogDetails
