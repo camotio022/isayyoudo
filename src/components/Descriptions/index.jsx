@@ -52,6 +52,8 @@ export const Descriptions = ({
                             boxShadow: 'box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
                             width: ismobilequery ? '90%' : 'max(92%, 60%)',
                             borderRadius: '8px', '--Card-radius': 0,
+                            minHeight: openItemId === index && 200,
+                            transition: 'all 1s'
                         }}
                     >
 

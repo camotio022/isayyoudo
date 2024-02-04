@@ -55,11 +55,13 @@ export const LogoutComponent = () => {
                                     onClick={() => {
                                         navigate(action.link)
                                     }}
+                                    color={'red'}
                                     sx={{
+                                        color: value === index && `${Root.color_button} !important`,
                                         ':focus': {
                                             outline: 'none',
                                             color: Root.color_button
-                                        },
+                                        },                                       
                                         borderTop: value === index && `3px solid ${Root.color_button}`
                                     }} label={action.label} icon={action.icon} />
                             )
