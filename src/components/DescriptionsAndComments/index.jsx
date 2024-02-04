@@ -67,6 +67,10 @@ export const DescriptionsAndComments = ({
         } else if (comment.content && value === 'Descriptions') {
             try {
                 await descriptionService.description.post(comment)
+                setComment((prevComment) => ({
+                    ...prevComment,
+                    content: '',
+                }));
             } catch (err) {
                 console.error(err)
             }

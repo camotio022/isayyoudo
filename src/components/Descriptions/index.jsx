@@ -2,7 +2,7 @@ import * as React from 'react';
 import Card from '@mui/joy/Card';
 import * as Tag from './styles/index'
 import CardContent from '@mui/joy/CardContent';
-import { Avatar, Stack } from '@mui/material';
+import { Avatar, Menu, MenuItem, Stack } from '@mui/material';
 import { Root } from '../Global/Root/root_styles';
 import { descriptionService } from '../../api/descriptions';
 import { db } from '../../firebaseConfig';
@@ -10,6 +10,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LoCommAndDesc } from '../Loadinds/LoCommAndDesc';
 import { FormatRelativeTime } from '../CommentsTasks/formatRelativeTime';
+import { Archive, Delete, Edit } from '@mui/icons-material';
 export const Descriptions = ({
     ismobilequery,
     colors,
@@ -18,6 +19,11 @@ export const Descriptions = ({
     task
 }) => {
     const [descriptions, setDescriptions] = useState([])
+    const [openItemId, setOpenItemId] = useState(null);
+
+    const handleClick = (itemId) => {
+        setOpenItemId((prevOpenItemId) => (prevOpenItemId === itemId ? null : itemId));
+    };
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'descriptions'), async (snapshot) => {
             const descriptionsForTask = await descriptionService.description.getDescriptionsForTask(taskId);
@@ -30,23 +36,25 @@ export const Descriptions = ({
             <LoCommAndDesc />
         )
     }
-    console.log(descriptions)
+
     return (
         <>
             {descriptions.map((description, index) => {
                 const dataCompleta = <FormatRelativeTime dateTimeString={description.timestamp} />
                 return (
                     <Card
+                        key={index}
+                        onClick={() => handleClick(index)}
                         variant="outlined"
                         sx={{
                             mt: index === 0 ? 10 : 2,
                             mb: (descriptions.length - 1) === index && 10,
-                            boxShadow: Root.boxShadow,
-                            width: ismobilequery ? '80%' : 'max(92%, 60%)',
+                            boxShadow: 'box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
+                            width: ismobilequery ? '90%' : 'max(92%, 60%)',
                             borderRadius: '8px', '--Card-radius': 0,
-                            border: 'none'
                         }}
                     >
+
                         <CardContent orientation="horizontal" sx={{
                             position: 'relative',
                             overflow: 'hidden',
@@ -78,6 +86,25 @@ export const Descriptions = ({
                                 {description.content}
                             </Stack>
                         </CardContent>
+                        {openItemId === index && <Tag.Colpax>
+                            <Stack sx={{
+                                color: Root.white,
+                                backgroundColor: Root.color_button
+                            }}>
+                                <Tag.item disableRipple>
+                                    <Edit />
+                                    Edit
+                                </Tag.item>
+                                <Tag.item >
+                                    <Archive />
+                                    Archived
+                                </Tag.item>
+                                <Tag.item >
+                                    <Delete />
+                                    Delete
+                                </Tag.item>
+                            </Stack>
+                        </Tag.Colpax>}
                     </Card>
                 )
             })}

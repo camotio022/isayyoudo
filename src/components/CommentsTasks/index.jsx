@@ -68,7 +68,7 @@ export const CommentsTasks = ({
     };
     const splitNameUserInScreens = (name) => {
         if (ismobilequery) {
-            return name.split(' ')[0];
+            return name?.split(' ')[0];
         }
         return name;
     }

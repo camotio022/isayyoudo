@@ -9,6 +9,7 @@ export const MuiContainer = styled(Container)(({ theme }) => ({
     flexDirection: 'column',
     height: '100vh',
     width: '100%',
+    backgroundColor: Root.color_button_opacity,
 }));
 export const MuiDivicer = styled(Box)(({ theme }) => ({
     position: 'absolute',
@@ -18,10 +19,8 @@ export const MuiDivicer = styled(Box)(({ theme }) => ({
     alignItems: 'center',
     height: '40vh',
     width: '150vw',
-    border: `1px solid ${Root.color_button}`,
-    top: -80,
-    left: -60,
-    backgroundColor: Root.color_button_opacity,
-    transform: 'rotate(10deg)',
-    transformOrigin: 'bottom left'
+    borderBottom: `1px solid ${Root.color_button}`,
+    top: 0,
+    left: 0,
+
 }));
