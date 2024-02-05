@@ -34,7 +34,7 @@ export const DescriptionsAndComments = ({
         author: {
             userId: user.uid,
             name: user.displayName,
-            avatar: user.photoURL,
+            avatar: user?.photoURL,
         },
         content: commentArea,
         timestamp: serverTimestamp(),

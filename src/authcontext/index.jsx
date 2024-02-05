@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
                         id: user.uid,
                         name: user.displayName,
                         email: user.email,
-                        photoURL: user.photoURL,
+                        photoURL: user?.photoURL,
                     };
 
                     await setDoc(doc(usersRef, user.uid), newUser);

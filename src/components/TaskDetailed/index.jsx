@@ -28,8 +28,8 @@ export const TaskDetailed = ({
         taskId: '',
         author: {
             userId: user.uid,
-            name: user.displayName,
-            avatar: user.photoURL,
+            name: user?.displayName,
+            avatar: user?.photoURL,
         },
         content: commentArea,
         timestamp: serverTimestamp(),

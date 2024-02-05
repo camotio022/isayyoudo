@@ -54,7 +54,7 @@ export const MenuUser = ({
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={handleClose}>
-                    <Tag.AvatarPhoto src={user.photoURL} /> {user.displayName}
+                    <Tag.AvatarPhoto src={user?.photoURL} /> {user?.displayName}
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={()=>handleClose(true)}>

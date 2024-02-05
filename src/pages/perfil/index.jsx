@@ -22,7 +22,7 @@ export const Perfil = () => {
                     flexDirection: 'row',
                     width: '95%'
                 }}>
-                    <Avatar sx={{ width: 90, height: 90 }} src={user.photoURL} />
+                    <Avatar sx={{ width: 90, height: 90 }} src={user?.photoURL} />
                     <Stack sx={{color: Root.white,}}>
                         <Typography sx={{  fontWeight: 400 }} variant="h5" gutterBottom>
                             {user.displayName}
