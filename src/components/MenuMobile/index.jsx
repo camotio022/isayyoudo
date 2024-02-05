@@ -150,7 +150,7 @@ export const MenuMobile = ({
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar src={user.photoURL} sx={{ width: 39, height: 39 }}>M</Avatar>
+                        <Avatar src={user?.photoURL} sx={{ width: 39, height: 39 }}>M</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -196,13 +196,13 @@ export const MenuMobile = ({
                 })] :
                     [(
                         <MenuItem key="profile" onClick={handleClose}>
-                            <Avatar src={user.photoURL}/>
-                            {user.displayName}
+                            <Avatar src={user?.photoURL}/>
+                            {user?.displayName}
                         </MenuItem>
                     ),
                     (
                         <MenuItem disabled key="account" onClick={handleClose}>
-                            <Avatar src={user.photoURL}/> Premmium Level
+                            <Avatar src={user?.photoURL}/> Premmium Level
                         </MenuItem>
                     ),
                     <Divider key="divider" />,

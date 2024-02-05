@@ -14,7 +14,7 @@ export const nullStateTasks = () => {
     taskStatus: '',
     estimated: '',
     assigner: user.displayName,
-    assignerPhotoURL: user.photoURL,
+    assignerPhotoURL: user?.photoURL,
     assignerId: user.uid,
     assignerTasksCreated: 0,
     tags: '',
