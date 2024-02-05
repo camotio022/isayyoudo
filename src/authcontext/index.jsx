@@ -56,7 +56,6 @@ export const AuthProvider = ({ children }) => {
         window.location.replace('/')
     }
     const loginWithGoogle = async () => {
-
         signInWithPopup(auth, provider)
             .then(async (result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -66,9 +65,12 @@ export const AuthProvider = ({ children }) => {
                 const usersRef = collection(firestore, 'users');
                 const querySnapshot = await getDocs(query(usersRef, where('email', '==', user.email)));
                 const existingUser = querySnapshot.docs[0];
+
                 if (existingUser) {
                     const userData = {
                         name: user.displayName,
+                        idGoogle: user.uid,
+                        photoURL: user?.photoURL || null,
                     };
                     await updateDoc(doc(usersRef, existingUser.id), userData);
                     setUser(existingUser.data());
@@ -77,12 +79,15 @@ export const AuthProvider = ({ children }) => {
                         id: user.uid,
                         name: user.displayName,
                         email: user.email,
-                        photoURL: user?.photoURL,
+                        photoURL: user?.photoURL || null,
                     };
+
+                    console.log('Novo Usuário:', newUser);
 
                     await setDoc(doc(usersRef, user.uid), newUser);
                     setUser(newUser);
                 }
+
                 login(user);
             })
             .catch((error) => {
@@ -91,6 +96,7 @@ export const AuthProvider = ({ children }) => {
                 setMessage(errorMessage);
             });
     };
+
     const loginWithEmailAndPassword = async (email, password) => {
 
         if (!email && !password) return
