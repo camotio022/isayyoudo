@@ -11,6 +11,7 @@ const provider = new GoogleAuthProvider()
 import { getFirestore, doc, setDoc, collection, getDocs, query, where, updateDoc } from 'firebase/firestore'
 import { DialogError } from '../components/Dialog'
 export const AuthProvider = ({ children }) => {
+    const [users, setUsers] = useState(JSON.parse(localStorage.getItem('users')) || [])
     const [isCreatingTask, setIsCreatingTask] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const auth = getAuth()
@@ -47,6 +48,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(true)
         localStorage.setItem('isLoggedIn', 'true')
         localStorage.setItem('user', JSON.stringify(userData))
+        localStorage.setItem('users', JSON.stringify(userData));
         window.location.replace('/')
     }
     const logout = () => {
@@ -56,7 +58,6 @@ export const AuthProvider = ({ children }) => {
         window.location.replace('/')
     }
     const loginWithGoogle = async () => {
-
         signInWithPopup(auth, provider)
             .then(async (result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -114,6 +115,8 @@ export const AuthProvider = ({ children }) => {
                 loginWithGoogle,
                 loginWithEmailAndPassword,
                 user,
+                users,
+                setUsers,
                 isCreatingTask,
                 setIsCreatingTask
             }}

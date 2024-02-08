@@ -12,9 +12,12 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { FormControlLabel, Switch } from '@mui/material';
+import { Button, Container, FormControlLabel, Grid, Switch, TextField } from '@mui/material';
+import { AddCardOutlined, Google, GroupAdd } from '@mui/icons-material';
+import { Root } from '../Global/Root/root_styles.jsx';
+import { MyButton } from '../Global/Styles/styles.jsx';
 export const MenuUser = ({
-    open, handleClose, anchorEl, user, handleChange, checked}) => {
+    open, handleClose, anchorEl, user, handleChange, checked }) => {
 
     return (
         <React.Fragment>
@@ -22,8 +25,6 @@ export const MenuUser = ({
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
-                onClose={handleClose}
-                onClick={handleClose}
                 PaperProps={{
                     elevation: 0,
                     sx: {
@@ -57,15 +58,80 @@ export const MenuUser = ({
                     <Tag.AvatarPhoto src={user?.photoURL} /> {user?.displayName}
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={()=>handleClose(true)}>
-                    <ListItemIcon>
-                        <FormControlLabel
-                            control={<Switch checked={checked} onChange={handleChange} />}
-                            label="Active backgroundColor of tasks"
-                        />
+                <MenuItem sx={{':hover': {
+                    color: Root.color_button,
+                    backgroundColor: 'transparent',
+                }}}>
+                    <ListItemIcon sx={{':hover': {
+                    color: Root.color_button
+                }}}>
+                        <GroupAdd />
                     </ListItemIcon>
-                    
+                    Add new acount
                 </MenuItem>
+                <Container component="main" maxWidth="xs">
+                    <Box
+                        sx={{
+                            marginTop: 2,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Typography mb={2}>
+                            Sign new account
+                        </Typography>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    autoComplete="given-name"
+                                    size='small'
+                                    name="firstName"
+                                    required
+                                    fullWidth
+                                    id="firstName"
+                                    label="Email"
+                                    autoFocus
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    autoComplete="given-password"
+                                    size='small'
+                                    name="password"
+                                    required
+                                    fullWidth
+                                    id="password"
+                                    label="Password"
+                                    type='password'
+                                    autoFocus
+                                />
+                            </Grid>
+                        </Grid>
+                        <MyButton
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            startIcon={<GroupAdd/>}
+                        >
+                            Add new account
+                        </MyButton>
+                        or
+                        <MyButton
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 1, mb: 2 }}
+                            colorstask={Root.color_button}
+                            bg={Root.white}
+                            startIcon={<Google/>}
+                        >
+                            Add new account with google
+                        </MyButton>
+                        
+                    </Box>
+                </Container>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <Settings fontSize="small" />
