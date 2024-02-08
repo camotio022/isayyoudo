@@ -70,7 +70,6 @@ export const Main = () => {
                     <Route path='/' element={<Login />} />
                     <Route path='/signup' element={<Cadastro />} />
                 </Routes>
-                <Footer />
             </Fragment>
         </>
     )
