@@ -11,6 +11,7 @@ const provider = new GoogleAuthProvider()
 import { getFirestore, doc, setDoc, collection, getDocs, query, where, updateDoc } from 'firebase/firestore'
 import { DialogError } from '../components/Dialog'
 export const AuthProvider = ({ children }) => {
+    const [users, setUsers] = useState(JSON.parse(localStorage.getItem('users')) || [])
     const [isCreatingTask, setIsCreatingTask] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const auth = getAuth()
@@ -18,6 +19,8 @@ export const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState(null)
     const [open, setOpen] = useState(false)
     const [message, setMessage] = useState(null)
+    const [openAddAccounts, setOpenAddAccounts] = useState(false)
+
     const handleClose = () => {
         setOpen(false)
     }
@@ -47,6 +50,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(true)
         localStorage.setItem('isLoggedIn', 'true')
         localStorage.setItem('user', JSON.stringify(userData))
+        localStorage.setItem('users', JSON.stringify(userData));
         window.location.replace('/')
     }
     const logout = () => {
@@ -96,21 +100,27 @@ export const AuthProvider = ({ children }) => {
                 setMessage(errorMessage);
             });
     };
+    const loginWithEmailAndPassword = async (email, password, type) => {
+        if (!email || !password) return;
+        try {
+            let userCredential;
+            if (type === 'addAccounts') {
+                userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+                existingUsers.push(userCredential.user);
+                localStorage.setItem('users', JSON.stringify(existingUsers));
+            } else {
+                userCredential = await signInWithEmailAndPassword(auth, email, password);
+                setUser(userCredential.user);
+                login(userCredential.user);
+            }
+        } catch (error) {
+            setOpen(true);
+            const errorMessage = error.message || 'Ocorreu um erro ao fazer login.';
+            setMessage(errorMessage);
+        }
+    };
 
-    const loginWithEmailAndPassword = async (email, password) => {
-
-        if (!email && !password) return
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                setUser(userCredential.user)
-                login(userCredential.user)
-            })
-            .catch((error) => {
-                setOpen(true);
-                const errorMessage = error.message || 'Ocorreu um erro ao fazer login.';
-                setMessage(errorMessage);
-            })
-    }
     return (
         <AuthContext.Provider
             value={{
@@ -120,8 +130,12 @@ export const AuthProvider = ({ children }) => {
                 loginWithGoogle,
                 loginWithEmailAndPassword,
                 user,
+                users,
+                setUsers,
                 isCreatingTask,
-                setIsCreatingTask
+                setIsCreatingTask,
+                openAddAccounts,
+                setOpenAddAccounts
             }}
         >
             <Fragment>

@@ -1,32 +1,35 @@
 import * as React from 'react';
 import * as Tag from '../Teps/index.js'
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
+import * as TagMain from './styles/index.js'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { FormControlLabel, Switch } from '@mui/material';
+import { GroupAdd } from '@mui/icons-material';
+import { Root } from '../Global/Root/root_styles.jsx';
+import { useContext } from 'react';
+import { AuthContext } from '../../authcontext/index.jsx';
 export const MenuUser = ({
-    open, handleClose, anchorEl, user, handleChange, checked}) => {
-
+    open, handleClose, anchorEl, user, handleChange, checked }) => {
+    const { openAddAccounts, setOpenAddAccounts } = useContext(AuthContext)
+    const handleOpen = () => {
+        handleClose()
+        setOpenAddAccounts(!openAddAccounts)
+    }
     return (
         <React.Fragment>
             <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
-                onClose={handleClose}
-                onClick={handleClose}
                 PaperProps={{
                     elevation: 0,
                     sx: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         overflow: 'visible',
                         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                         mt: 1.5,
@@ -47,38 +50,48 @@ export const MenuUser = ({
                             bgcolor: 'background.paper',
                             transform: 'translateY(-50%) rotate(45deg)',
                             zIndex: 0,
+                            borderLeft: `1px solid ${Root.color_button}`,
+                            borderTop: `1px solid ${Root.color_button}`,
                         },
+                        border: `1px solid ${Root.color_button}`
                     },
                 }}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={handleClose}>
+                <TagMain.MuiItem onClick={handleClose}>
                     <Tag.AvatarPhoto src={user?.photoURL} /> {user?.displayName}
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={()=>handleClose(true)}>
-                    <ListItemIcon>
-                        <FormControlLabel
-                            control={<Switch checked={checked} onChange={handleChange} />}
-                            label="Active backgroundColor of tasks"
-                        />
+                </TagMain.MuiItem>
+                <Divider sx={{ width: '90%', borderColor: Root.color_button, ml: '5%' }} />
+                <TagMain.MuiItem onClick={handleOpen} sx={{
+                    ':hover': {
+                        color: Root.color_button,
+                        backgroundColor: 'transparent',
+                    }
+                }}>
+                    <ListItemIcon sx={{
+                        ':hover': {
+                            color: Root.color_button
+                        }
+                    }}>
+                        <GroupAdd />
                     </ListItemIcon>
-                    
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
+                    Add new acount
+                </TagMain.MuiItem>
+                <TagMain.MuiItem onClick={handleClose}>
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
                     Settings themes task future
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
+                </TagMain.MuiItem>
+                <TagMain.MuiItem onClick={handleClose}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
                     Logout disable
-                </MenuItem>
+                </TagMain.MuiItem>
             </Menu>
+            
         </React.Fragment>
     );
 }

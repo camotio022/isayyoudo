@@ -19,6 +19,7 @@ import { CreateTask } from "../pages/createTasks/index.jsx"
 import { NotFound } from "../components/NotFound/index.jsx"
 import { TasksActiveOrToDo } from "../pages/subpages/active/index.jsx"
 import { Perfil } from "../pages/perfil/index.jsx"
+import { AddAcounts } from "../components/AddAccounts/index.jsx"
 const pageUrls = [
     '/',
     '/active',
@@ -29,11 +30,11 @@ const pageUrls = [
     '/taskCompleted',
     '/taskClose',
     '/createTask',
-    '/porfile'
+    '/porfile',
 ];
 export const Main = () => {
-    
     const refRouter = useHref()
+    const { openAddAccounts, setOpenAddAccounts } = useContext(AuthContext)
     const auth = useContext(AuthContext)
     if (auth?.isLoggedIn) {
         if (pageUrls.includes(refRouter)) {
@@ -41,6 +42,7 @@ export const Main = () => {
                 <MainLayout>
                     <>
                         <LogoutComponent />
+                        {openAddAccounts && <AddAcounts />}
                         <Routes>
                             <Route path='/' element={<HomePage />} />
                             <Route path='/community' element={<Community />} />
@@ -70,7 +72,6 @@ export const Main = () => {
                     <Route path='/' element={<Login />} />
                     <Route path='/signup' element={<Cadastro />} />
                 </Routes>
-                <Footer />
             </Fragment>
         </>
     )
