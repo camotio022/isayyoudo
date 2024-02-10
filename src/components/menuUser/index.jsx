@@ -7,17 +7,34 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { GroupAdd } from '@mui/icons-material';
+import { GroupAdd, SwapHoriz } from '@mui/icons-material';
 import { Root } from '../Global/Root/root_styles.jsx';
 import { useContext } from 'react';
 import { AuthContext } from '../../authcontext/index.jsx';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 export const MenuUser = ({
-    open, handleClose, anchorEl, user, handleChange, checked }) => {
-    const { openAddAccounts, setOpenAddAccounts } = useContext(AuthContext)
+    open, handleClose, anchorEl, user }) => {
+    const { openAddAccounts,
+        setOpenAddAccounts,
+        logout,
+    } = useContext(AuthContext)
+    const [users, setUsers] = useState([])
+    const navigate = useNavigate()
     const handleOpen = () => {
         handleClose()
         setOpenAddAccounts(!openAddAccounts)
     }
+    const newSignin = async (data, type) => {
+        if (!data) return;
+        localStorage.setItem('user', JSON.stringify(data));
+        window.location.replace('/')
+    }
+    useEffect(() => {
+        setUsers(JSON.parse(localStorage.getItem('users')) || [])
+    }, [])
+    console.log(users)
     return (
         <React.Fragment>
             <Menu
@@ -63,6 +80,25 @@ export const MenuUser = ({
                     <Tag.AvatarPhoto src={user?.photoURL} /> {user?.displayName}
                 </TagMain.MuiItem>
                 <Divider sx={{ width: '90%', borderColor: Root.color_button, ml: '5%' }} />
+                <TagMain.MuiItem onClick={handleClose}>
+                    <ListItemIcon>
+                        <SwapHoriz />
+                    </ListItemIcon>
+                    Switch account
+                </TagMain.MuiItem>
+                {users.map((account, index) => {
+                    return (
+                        <TagMain.MuiItem key={account.uid} onClick={() => newSignin(account, 'switchAccount')}>
+                            <ListItemIcon>
+                                <Tag.AvatarPhoto src={account.photoURL} />
+                            </ListItemIcon>
+                            {account.displayName}
+                        </TagMain.MuiItem>
+                    )
+                })}
+
+                <Divider sx={{ width: '90%', borderColor: Root.color_button, ml: '5%' }} />
+
                 <TagMain.MuiItem onClick={handleOpen} sx={{
                     ':hover': {
                         color: Root.color_button,
@@ -84,14 +120,14 @@ export const MenuUser = ({
                     </ListItemIcon>
                     Settings themes task future
                 </TagMain.MuiItem>
-                <TagMain.MuiItem onClick={handleClose}>
+                <TagMain.MuiItem onClick={logout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
-                    Logout disable
+                    Logout
                 </TagMain.MuiItem>
             </Menu>
-            
+
         </React.Fragment>
     );
 }
