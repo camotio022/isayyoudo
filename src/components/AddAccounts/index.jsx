@@ -2,25 +2,47 @@ import * as React from 'react';
 import * as Tag from './styles/index.js'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Grid, TextField } from '@mui/material';
-import { Google, GroupAdd } from '@mui/icons-material';
+import { Grid, InputAdornment, Stack, TextField } from '@mui/material';
+import { Close, Google, GroupAdd, RemoveRedEye, Visibility, VisibilityOff } from '@mui/icons-material';
 import { Root } from '../Global/Root/root_styles.jsx';
 import { MyButton } from '../Global/Styles/styles.jsx';
 import { LogoPage } from '../Logo/index.jsx';
 import { AuthContext } from '../../authcontext/index.jsx';
 import { useContext } from 'react';
 import { useState } from 'react';
-
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 export const AddAcounts = () => {
+    const auth = getAuth()
+    const [users, setUsers] = useState([])
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-    const { loginWithEmailAndPassword } = useContext(AuthContext)
+    const [isPassword, setIsPassword] = useState(false);
+    const { loginWithEmailAndPassword, loginWithGoogle, setOpenAddAccounts } = useContext(AuthContext)
     const LoginPassword = async (type) => {
-        await loginWithEmailAndPassword(email, password, type)
+        if (!email || !password) return;
+        try {
+            let userCredential;
+            const existThisUser = users.find((user) => user.email === email);
+
+            if (existThisUser) {
+                alert('Este usuário já está adicionado nesta seção de login. Por favor, tente outro usuário!');
+            }
+            userCredential = await signInWithEmailAndPassword(auth, email, password);
+            users.push(userCredential.user);
+            localStorage.setItem('users', JSON.stringify(users));
+            return;
+        } catch (error) {
+            if (type === 'addAccounts') {
+                alert(error.message || 'Ocorreu um erro ao fazer login.');
+            }
+        }
     }
     return (
         <Tag.MuiStack>
             <Tag.MuiContainer component="main" maxWidth="xs">
+                <Tag.MuiClose onClick={() => setOpenAddAccounts(false)}>
+                    <Close />
+                </Tag.MuiClose>
                 <LogoPage sx={
                     {
                         height: '100px',
@@ -48,6 +70,7 @@ export const AddAcounts = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                                 fullWidth
+                                type='email'
                                 label="Email"
                             />
                         </Grid>
@@ -59,6 +82,18 @@ export const AddAcounts = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 fullWidth
+                                type={isPassword ? 'password' : 'text'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="start">
+                                            {isPassword ? <Visibility
+                                                onClick={() => setIsPassword(!isPassword)
+                                                } /> : <VisibilityOff
+                                                onClick={() => setIsPassword(!isPassword)
+                                                } />}
+                                        </InputAdornment>
+                                    )
+                                }}
                                 label="Password" />
                         </Grid>
                     </Grid>
@@ -74,6 +109,7 @@ export const AddAcounts = () => {
                     </MyButton>
                     or
                     <MyButton
+                        onClick={() => loginWithGoogle('addAcconts')}
                         type="submit"
                         fullWidth
                         variant="contained"

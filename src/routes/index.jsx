@@ -1,4 +1,5 @@
 import { Route, Routes, useHref } from "react-router-dom"
+import { useContext } from "react"
 
 import { MainLayout } from "../layout/"
 import { HomePage } from "../pages/home/"
@@ -7,7 +8,6 @@ import { Catalog } from "../pages/catalog/"
 import { MyTasks } from "../pages/tasks/"
 import { Fragment, useState } from "react"
 import { Cadastro } from "../auth/Cadastro"
-import { useContext } from "react"
 import { LogoutComponent } from "../components/Logout/"
 import { Footer } from '../layout/components/footer/'
 import { Login } from "../auth/Login"
