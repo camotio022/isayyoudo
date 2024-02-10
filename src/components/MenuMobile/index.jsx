@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { Button } from '@mui/material';
-import { AssignmentTurnedIn, Close, KeyboardArrowDown, Loop } from '@mui/icons-material';
+import { AssignmentTurnedIn, Close, KeyboardArrowDown, Loop, SwapHoriz } from '@mui/icons-material';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
@@ -33,7 +33,8 @@ import { Root } from '../Global/Root/root_styles';
 export const MenuMobile = ({
     canSetColorMenu
 }) => {
-    const { user, logout } = useContext(AuthContext)
+    const [users, setUsers] = useState([])
+    const { user, logout, setOpenAddAccounts, openAddAccounts } = useContext(AuthContext)
     const [anchorEl, setAnchorEl] = useState(null);
     const [tasks, setTasks] = useState([])
     const [taskStatus, setTasksStatus] = useState(false);
@@ -48,6 +49,9 @@ export const MenuMobile = ({
         }
     };
     useEffect(() => {
+
+        setUsers(JSON.parse(localStorage.getItem('users')) || [])
+
         const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
             const timesTempTasks = snapshot.docs.map((doc) => ({
                 id: doc.id,
@@ -60,6 +64,15 @@ export const MenuMobile = ({
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const handleOpen = () => {
+        handleClose()
+        setOpenAddAccounts(!openAddAccounts)
+    }
+    const newSignin = async (data, type) => {
+        if (!data) return;
+        localStorage.setItem('user', JSON.stringify(data));
+        window.location.replace('/')
+    }
     const status = [
         {
             title: 'Active',
@@ -122,8 +135,8 @@ export const MenuMobile = ({
                     variant="none"
                     disableElevation
                     sx={{
-                        color: canSetColorMenu&& Root.color_button,
-                        fontWeight: canSetColorMenu&& 600,
+                        color: canSetColorMenu && Root.color_button,
+                        fontWeight: canSetColorMenu && 600,
                         '&:focus': {
                             border: 'none',
                             outline: 'none',
@@ -196,18 +209,36 @@ export const MenuMobile = ({
                 })] :
                     [(
                         <MenuItem key="profile" onClick={handleClose}>
-                            <Avatar src={user?.photoURL}/>
+                            <Avatar src={user?.photoURL} />
                             {user?.displayName}
                         </MenuItem>
                     ),
                     (
                         <MenuItem disabled key="account" onClick={handleClose}>
-                            <Avatar src={user?.photoURL}/> Premmium Level
+                            <Avatar src={user?.photoURL} /> Premmium Level
                         </MenuItem>
                     ),
-                    <Divider key="divider" />,
+                    <Divider sx={{ width: '90%', borderColor: Root.color_button, ml: '5%' }} />,
+                    <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <SwapHoriz />
+                        </ListItemIcon>
+                        Switch account
+                    </MenuItem>,
+                    (<>
+                        {users.map((account, index) => {
+                            return (
+                                <MenuItem key={account.uid} onClick={() => newSignin(account, 'switchAccount')}>
+                                    <ListItemIcon>
+                                        <Avatar src={account.photoURL} />
+                                    </ListItemIcon>
+                                    {account.displayName}
+                                </MenuItem>
+                            )
+                        })}</>),
+                    <Divider sx={{ width: '90%', borderColor: Root.color_button, ml: '5%' }} />,
                     (
-                        <MenuItem disabled key="add-account" onClick={handleClose}>
+                        <MenuItem key="add-account" onClick={handleClose}>
                             <ListItemIcon>
                                 <PersonAdd fontSize="small" />
                             </ListItemIcon>

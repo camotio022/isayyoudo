@@ -21,7 +21,6 @@ export const MenuUser = ({
         logout,
     } = useContext(AuthContext)
     const [users, setUsers] = useState([])
-    const navigate = useNavigate()
     const handleOpen = () => {
         handleClose()
         setOpenAddAccounts(!openAddAccounts)
