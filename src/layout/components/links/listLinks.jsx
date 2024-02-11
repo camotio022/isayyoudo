@@ -1,13 +1,30 @@
 import {
+    AssignmentInd,
     Diversity3,
     Drafts,
-    Home, ListAlt, MenuBook, Task,
+    Explore,
+    Home, ListAlt, MenuBook, Search, Task,
 } from '@mui/icons-material'
 export const links = [
     {
         icon: <Home />,
         name: 'Home page',
         link:'/',
+    },
+    {
+        icon: <AssignmentInd />,
+        name: 'User Profile',
+        link:'/perfil',
+    },
+    {
+        icon: <Search />,
+        name: 'Search',
+        link:'/search',
+    },
+    {
+        icon: <Diversity3 />,
+        name: 'Community',
+        link:'/community',
     },
     {
         icon: <ListAlt />,
@@ -20,8 +37,8 @@ export const links = [
         link:'/catalog',
     },
     {
-        icon: <Diversity3 />,
-        name: 'Community',
-        link:'/community',
+        icon: <Explore />,
+        name: 'Explorer',
+        link:'/explorar',
     },
 ]
