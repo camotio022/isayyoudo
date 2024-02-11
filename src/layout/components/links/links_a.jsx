@@ -41,7 +41,6 @@ export const Links_a = ({
     };
     fetchTasks();
   }, [user])
-  console.log(mytasks)
   return (
     <Link to={link} style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMenuLinks}>
       <ListItemButton
