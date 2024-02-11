@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import * as Tag from './styles/index.js'
 import image from './imgs/juggle---drop.gif'
-import { Box, Stepper, Step, StepLabel, Button, Typography, Stack, useMediaQuery } from '@mui/material';
-import { Delete, Info, Preview, Save, Timeline, Warning } from '@mui/icons-material';
+import { Box, Stepper, Step, StepLabel, Button, Typography, Stack, useMediaQuery, Avatar } from '@mui/material';
+import { AddTask, Delete, Info, Preview, Save, Timeline, Warning } from '@mui/icons-material';
 import { StepOne } from './components/StepOne/index.jsx';
 import { StepTwo } from './components/StepTwo/index.jsx';
 import { AuthContext } from '../../authcontext/index.jsx';
@@ -145,7 +145,9 @@ export const CreateTask = () => {
     };
     return (
         <Tag.ContentNewTask ismobilequery={ismobilequery} bg={taskDetails.taskStatus}>
-            {!ismobilequery && <CardTopCreateTask image={image} activeStep={activeStep} />}
+           {!ismobilequery&&<Avatar sx={{mb: 2}}>
+            <AddTask/>
+            </Avatar>}
             <Tag.CardNewTask ismobilequery={ismobilequery}>
                 <Stepper sx={{ width: '100%' }} alternativeLabel activeStep={activeStep < 1 ? 1 : activeStep}>
                     {steps.map((step, index) => (

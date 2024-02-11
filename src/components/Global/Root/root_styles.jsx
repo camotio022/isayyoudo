@@ -3,6 +3,7 @@ import { grey } from "@mui/material/colors";
 export const Root = {
   containTask: 'white',
   gray_desfius: '#A8ADB3',
+  color_app_bar: '#F5F5F5',
     color_default: '#ffffff',
     color_button: '#932dd2',
     color_button_secondary: "#932dd2",
@@ -33,7 +34,8 @@ export const Root = {
     dark: '#343a40',
     boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
     boxShadowTask: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-    border: '1px solid #c4c4c4',
+    boxS: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
+    border: '1px solid #F5F5F5',
     breakpointXS: '0',
     breakpointSM: '576px',
     breakpointMD: '768px',

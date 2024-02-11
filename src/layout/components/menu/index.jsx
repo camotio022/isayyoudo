@@ -27,7 +27,7 @@ export const Menu = (
                     display: 'flex',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    width: "80%"
+                    width: "90%"
                 }}>
                 <MyButton sx={{ textTransform: "lowercase" }}>
                     <Add />
@@ -35,17 +35,25 @@ export const Menu = (
                 </MyButton>
             </Link>
             <T.MinhaLista>
-                {links.map((li) => {
-                    return (
+                {isSmallScreen ?
+                    links.filter((li) => li.name !== 'Search' && li.name !== 'Explorer' && li.name !== 'User Profile')
+                        .map((link, index) => (
+                            <Links_a
+                                key={link.name}
+                                {...link}
+                                canShowAlert={link.name === 'My Tasks'}
+                                closeMenuLinks={() => setShowLinks(false)}
+                            />
+                        ))
+                    :
+                    links.map((li) => (
                         <Links_a
                             key={li.name}
                             {...li}
-                            name={li.name}
                             canShowAlert={li.name === 'My Tasks'}
                             closeMenuLinks={() => setShowLinks(false)}
                         />
-                    )
-                })}
+                    ))}
             </T.MinhaLista>
             <T.Logout onClick={logout}>
                 <Logout />

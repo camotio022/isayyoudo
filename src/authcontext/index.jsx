@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(false)
         localStorage.removeItem('isLoggedIn')
         localStorage.removeItem('user')
+        localStorage.removeItem('users')
         window.location.replace('/')
     }
     const loginWithGoogle = async () => {

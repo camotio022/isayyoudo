@@ -5,8 +5,14 @@ export const ContentNewTask = styled(Stack)(({ theme, ismobilequery }) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: '8px',
-    width: '99%',
-    height: ismobilequery ? '100%' : '95%',
+    width: ismobilequery ? '99%' : '45%',
+    height: ismobilequery && '100%',
+    minHeight: !ismobilequery && 'auto',
+    backgroundColor: Root.white,
+    border:!ismobilequery&& `1px solid ${Root.color_app_bar}`,
+    borderRadius: '4px',
+    marginTop: !ismobilequery && '5rem',
+    paddingBlock: '20px',
 }));
 
 export const CardNewTask = styled(Box)(({ theme, ismobilequery, bg }) => ({
@@ -14,11 +20,11 @@ export const CardNewTask = styled(Box)(({ theme, ismobilequery, bg }) => ({
     alignItems: 'flex-end',
     justifyContent: 'center',
     gap: '16px',
-    width: ismobilequery ? '100%' : '90%',
+    width: ismobilequery ? '100%' : '100%',
     height: ismobilequery ? '30%' : 'auto',
     marginBottom: '23px',
     paddingBottom: ismobilequery && '10px',
-    backgroundColor: ismobilequery &&  Root.color_button_opacity
+    backgroundColor: ismobilequery && Root.color_button_opacity
 }));
 export const ContainerDescription = styled(Box)(({ theme }) => ({
     fontSize: '16px',

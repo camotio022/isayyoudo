@@ -11,7 +11,7 @@ export const TabsMain = styled(Box)(({ theme, border, width, bg, showBorder }) =
     justifyContent: 'flex-start',
     backgroundColor: bg? bg: Root.white,
     gap: 10,
-    boxShadow: Root.boxShadowTask,
+    boxShadow: Root.boxS,
 
     '&::-webkit-scrollbar': {
         width: '5px',
