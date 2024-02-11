@@ -6,8 +6,11 @@ import {
 } from '@mui/material'
 import { Root } from '../../../components/Global/Root/root_styles';
 import { NotificationCounter } from '../../../components/Global/Styles/styles';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { AuthContext } from '../../../authcontext';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '../../../firebaseConfig';
 
 export const Links_a = ({
   name,
@@ -16,9 +19,29 @@ export const Links_a = ({
   canShowAlert,
   closeMenuLinks,
 }) => {
+  const [mytasks, setMyTasks] = useState([])
+  const { user } = useContext(AuthContext)
   const location = useLocation();
   const isRoute = location.pathname === link;
-
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const q = query(collection(db, 'tasks'), where('assignerId', '==', user.uid));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const tasks = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setMyTasks(tasks);
+        });
+        return unsubscribe;
+      } catch (error) {
+        console.error('Erro ao buscar tarefas:', error);
+      }
+    };
+    fetchTasks();
+  }, [user])
+  console.log(mytasks)
   return (
     <Link to={link} style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMenuLinks}>
       <ListItemButton
@@ -45,7 +68,7 @@ export const Links_a = ({
           <Badge
             badgeContent={
               <NotificationCounter>
-                {10} {/* Conteúdo do contador de notificações */}
+                {mytasks.length}
               </NotificationCounter>
             }
           />
