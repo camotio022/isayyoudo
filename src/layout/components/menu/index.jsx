@@ -27,7 +27,7 @@ export const Menu = (
                     display: 'flex',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    width: "80%"
+                    width: "90%"
                 }}>
                 <MyButton sx={{ textTransform: "lowercase" }}>
                     <Add />

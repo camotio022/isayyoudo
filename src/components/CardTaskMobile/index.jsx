@@ -64,7 +64,7 @@ export const CardTaskMobile = (
                 width: mobile === 'true' ? '90%' : 300,
                 height: mobile === 'true' ? 270 : 270,
                 cursor: 'pointer',
-                boxShadow: Root.boxShadow,
+                boxShadow: Root.boxS,
                 padding: 1.2
             }}>
                 <Tag.Menus>

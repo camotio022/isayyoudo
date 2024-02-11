@@ -12,7 +12,7 @@ export const LateralMenu = styled('div')(({ theme, isSmallScreen }) => ({
     width: isSmallScreen && '100%',
     height: '100%',
     padding: '20px',
-    backgroundColor: Root.white,
+    backgroundColor: Root.color_app_bar,
     color: Root.gray,
     borderRight: !isSmallScreen && Root.border,
     boxSizing: "border-box",
@@ -20,6 +20,7 @@ export const LateralMenu = styled('div')(({ theme, isSmallScreen }) => ({
     zIndex: 99999,
 }));
 export const MinhaLista = styled(List)(() => ({
+    marginTop: '16px',
     overflow: 'auto',
     height: '100%',
     width: '90%',
@@ -37,7 +38,8 @@ export const Logout = styled(Box)(() => ({
     width: '100%',
     maxWidth: '100%',
     transition: 'all 0.5s ease-in-out',
-    boxShadow: Root.boxShadow,
+    boxShadow: Root.boxS,
+    color: Root.black,
     '&:hover': {
         backgroundColor: Root.color_button_secondary,
         color: Root.color_default,

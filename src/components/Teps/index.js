@@ -3,15 +3,17 @@ import { Root } from "../Global/Root/root_styles";
 
 export const Container = styled(Box)(({ theme }) => ({
     display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'column',
-    gap: '4px',
-    width: '95%',
-    height: '10%',
-    backgroundColor: Root.containTask,
-    top: 0,
+    gap: '10px',
+    width: '100%',
+    minHeight: '130px',
+    height: 'auto',
+    backgroundColor: Root.color_app_bar,
     left: 0,
+    top: 0,
+    border: Root.border
 }));
 export const TabsMainA = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -25,11 +27,14 @@ export const TabsMainA = styled(Box)(({ theme }) => ({
 }));
 export const TabsMain = styled(Box)(({ theme }) => ({
     display: 'flex',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     justifyContent: 'flex-start',
-    gap: '2rem',
-    width: '100%',
-    height: '3rem',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: '12px',
+    width: '95%',
+    minHeight: '2rem',
+    height: 'auto',
 }));
 export const TabMainItems = styled(Box)(({ theme }) => ({
     display: 'flex',

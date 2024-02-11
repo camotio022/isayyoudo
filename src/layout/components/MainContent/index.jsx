@@ -33,8 +33,10 @@ export const MainContent = ({
                     justifyContent: 'space-between',
                     flexDirection: 'row',
                     height: 'auto',
-                    top: '1rem',
-                    width: '90%',
+                    top: '0rem',
+                    width: '92%',
+                    height: '4rem',
+                    bgcolor: Root.containTask,
                     zIndex: !showLinks && 99999,
                 }} >
                     <MuiMenu onClick={() => {

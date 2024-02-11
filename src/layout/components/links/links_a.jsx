@@ -45,7 +45,7 @@ export const Links_a = ({
     <Link to={link} style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMenuLinks}>
       <ListItemButton
         sx={{
-          color: Root.gray,
+          color: Root.black,
           transition: 'all .2s ease-in-out',
           borderLeft: isRoute && `5px solid ${Root.color_button}`,
           borderRight: isRoute && Root.border,
@@ -58,7 +58,7 @@ export const Links_a = ({
         <ListItemIcon sx={{
           color: isRoute ?
             Root.color_button :
-            Root.gray
+            Root.black
         }}>{icon}</ListItemIcon>
         <ListItemText sx={isRoute && {
           color: Root.color_button,
