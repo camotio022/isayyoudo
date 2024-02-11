@@ -33,6 +33,7 @@ export const Root = {
     dark: '#343a40',
     boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
     boxShadowTask: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+    boxS: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
     border: '1px solid #c4c4c4',
     breakpointXS: '0',
     breakpointSM: '576px',
