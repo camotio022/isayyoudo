@@ -1,6 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100">
   <!-- Texto "iSay" em laranja -->
-  <text x="10" y="50" font-family="Arial" font-size="40" fill="#FFA500">iSay</text>
-  <!-- Texto "YouDo" em roxo -->
-  <text x="70" y="50" font-family="Arial" font-size="40" fill="#800080">YouDo</text>
+  <text x="20" y="80" font-family="Arial" font-size="150" fill="#FFA500">ISY</text>  
 </svg>
