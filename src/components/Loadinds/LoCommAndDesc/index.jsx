@@ -26,13 +26,13 @@ const AnimatedBox = styled(Box)(({ theme, ismobilequery }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: ismobilequery ? '80px' : '100px',
-    height: ismobilequery ? '80px' : '100px',
+    minWidth: ismobilequery ? '40px' : '50px',
+    height: ismobilequery ? '40px' : '50px',
     backgroundColor: Root.color_button_opacity,
     color: Root.color_button,
     borderRadius: '8px',
-    fontSize: ismobilequery ? 20 : 28,
-    fontWeight: 900,
+    fontSize: ismobilequery ? 10 : 18,
+    fontWeight: 400,
     margin: '16px',
 }));
 
@@ -44,7 +44,7 @@ export const LoCommAndDesc = () => {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            minHeight: 600
+            minHeight: 500
         }}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 {[{
@@ -76,7 +76,7 @@ export const LoCommAndDesc = () => {
                 justifyContent: 'center',
                 textAlign: 'center',
                 fontSize: ismobilequery ? 20 : 28,
-                fontWeight: 900,
+                fontWeight: 600,
                 color: Root.color_button,
                 width: 'auto'
             }}>

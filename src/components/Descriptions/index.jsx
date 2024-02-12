@@ -10,7 +10,6 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { LoCommAndDesc } from '../Loadinds/LoCommAndDesc';
 import { FormatRelativeTime } from '../CommentsTasks/formatRelativeTime';
-import { Archive, Delete, Edit } from '@mui/icons-material';
 import { MoreVertMenu } from '../MoreVerMenu';
 export const Descriptions = ({
     ismobilequery,
@@ -21,6 +20,7 @@ export const Descriptions = ({
 }) => {
     const [descriptions, setDescriptions] = useState([])
     const [openItemId, setOpenItemId] = useState(null);
+    const [isLoad, setIsLoad] = useState(true)
 
     const handleClick = (itemId) => {
         setOpenItemId((prevOpenItemId) => (prevOpenItemId === itemId ? null : itemId));
@@ -32,7 +32,12 @@ export const Descriptions = ({
         });
         return () => unsubscribe();
     }, [taskId]);
-    if (descriptions.length === 0) {
+    setTimeout(() => {
+        if (descriptions.length === 0) {
+            setIsLoad(false)
+        }
+    }, [6000])
+    if (isLoad) {
         return (
             <LoCommAndDesc />
         )
