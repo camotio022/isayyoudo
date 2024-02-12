@@ -75,8 +75,6 @@ export const DescriptionsAndComments = ({
         }
 
     }
-
-
     const handleTouchEnd = (event) => {
         swipeDistance = event.touches[0].clientX
         if (swipeDistance.toFixed(0) > 50) {
@@ -87,7 +85,6 @@ export const DescriptionsAndComments = ({
     }
     document.addEventListener('touchmove', handleTouchEnd, false);;
     return (
-
         <Tag.DialogDetails
             ismobilequery={ismobilequery}
         >
@@ -122,7 +119,6 @@ export const DescriptionsAndComments = ({
                             />
                         )
                     })}
-
                     <Tag.MuiBottomNavigationAction
                         label='close'
                         value={'close'}

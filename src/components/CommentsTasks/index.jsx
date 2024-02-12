@@ -19,7 +19,7 @@ export const CommentsTasks = ({
     const { user } = useContext(AuthContext)
     const [comments, setComments] = useState([])
     const [openItemId, setOpenItemId] = useState(null);
-    const [isLoad, setIsLoad] = useState(null)
+    const [isLoad, setIsLoad] = useState(true)
 
     const handleClick = (itemId) => {
         setOpenItemId((prevOpenItemId) => (prevOpenItemId === itemId ? null : itemId));
@@ -31,6 +31,11 @@ export const CommentsTasks = ({
         });
         return () => unsubscribe();
     }, [taskId]);
+    setTimeout(() => {
+        if (comments.length === 0) {
+            setIsLoad(false)
+        }
+    }, [6000])
     const extractMentionsAndHashtags = (text) => {
         const mentionRegex = /@([\wÀ-ÖØ-öø-ÿ]+)/g;
         const hashtagRegex = /#([\wÀ-ÖØ-öø-ÿ]+)/g;
@@ -77,7 +82,7 @@ export const CommentsTasks = ({
         }
         return name;
     }
-    if (comments.length === 0) {
+    if (isLoad) {
         return (
             <LoCommAndDesc />
         )

@@ -48,7 +48,7 @@ export const Links_a = ({
           color: Root.black,
           transition: 'all .2s ease-in-out',
           borderLeft: isRoute && `5px solid ${Root.color_button}`,
-          borderRight: isRoute && Root.border,
+          borderRight: isRoute && `2px solid ${Root.color_button_opacity}`,
           boxShadow: isRoute && Root.boxS,
           ':hover': {
             borderLeft: `2px solid ${Root.color_button}`,
