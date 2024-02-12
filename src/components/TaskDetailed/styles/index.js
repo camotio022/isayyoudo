@@ -9,30 +9,32 @@ export const DialogDetails = styled('div')(({ }) => ({
     transition: 'all .3s',
     zIndex: 99999,
     overflowX: 'hidden',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
     height: '100vh',
     width: '100vw',
     top: 0,
     left: 0,
 }));
-export const ContainerDialog = styled(Paper)(({ theme, ismobilequery }) => ({
+export const ContainerDialog = styled(Stack)(({ theme, ismobilequery }) => ({
     position: 'relative',
     width: ismobilequery ? '100%' : 500,
-    height: ismobilequery ? '100%' : '90%',
+    height: ismobilequery ? '100%' : '70vh',
     marginBlock: 5,
     borderRadius: '0.3rem',
     overflow: 'auto',
-    '&::-webkit-scrollbar': {
+    backgroundColor: Root.containTask,
+    border: `1px solid ${Root.color_button}`,
+    '&:-webkit-scrollbar': {
         width: '5px',
-        height: '3px'
+        height: '3px',
     },
 
-    '&::-webkit-scrollbar-thumb': {
+    '&:-webkit-scrollbar-thumb': {
         backgroundColor: '#f1f1f1',
         borderRadius: '6px',
     },
 
-    '&::-webkit-scrollbar-track': {
+    '&:-webkit-scrollbar-track': {
         backgroundColor: '#f1f1f1',
     },
     scrollbarWidth: 'thin',
@@ -61,5 +63,5 @@ export const NavBarFixed = styled(Stack)(({
         zIndex: 1,
         borderTopLeftRadius: '0.3rem',
         borderTopRightRadius: '0.3rem',
-        borderBottom: Root.border
+        borderBottom: `1px solid ${Root.color_app_bar}`,
     }));
