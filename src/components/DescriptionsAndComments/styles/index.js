@@ -21,10 +21,13 @@ export const MuiPaper = styled(Paper)(({ theme, ismobilequery }) => ({
     justifyContent: 'center',
     flexDirection: 'column',
     position: !ismobilequery && 'relative',
-    width: ismobilequery ? '100%' : 500,
-    height: ismobilequery ? '100%' : '95vh',
-    borderRadius: 0,
-    overflow: 'hidden'
+    width: ismobilequery ? '100%' : 490,
+    height: ismobilequery ? '100%' : '69vh',
+    borderRadius: 4,
+    overflow: 'hidden',
+    padding: '20px',
+    border: `1px solid ${Root.color_button}`
+
 }));
 export const MuiBottomNavigation = styled(BottomNavigation)(({ theme, ismobilequery }) => ({
     position: ismobilequery ? 'fixed' : 'absolute',
