@@ -33,8 +33,10 @@ export const TabsMain = styled(Box)(({ theme }) => ({
     flexWrap: 'wrap',
     gap: '12px',
     width: '95%',
-    minHeight: '2rem',
+    minHeight: '2.5rem',
     height: 'auto',
+    marginBottom: '-16px',
+
 }));
 export const TabMainItems = styled(Box)(({ theme }) => ({
     display: 'flex',

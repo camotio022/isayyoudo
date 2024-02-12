@@ -138,8 +138,9 @@ export const TepsMenuTasks = () => {
                                 locationMain && aba.link === '/activeTask'
                             ) ? 'black' : ((
                                 location.pathname === aba.link
-                            ) ? 'black' : Root.gray_desfius),
+                            ) ? Root.color_button : Root.gray_desfius),
                             fontWeight: 'bolder',
+                            height: '95%',
                             borderBottom: (locationMain && aba.link === '/activeTask') ? border : ((location.pathname === aba.link) && border)
                         }} key={index}>{aba.title}({aba.taskNumber})</Link>
                     )

@@ -74,7 +74,7 @@ export const TaskDetailed = ({
         mr: 2,
         width: '32px',
         height: '32px',
-        boxShadow: Root.boxShadow,
+        boxShadow: Root.boxS,
         bgcolor: bg ? bg : taskStatusBgcolor.empty,
         color: colors ? colors : taskStatusColors.empty
     }
@@ -95,7 +95,7 @@ export const TaskDetailed = ({
                             onClick={() => setOpenMoreInfo(!open)}
                             sx={{
                                 color: colors ? colors : taskStatusColors.empty,
-                                boxShadow: Root.boxShadow,
+                                boxShadow: Root.boxS,
                                 bgcolor: bg ? bg : taskStatusBgcolor.empty,
                                 width: '32px',
                                 height: '32px',

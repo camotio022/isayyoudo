@@ -22,13 +22,12 @@ export const TaskCard = ({
     colorStatus,
     setTask,
     task,
-    setOpenMoreInfo,
-    openMoreInfo,
     width,
     typeShowTask,
     taskId,
     isCreatingTask
 }) => {
+    const [openMoreInfo, setOpenMoreInfo] = useState(false)
     const matches = useMediaQuery('(min-width:600px)');
     const CheckKey = (key) => {
         return key ? key : 'Empty';
