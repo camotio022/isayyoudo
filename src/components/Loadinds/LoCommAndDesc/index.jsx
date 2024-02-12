@@ -3,8 +3,6 @@ import { Container, Box, Typography, Stack, useMediaQuery } from '@mui/material'
 import { styled } from '@mui/system';
 import { keyframes } from '@emotion/react';
 import { Root } from '../../Global/Root/root_styles';
-
-// Animação de troca de posição
 const moveAnimation = keyframes`
   0% {
     transform: translateY(0);
