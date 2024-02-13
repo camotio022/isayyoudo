@@ -25,17 +25,16 @@ export const CommentsTasks = ({
         setOpenItemId((prevOpenItemId) => (prevOpenItemId === itemId ? null : itemId));
     };
     useEffect(() => {
+        setIsLoad(true)
         const unsubscribe = onSnapshot(collection(db, 'comments'), async (snapshot) => {
             const commentsForTask = await commentService.comment.getCommentsForTask(taskId);
             setComments(commentsForTask);
-        });
-        return () => unsubscribe();
-    }, [taskId]);
-    setTimeout(() => {
-        if (comments.length === 0) {
             setIsLoad(false)
-        }
-    }, [6000])
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, [taskId]);
     const extractMentionsAndHashtags = (text) => {
         const mentionRegex = /@([\wÀ-ÖØ-öø-ÿ]+)/g;
         const hashtagRegex = /#([\wÀ-ÖØ-öø-ÿ]+)/g;
@@ -85,7 +84,7 @@ export const CommentsTasks = ({
     if (isLoad) {
         return (
             <LoCommAndDesc />
-        )
+        );
     }
     return (
         <>

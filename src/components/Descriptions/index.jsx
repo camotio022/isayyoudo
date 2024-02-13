@@ -26,17 +26,14 @@ export const Descriptions = ({
         setOpenItemId((prevOpenItemId) => (prevOpenItemId === itemId ? null : itemId));
     };
     useEffect(() => {
+        setIsLoad(true)
         const unsubscribe = onSnapshot(collection(db, 'descriptions'), async (snapshot) => {
             const descriptionsForTask = await descriptionService.description.getDescriptionsForTask(taskId);
             setDescriptions(descriptionsForTask);
+            setIsLoad(false)
         });
         return () => unsubscribe();
     }, [taskId]);
-    setTimeout(() => {
-        if (descriptions.length === 0) {
-            setIsLoad(false)
-        }
-    }, [6000])
     if (isLoad) {
         return (
             <LoCommAndDesc />
