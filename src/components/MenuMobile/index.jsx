@@ -210,7 +210,7 @@ export const MenuMobile = ({
                     [(
                         <MenuItem key="profile" onClick={handleClose}>
                             <Avatar src={user?.photoURL} />
-                            {user?.displayName}
+                            {user?.name}
                         </MenuItem>
                     ),
                     (
@@ -228,11 +228,11 @@ export const MenuMobile = ({
                     (<>
                         {users.map((account, index) => {
                             return (
-                                <MenuItem key={account.uid} onClick={() => newSignin(account, 'switchAccount')}>
+                                <MenuItem key={account.id} onClick={() => newSignin(account, 'switchAccount')}>
                                     <ListItemIcon>
                                         <Avatar src={account.photoURL} />
                                     </ListItemIcon>
-                                    {account.displayName}
+                                    {account.name}
                                 </MenuItem>
                             )
                         })}</>),

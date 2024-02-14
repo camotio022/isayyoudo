@@ -4,7 +4,7 @@ import { taskStatusBgcolor, taskStatusColors } from '../../pages/createTasks/qui
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Box, Divider, Stack, useMediaQuery } from '@mui/material';
-import { Close, Comment, Description, Edit, Group } from '@mui/icons-material';
+import { Close, Comment, Description, Edit, Group, MergeType } from '@mui/icons-material';
 import { Root } from '../Global/Root/root_styles';
 import { useState } from 'react';
 import { CommentArea } from '../Dialog/components/MyComments';
@@ -27,8 +27,8 @@ export const TaskDetailed = ({
     const [comment, setComment] = useState({
         taskId: '',
         author: {
-            userId: user.uid,
-            name: user?.displayName,
+            userId: user.id,
+            name: user?.name,
             avatar: user?.photoURL,
         },
         content: commentArea,
@@ -79,16 +79,16 @@ export const TaskDetailed = ({
         color: colors ? colors : taskStatusColors.empty
     }
     return (
-        <Tag.DialogDetails  ismobilequery={ismobilequery}>
+        <Tag.DialogDetails ismobilequery={ismobilequery}>
             <Tag.ContainerDialog ismobilequery={ismobilequery}>
                 <Tag.NavBarFixed
                     ismobilequery={ismobilequery}
                     colors={colors}
                 >
-                    <Box ml={2} component={'div'}>
-                        {<BullPoint />}
+                    <Tag.BoxItem2 ml={2} sx={{color: colors}}>
+                        {<MergeType />}
                         {checkKeyIsValid(task.typeCollection)}
-                    </Box>
+                    </Tag.BoxItem2>
                     <Box mr={2} sx={{ cursor: 'pointer' }}>
                         <Edit sx={itemDetailsSX} />
                         <Close
@@ -103,25 +103,28 @@ export const TaskDetailed = ({
                     </Box>
                 </Tag.NavBarFixed>
                 <Divider sx={{ mt: 3 }} />
-                <Box ml={3} mt={8} component={'h3'} sx={{ height: 'auto', maxWidth: '90%' }}>
+                <Box ml={3} mt={8} component={'h3'} sx={{ height: 'auto', maxWidth: '90%', color: Root.color_button }}>
                     {checkKeyIsValid(task.title)}
                 </Box>
-                <Stack mt={4} sx={{
+                <Stack mt={4} ml={3} sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 0.5,
+                    width: '90%',
+                    paddingBlock: '10px',
+                    border: `1px solid ${Root.color_app_bar}`
                 }}>
                     <Tag.BoxItem ismobilequery={ismobilequery}>
                         <Box >{<BullPoint />}Status</Box>
-                        <Button
+                        <Tag.BoxItem2
                             sx={{
                                 minWidth: 85,
                                 color: colors ? colors : taskStatusColors.empty,
-                                backgroundColor: bg ? bg : taskStatusBgcolor.empty
+
                             }}>
                             {checkKeyIsValid(task.taskStatus)}
-                        </Button>
+                        </Tag.BoxItem2>
                     </Tag.BoxItem>
                     <Tag.BoxItem ismobilequery={ismobilequery}>
                         <Box >{<BullPoint />}Start Date</Box>
@@ -150,7 +153,7 @@ export const TaskDetailed = ({
                     flexDirection: 'column',
                 }}>
                     <BottomNavigation
-                        sx={{ width: '100%'}}
+                        sx={{ width: '100%' }}
                         showLabels
                         value={value}
                         onChange={(event, newValue) => {
@@ -164,6 +167,7 @@ export const TaskDetailed = ({
                             ].map((action, index) => {
                                 return (
                                     <BottomNavigationAction key={action.label} sx={{
+                                        color: value === index && Root.color_button,
                                         ':focus': {
                                             outline: 'none',
                                             color: Root.color_button

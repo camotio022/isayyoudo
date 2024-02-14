@@ -32,8 +32,8 @@ export const DescriptionsAndComments = ({
     const [comment, setComment] = useState({
         taskId: '',
         author: {
-            userId: user.uid,
-            name: user.displayName,
+            userId: user.id,
+            name: user.name,
             avatar: user?.photoURL,
         },
         content: commentArea,

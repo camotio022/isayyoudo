@@ -6,11 +6,10 @@ export const MuiContainer = styled(Container)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    flexDirection: 'column',
-    height: '100vh',
+    flexDirection: 'row',
+    height: '100%',
     width: '100%',
-    backgroundColor: Root.color_button_opacity,
-}));
+    marginTop: -16}));
 export const MuiDivicer = styled(Box)(({ theme }) => ({
     position: 'absolute',
     display: 'flex',

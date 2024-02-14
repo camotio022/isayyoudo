@@ -1,4 +1,4 @@
-import { Avatar, Stack, Typography } from "@mui/material"
+import { Avatar, Stack, Tooltip, Typography } from "@mui/material"
 import { BullPoint } from "../Bull"
 import { MoreHoriz, ThumbUp, ThumbUpOffAlt } from "@mui/icons-material"
 import * as Tag from './index.js'
@@ -11,6 +11,7 @@ import { FormatRelativeTime } from "./formatRelativeTime.jsx"
 import { AuthContext } from "../../authcontext/index.jsx"
 import { LoCommAndDesc } from "../Loadinds/LoCommAndDesc/index.jsx"
 import { MoreVertMenu } from "../MoreVerMenu/index.jsx"
+import { taskStatusBgcolor } from "../../pages/createTasks/quirys/taskStatus.js"
 export const CommentsTasks = ({
     shadow,
     ismobilequery,
@@ -48,12 +49,12 @@ export const CommentsTasks = ({
         mentions.forEach((mention) => {
             updatedText = updatedText.replace(mention, `
                 <strong style="
-                    background-color: rgba(0,0, 255, 0.2); 
-                    color: blue;
+                    color: ${Root.color_button};
                     font-size: 13px;
                     padding: 2px;
-                    border-radius: 8px;
-                    margin-right: 4px,
+                    margin-right: 4px;
+                    cursor: pointer;
+                    text-decoration: underline;
                 ">
                     ${mention}
                 </strong>
@@ -62,11 +63,9 @@ export const CommentsTasks = ({
         hashtags.forEach((hashtag) => {
             updatedText = updatedText.replace(hashtag, `
             <strong style="
-                background-color: rgba(25,31, 52, 0.2); 
-                color: brown;
+                color: ${Root.green};
                 font-size: 13px;
                 padding: 2px;
-                border-radius: 8px;
                 margin-right: 4px,
             ">
                 ${hashtag}
@@ -94,7 +93,7 @@ export const CommentsTasks = ({
                         <Tag.CommentMainTag
                             key={index} ismobilequery={ismobilequery}
                             gap={1} mt={1}
-                            mb={(comments.length - 1) === index && (shadow ? '10rem' : 5)}
+                            mb={(comments.length - 1) === index && (shadow ? '10rem' : 3)}
                         >
                             {openItemId === index &&
                                 <MoreVertMenu
@@ -102,14 +101,14 @@ export const CommentsTasks = ({
                                     type='comment'
                                     setOpenItemId={setOpenItemId}
                                 />}
-                            <Tag.CommentMainParte1 mt={index === 0 ? (shadow ? '5rem' : 5) : 2}>
+                            <Tag.CommentMainParte1 mt={index === 0 ? (shadow ? '2rem' : 3) : 2}>
                                 <Tag.CommentMainParteA diretion={'flex-start'}>
                                     <Avatar sx={{ height: 42, width: 42, ml: -2 }}
                                         src={comment.author.avatar} />
                                     <Stack sx={{
                                         color: Root.color_button,
-                                        fontSize: '1.2rem',
-                                        fontWeight: ismobilequery ? 500 : 700
+                                        fontSize: '1rem',
+                                        fontWeight: ismobilequery ? 500 : 500
                                     }}>
                                         {splitNameUserInScreens(comment.author.name)}
                                     </Stack>
@@ -118,21 +117,14 @@ export const CommentsTasks = ({
                                         <FormatRelativeTime dateTimeString={comment.timestamp} />
                                     </Typography>
                                 </Tag.CommentMainParteA>
-                                <Stack
+
+                                <Tag.SettingsComment
                                     onPress={() => handleClick(index)}
                                     onClick={() => handleClick(index)}
-                                    sx={{
-                                        border: Root.border,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        height: 'auto',
-                                        cursor: 'pointer',
-                                        padding: '2px',
-                                        color: Root.color_button
-                                    }}>
+                                >
                                     <MoreHoriz />
-                                </Stack>
+                                </Tag.SettingsComment>
+
                             </Tag.CommentMainParte1>
 
                             <Tag.CommentMainParteA
@@ -169,11 +161,9 @@ export const CommentsTasks = ({
                                     height: '1rem',
                                     width: '1px',
                                 }} />
-                                <Stack sx={{
-                                    fontWeight: ismobilequery ? 400 : 800
-                                }}>
+                                <Tag.ReplayComment ismobilequery={ismobilequery}>
                                     Replay
-                                </Stack>
+                                </Tag.ReplayComment>
                             </Tag.CommentMainParteA>
                         </Tag.CommentMainTag>
                     )

@@ -48,6 +48,18 @@ export const BoxItem = styled(Box)(({ }) => (
         flexDirection: 'row',
         width: '90%',
         height: '2rem',
+        padding: '4px',
+        border: `1px solid ${Root.color_app_bar}`
+    }));
+export const BoxItem2 = styled(Box)(({ }) => (
+    {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 'auto',
+        height: 'auto',
+        textTransform: 'uppercase',
+        gap: '1px',
     }));
 export const NavBarFixed = styled(Stack)(({
     ismobilequery }) => (

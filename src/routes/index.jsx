@@ -30,7 +30,7 @@ const pageUrls = [
     '/taskCompleted',
     '/taskClose',
     '/createTask',
-    '/porfile',
+    '/perfil',
 ];
 export const Main = () => {
     const refRouter = useHref()
@@ -53,7 +53,7 @@ export const Main = () => {
                             <Route path='/taskCompleted' element={<CompletedTasks />} />
                             <Route path='/taskClose' element={<TasksClosed />} />
                             <Route path='/createTask' element={<CreateTask />} />
-                            <Route path='/porfile' element={<Perfil />} />
+                            <Route path='/perfil' element={<Perfil />} />
                         </Routes>
                     </>
                 </MainLayout>

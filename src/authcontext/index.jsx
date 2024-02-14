@@ -10,6 +10,7 @@ export const AuthContext = createContext()
 const provider = new GoogleAuthProvider()
 import { getFirestore, doc, setDoc, collection, getDocs, query, where, updateDoc } from 'firebase/firestore'
 import { DialogError } from '../components/Dialog'
+import { db } from '../firebaseConfig'
 export const AuthProvider = ({ children }) => {
     const [users, setUsers] = useState([])
     const [isCreatingTask, setIsCreatingTask] = useState(true)
@@ -34,9 +35,12 @@ export const AuthProvider = ({ children }) => {
                 setUser(userDataFromLocalStorage);
             }
         }
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+
             if (user) {
-                setUser(user);
+                const userData = await queryUser(user.email);
+                setUser(userData);
+                setUserData(userData);
             } else {
                 setUser(null);
             }
@@ -72,7 +76,12 @@ export const AuthProvider = ({ children }) => {
                 const usersRef = collection(firestore, 'users');
                 const querySnapshot = await getDocs(query(usersRef, where('email', '==', user.email)));
                 const existingUser = querySnapshot.docs[0];
-
+                const newUser = {
+                    id: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user?.photoURL || null,
+                };
                 if (existingUser) {
                     const userData = {
                         name: user.displayName,
@@ -82,20 +91,12 @@ export const AuthProvider = ({ children }) => {
                     await updateDoc(doc(usersRef, existingUser.id), userData);
                     setUser(existingUser.data());
                 } else {
-                    const newUser = {
-                        id: user.uid,
-                        name: user.displayName,
-                        email: user.email,
-                        photoURL: user?.photoURL || null,
-                    };
-
                     console.log('Novo Usuário:', newUser);
-
                     await setDoc(doc(usersRef, user.uid), newUser);
                     setUser(newUser);
                 }
 
-                login(user);
+                login(newUser);
             })
             .catch((error) => {
                 setOpen(true);
@@ -103,6 +104,19 @@ export const AuthProvider = ({ children }) => {
                 setMessage(errorMessage);
             });
     };
+    const queryUser = async (id) => {
+        let userData;
+        const usersRef = collection(db, 'users');
+        const querySnapshot = await getDocs(query(usersRef, where('email', '==', id)));
+        if (!querySnapshot.empty) {
+            querySnapshot.forEach(doc => {
+                userData = doc.data();
+            });
+        } else {
+            console.log('Usuário não encontrado no Firestore.');
+        }
+        return userData;
+    }
     const loginWithEmailAndPassword = async (email, password, type) => {
         if (!email || !password) return;
         try {
@@ -114,8 +128,9 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('users', JSON.stringify(existingUsers));
             } else {
                 userCredential = await signInWithEmailAndPassword(auth, email, password);
-                setUser(userCredential.user);
-                login(userCredential.user);
+                const userData = await queryUser(userCredential.user.email);
+                setUser(userData);
+                login(userData);
             }
         } catch (error) {
             setOpen(true);
@@ -123,7 +138,6 @@ export const AuthProvider = ({ children }) => {
             setMessage(errorMessage);
         }
     };
-
     return (
         <AuthContext.Provider
             value={{

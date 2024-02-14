@@ -17,8 +17,8 @@ export const TepsMenuTasks = () => {
     const location = useLocation()
     const locationMain = location.pathname === '/';
     const border = `2px solid ${Root.color_button}`
-    const firstInitial = user.displayName?.split(' ')[0].charAt(0);
-    const firstName = user.displayName?.split(' ')[0];
+    const firstInitial = user?.name?.split(' ')[0].charAt(0);
+    const firstName = user?.name?.split(' ')[0];
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
             const timesTempTasks = snapshot.docs.map((doc) => ({
@@ -30,7 +30,7 @@ export const TepsMenuTasks = () => {
         return () => unsubscribe();
     }, []);
 
-
+console.log(user)
     const handleChange = (event) => {
         setChecked(event.target.checked);
         if (event.target.checked) {

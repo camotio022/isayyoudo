@@ -15,7 +15,7 @@ export const Catalog = () => {
 
                     <Grid item xs={12} md={6}>
                         <Typography variant="h6">User Display Name:</Typography>
-                        <Typography>{user.displayName}</Typography>
+                        <Typography>{user.name}</Typography>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <Typography variant="h6">User UID:</Typography>

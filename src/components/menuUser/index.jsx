@@ -76,7 +76,7 @@ export const MenuUser = ({
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <TagMain.MuiItem onClick={handleClose}>
-                    <Tag.AvatarPhoto src={user?.photoURL} /> {user?.displayName}
+                    <Tag.AvatarPhoto src={user?.photoURL} /> {user?.name}
                 </TagMain.MuiItem>
                 <Divider sx={{ width: '90%', borderColor: Root.color_button, ml: '5%' }} />
                 <TagMain.MuiItem onClick={handleClose}>
@@ -91,7 +91,7 @@ export const MenuUser = ({
                             <ListItemIcon>
                                 <Tag.AvatarPhoto src={account.photoURL} />
                             </ListItemIcon>
-                            {account.displayName}
+                            {account.name}
                         </TagMain.MuiItem>
                     )
                 })}
