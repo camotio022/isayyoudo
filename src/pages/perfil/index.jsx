@@ -1,9 +1,17 @@
-import { Avatar, Box, Card, CardContent, CardMedia, Container, Stack, Typography } from "@mui/material"
+import { Box, Card, CardMedia, Stack } from "@mui/material"
 import * as Tag from './styles/index'
 import { Root } from '../../components/Global/Root/root_styles'
 import { AuthContext } from '../../authcontext/index'
 import { useContext, useState } from "react"
-import { AccountTree, BookmarkAdd, BookmarkBorder, IntegrationInstructions, Person, RequestPage, RequestPageOutlined, RoomPreferences, RoomService, Route, TaskSharp } from "@mui/icons-material"
+import {
+    AccountTree,
+    BookmarkBorder,
+    Person,
+    RoomPreferences,
+    Route,
+    TaskSharp
+} from "@mui/icons-material"
+import { StateUserOne } from "./components/StateOne/index.jsx"
 export const Perfil = () => {
     const { user } = useContext(AuthContext)
     const [value, setValue] = useState(0)
@@ -19,7 +27,6 @@ export const Perfil = () => {
                 flexDirection: 'column',
                 height: '95%',
                 width: '28%',
-                border: Root.border
             }}>
                 <Card sx={{
                     width: '90%',
@@ -28,10 +35,13 @@ export const Perfil = () => {
                     borderRadius: '0px'
                 }}>
                     <CardMedia
+                        sx={{
+                            borderRadius: '4px'
+                        }}
                         component="img"
                         alt="green iguana"
                         height="250"
-                        image={user.photoURL}
+                        image={user?.photoURL}
                     />
                     <Stack sx={{
                         display: 'flex',
@@ -62,7 +72,6 @@ export const Perfil = () => {
                                 width: '99%',
                                 height: '30px',
                                 mt: index === 0 ? 4 : 1,
-
                                 borderTop: `1px solid ${Root.color_app_bar}`
                             }}>
                                 <Stack sx={{ fontWeight: '500', }}>
@@ -143,6 +152,7 @@ export const Perfil = () => {
                     })}
                 </Card>
             </Stack>
+            {value === 0 && <StateUserOne />}
         </Tag.MuiContainer>
     )
 }
