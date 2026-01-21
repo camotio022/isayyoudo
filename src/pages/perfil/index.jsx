@@ -25,8 +25,9 @@ export const Perfil = () => {
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 flexDirection: 'column',
-                height: '95%',
+                minHeight: '95%',
                 width: '28%',
+                overflowY:'auto',
             }}>
                 <Card sx={{
                     width: '90%',
@@ -41,7 +42,7 @@ export const Perfil = () => {
                         component="img"
                         alt="green iguana"
                         height="250"
-                        image={user?.photoURL}
+                        image={user.photoURL? user.photoURL: 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
                     />
                     <Stack sx={{
                         display: 'flex',
