@@ -10,7 +10,6 @@ export const MuiContainer = styled(Container)(({ theme, issmallscreen }) => ({
     height: '100%',
     width: '100%',
     gap: 0,
-    overflowY: issmallscreen ? 'scroll' : 'auto',
     zIndex: 222222
 }));
 export const MuiDivicer = styled(Box)(({ theme }) => ({
